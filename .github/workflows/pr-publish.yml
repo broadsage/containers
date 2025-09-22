@@ -294,7 +294,7 @@ jobs:
 
       # Create GitHub SBOM Attestation
       - name: Create GitHub SBOM Attestation
-        uses: actions/attest-sbom@5026d3663739160db546203eeaffa6aa1c51a4d6 # v1.4.1
+        uses: actions/attest-sbom@4651f806c01d8637787e274ac3bdf724ef169f34 # v3.0.0
         with:
           subject-name: ${{ steps.build-metadata.outputs.image_name }}
           subject-digest: ${{ steps.build-publish.outputs.image_digest }}
