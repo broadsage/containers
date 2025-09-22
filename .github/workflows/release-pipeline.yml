@@ -351,7 +351,7 @@ jobs:
       # 6. Generate SBOM with Anchore Syft
       - name: Generate SBOM
         if: steps.build-production.outcome == 'success'
-        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
+        uses: anchore/sbom-action@f8bdd1d8ac5e901a77a92f111440fdb1b593736b # v0.20.6
         with:
           image: ${{ steps.build-metadata.outputs.image_name }}@${{ steps.build-production.outputs.image_digest }}
           format: spdx-json
