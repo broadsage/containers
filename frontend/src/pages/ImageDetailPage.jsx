@@ -87,34 +87,27 @@ const ImageDetailPage = () => {
                     <h1 className="text-2xl font-bold text-gray-900">{image.name}</h1>
                   </div>
                   
-                  {/* Docker Hub style badges */}
-                  {image.badges && image.badges.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-3">
-                      {image.badges.map((badge, index) => {
-                        if (badge === 'official') {
-                          return (
-                            <div key={index} className="inline-flex items-center space-x-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs font-medium text-blue-700">
-                              <CheckCircle className="w-3.5 h-3.5" />
-                              <span>Official Image</span>
-                            </div>
-                          );
-                        } else if (badge === 'opensource') {
-                          return (
-                            <div key={index} className="inline-flex items-center space-x-1 px-2 py-1 bg-green-50 border border-green-200 rounded text-xs font-medium text-green-700">
-                              <Shield className="w-3.5 h-3.5" />
-                              <span>Open Source</span>
-                            </div>
-                          );
-                        } else if (badge === 'verified') {
-                          return (
-                            <div key={index} className="inline-flex items-center space-x-1 px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs font-medium text-purple-700">
-                              <CheckCircle className="w-3.5 h-3.5" />
-                              <span>Verified Publisher</span>
-                            </div>
-                          );
-                        }
-                        return null;
-                      })}
+                  {/* Docker Hub style badge */}
+                  {image.badge && (
+                    <div className="mb-3">
+                      {image.badge === 'official' && (
+                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs font-medium text-blue-700">
+                          <CheckCircle className="w-3.5 h-3.5" />
+                          <span>Official Image</span>
+                        </div>
+                      )}
+                      {image.badge === 'community' && (
+                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-green-50 border border-green-200 rounded text-xs font-medium text-green-700">
+                          <Shield className="w-3.5 h-3.5" />
+                          <span>Community</span>
+                        </div>
+                      )}
+                      {image.badge === 'verified' && (
+                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs font-medium text-purple-700">
+                          <CheckCircle className="w-3.5 h-3.5" />
+                          <span>Verified Publisher</span>
+                        </div>
+                      )}
                     </div>
                   )}
                   
