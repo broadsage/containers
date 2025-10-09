@@ -256,15 +256,9 @@ jq -r '.packages[] | .licenseConcluded' sbom.json | sort | uniq
 jq '.packages[] | select(.licenseConcluded | test("GPL|AGPL|LGPL"; "i"))' sbom.json
 
 # Generate license report
-cat << 'EOF' > license-report.sh
-#!/bin/bash
-echo "# License Report"
-echo "Generated: $(date)"
-echo ""
-echo "## License Summary"
-jq -r '.packages[] | .licenseConcluded' sbom.json | \
-  sort | uniq -c | sort -nr
-EOF
+# Create license report script
+cat > license-report.sh
+# Add script content for generating license reports
 
 chmod +x license-report.sh
 ./license-report.sh
