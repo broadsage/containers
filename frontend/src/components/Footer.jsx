@@ -87,73 +87,38 @@ const Footer = () => {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-gray-800 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            {/* Copyright and Legal Links */}
-            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
-              <p className="text-xs text-gray-500">
-                © 2025 SecureHub. All Rights Reserved.
-              </p>
-              <div className="flex space-x-4 text-xs">
-                <a href="#" className="text-gray-500 hover:text-white transition-colors">
-                  Privacy Policy
-                </a>
-                <span className="text-gray-700">•</span>
-                <a href="#" className="text-gray-500 hover:text-white transition-colors">
-                  Terms of Use
-                </a>
-                <span className="text-gray-700">•</span>
-                <a href="#" className="text-gray-500 hover:text-white transition-colors">
-                  Cookie Policy
-                </a>
-                <span className="text-gray-700">•</span>
-                <a href="#" className="text-gray-500 hover:text-white transition-colors">
-                  Security
-                </a>
-              </div>
-            </div>
+        <div className="border-t border-gray-800 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
+            {/* Copyright */}
+            <p className="text-xs text-gray-500">
+              © 2025 SecureHub. Open source community project.
+            </p>
 
             {/* Social Links */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <a
                 href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                className="text-gray-400 hover:text-white transition-colors"
                 aria-label="GitHub"
               >
-                <Github className="w-4 h-4" />
+                <Github className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Bottom Tagline */}
-      <div className="bg-gray-950 py-3">
-        <div className="container mx-auto px-8 text-center">
-          <p className="text-xs text-gray-600">
-            Free & Open Source Container Security for Everyone 🌍
-          </p>
         </div>
       </div>
     </footer>
