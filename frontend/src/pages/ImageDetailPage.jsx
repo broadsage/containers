@@ -12,7 +12,7 @@ const ImageDetailPage = () => {
   const { name } = useParams();
   const navigate = useNavigate();
   const image = dockerImages.find(img => img.name === name);
-  const [activeTab, setActiveTab] = useState('specification');
+  const [activeTab, setActiveTab] = useState('overview');
 
   if (!image) {
     return (
