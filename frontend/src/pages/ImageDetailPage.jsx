@@ -66,53 +66,53 @@ const ImageDetailPage = () => {
         </Button>
 
         {/* Image Header */}
-        <Card className="mb-8">
-          <CardContent className="p-8">
+        <Card className="mb-6">
+          <CardContent className="p-6">
             <div className="flex items-start justify-between">
-              <div className="flex items-start space-x-6">
+              <div className="flex items-start space-x-4">
                 <div className="relative">
-                  <div className="w-24 h-24 bg-gray-50 rounded-xl p-4">
+                  <div className="w-16 h-16 bg-gray-50 rounded-lg p-3">
                     <img src={image.logo} alt={image.name} className="w-full h-full object-contain" />
                   </div>
                   {image.fips && (
-                    <Badge className="absolute -top-2 -right-2 bg-blue-600 text-white">
+                    <Badge className="absolute -top-1.5 -right-1.5 bg-blue-600 text-white text-xs">
                       FIPS
                     </Badge>
                   )}
                 </div>
                 
                 <div>
-                  <div className="flex items-center space-x-3 mb-3">
-                    <h1 className="text-4xl font-bold text-gray-900">{image.name}</h1>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <h1 className="text-2xl font-bold text-gray-900">{image.name}</h1>
                     {image.isFree && (
-                      <Badge className="bg-blue-50 text-blue-700">Free</Badge>
+                      <Badge className="bg-blue-50 text-blue-700 text-xs">Free</Badge>
                     )}
                   </div>
-                  <p className="text-gray-600 text-lg mb-4">{image.description}</p>
+                  <p className="text-gray-600 text-sm mb-3">{image.description}</p>
                   
-                  <div className="grid grid-cols-4 gap-6 mt-6">
-                    <div className="flex items-center space-x-2 text-sm">
-                      <Tag className="w-4 h-4 text-gray-500" />
+                  <div className="grid grid-cols-4 gap-4 mt-4">
+                    <div className="flex items-center space-x-1.5 text-xs">
+                      <Tag className="w-3.5 h-3.5 text-gray-500" />
                       <span className="text-gray-600">Latest: <span className="font-medium text-gray-900">{image.latestTag}</span></span>
                     </div>
-                    <div className="flex items-center space-x-2 text-sm">
-                      <Clock className="w-4 h-4 text-gray-500" />
+                    <div className="flex items-center space-x-1.5 text-xs">
+                      <Clock className="w-3.5 h-3.5 text-gray-500" />
                       <span className="text-gray-600">Updated {image.lastChanged}</span>
                     </div>
-                    <div className="flex items-center space-x-2 text-sm">
-                      <Download className="w-4 h-4 text-gray-500" />
+                    <div className="flex items-center space-x-1.5 text-xs">
+                      <Download className="w-3.5 h-3.5 text-gray-500" />
                       <span className="text-gray-600">{image.downloads.toLocaleString()} pulls</span>
                     </div>
-                    <div className="flex items-center space-x-2 text-sm">
-                      <Database className="w-4 h-4 text-gray-500" />
+                    <div className="flex items-center space-x-1.5 text-xs">
+                      <Database className="w-3.5 h-3.5 text-gray-500" />
                       <span className="text-gray-600">Size: {image.size}</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <Button style={{ backgroundColor: '#fd366e' }} className="text-white hover:opacity-90">
-                <Download className="w-4 h-4 mr-2" />
+              <Button style={{ backgroundColor: '#fd366e' }} className="text-white hover:opacity-90 text-sm" size="sm">
+                <Download className="w-4 h-4 mr-1.5" />
                 Pull Image
               </Button>
             </div>
