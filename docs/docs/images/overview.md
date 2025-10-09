@@ -134,4 +134,4 @@ Third-party maintained images verified by Chainguard security team.
 
 ---
 
-*Need help? Check our [troubleshooting guide](../guides/troubleshooting) or [open an issue](https://github.com/chainguard-images/images/issues).*
+*Need help? [Open an issue](https://github.com/chainguard-images/images/issues) or join our community discussions.*
