@@ -6,13 +6,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ArrowLeft, Download, Package, Shield, AlertTriangle, CheckCircle, XCircle, Clock, Tag, Database } from 'lucide-react';
+import { ArrowLeft, Download, Package, Shield, AlertTriangle, CheckCircle, XCircle, Clock, Tag, Database, FileText, Layers } from 'lucide-react';
 
 const ImageDetailPage = () => {
-  const { id } = useParams();
+  const { name } = useParams();
   const navigate = useNavigate();
-  const image = dockerImages.find(img => img.id === parseInt(id));
-  const [activeTab, setActiveTab] = useState('overview');
+  const image = dockerImages.find(img => img.name === name);
+  const [activeTab, setActiveTab] = useState('specification');
 
   if (!image) {
     return (
