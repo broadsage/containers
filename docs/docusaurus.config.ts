@@ -75,21 +75,27 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
+      title: 'Chainguard Images',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Chainguard Images Logo',
         src: 'img/logo.svg',
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'imagesSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Images',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          type: 'docSidebar',
+          sidebarId: 'guidesSidebar',
+          position: 'left',
+          label: 'Guides',
+        },
+        {to: '/blog', label: 'Security Updates', position: 'left'},
+        {
+          href: 'https://github.com/chainguard-images',
           label: 'GitHub',
           position: 'right',
         },
