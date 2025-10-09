@@ -105,11 +105,15 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Documentation',
           items: [
             {
-              label: 'Tutorial',
+              label: 'Getting Started',
               to: '/docs/intro',
+            },
+            {
+              label: 'Image Catalog',
+              to: '/docs/images',
             },
           ],
         },
@@ -117,16 +121,16 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'GitHub Discussions',
+              href: 'https://github.com/chainguard-images/images/discussions',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Slack',
+              href: 'https://chainguard.slack.com',
             },
             {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
+              label: 'Twitter',
+              href: 'https://twitter.com/chainguarddev',
             },
           ],
         },
@@ -134,17 +138,17 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
+              label: 'Security Updates',
               to: '/blog',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'Main Site',
+              href: 'https://chainguard.dev',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Chainguard, Inc. Open Source Community Project.`,
     },
     prism: {
       theme: prismThemes.github,
