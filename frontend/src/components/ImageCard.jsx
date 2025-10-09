@@ -1,11 +1,39 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Clock, Tag } from 'lucide-react';
+import { Clock, Tag, CheckCircle, Shield, Award } from 'lucide-react';
 import { Card, CardContent } from './ui/card';
 import { Badge } from './ui/badge';
 
 const ImageCard = ({ image }) => {
   const navigate = useNavigate();
+
+  const renderBadge = (badgeType) => {
+    switch (badgeType) {
+      case 'official':
+        return (
+          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-[10px] font-medium text-blue-700">
+            <CheckCircle className="w-2.5 h-2.5" />
+            <span>Official Image</span>
+          </div>
+        );
+      case 'opensource':
+        return (
+          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-green-50 border border-green-200 rounded text-[10px] font-medium text-green-700">
+            <Shield className="w-2.5 h-2.5" />
+            <span>Open Source</span>
+          </div>
+        );
+      case 'verified':
+        return (
+          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-purple-50 border border-purple-200 rounded text-[10px] font-medium text-purple-700">
+            <Award className="w-2.5 h-2.5" />
+            <span>Verified Publisher</span>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <Card 
@@ -36,13 +64,18 @@ const ImageCard = ({ image }) => {
               <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#fd366e] transition-colors">
                 {image.name}
               </h3>
-              <Badge 
-                variant="secondary" 
-                className="bg-green-50 text-green-700 hover:bg-green-100 text-xs"
-              >
-                Community
-              </Badge>
             </div>
+            
+            {/* Docker Hub style badges */}
+            {image.badges && image.badges.length > 0 && (
+              <div className="flex flex-wrap gap-1 mb-2">
+                {image.badges.map((badge, index) => (
+                  <React.Fragment key={index}>
+                    {renderBadge(badge)}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
             
             <div className="flex items-center text-xs text-gray-500 mb-1">
               <Clock className="w-3 h-3 mr-1" />
