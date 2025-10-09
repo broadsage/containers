@@ -217,32 +217,13 @@ mkdir images/myapp
 cd images/myapp
 
 # 2. Create image configuration
-cat > image.yaml << 'EOF'
-image:
-  name: myapp
-  entrypoint:
-    command: /usr/bin/myapp
-  accounts:
-    groups:
-      - groupname: nonroot
-        gid: 65532
-    users:
-      - username: nonroot
-        uid: 65532
-        gid: 65532
-    run-as: 65532
-  environment:
-    PATH: /usr/sbin:/sbin:/usr/bin:/bin
-
-contents:
-  packages:
-    - ca-certificates-bundle
-    - myapp
-
-versions:
-  - 'latest'
-  - '1.0'
-EOF
+# Create image.yaml configuration file
+cat > image.yaml
+# Add image configuration with:
+# - image name and entrypoint
+# - user accounts and permissions
+# - required packages
+# - version tags
 
 # 3. Create documentation
 cat > README.md << 'EOF'
