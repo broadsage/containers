@@ -113,7 +113,7 @@ const config: Config = {
             },
             {
               label: 'Image Catalog',
-              to: '/docs/images',
+              to: '/docs/images/overview',
             },
           ],
         },
