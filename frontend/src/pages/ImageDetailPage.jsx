@@ -205,20 +205,20 @@ const ImageDetailPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-3">Download this Container Image</h3>
                     <p className="text-gray-700 text-sm mb-3">
-                      For those with access, this container image is available on <code className="bg-gray-100 px-2 py-1 rounded">securehub.io</code>:
+                      For those with access, this container image is available on <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">securehub.io</code>:
                     </p>
-                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                    <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
                       docker pull securehub.io/ORGANIZATION/{image.name}:{image.latestTag}
                     </div>
-                    <p className="text-sm text-gray-600 mt-3">
-                      Be sure to replace the <code className="bg-gray-100 px-1.5 py-0.5 rounded">ORGANIZATION</code> placeholder with the name used for your organization's private repository.
+                    <p className="text-xs text-gray-600 mt-2">
+                      Be sure to replace the <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">ORGANIZATION</code> placeholder with the name used for your organization's private repository.
                     </p>
                   </div>
 
                   {/* Compatibility Notes */}
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Compatibility Notes</h3>
-                    <p className="text-gray-700 leading-relaxed">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Compatibility Notes</h3>
+                    <p className="text-gray-700 text-sm leading-relaxed">
                       SecureHub's {image.name} image is built with security-first principles. The image has few-to-zero CVEs 
                       and does not run as the root user, ensuring a minimal attack surface for production deployments.
                     </p>
@@ -226,8 +226,8 @@ const ImageDetailPage = () => {
 
                   {/* Getting Started */}
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Getting Started</h3>
-                    <p className="text-gray-700 mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Getting Started</h3>
+                    <p className="text-gray-700 text-sm mb-3">
                       The {image.name} container provides a reliable and secure environment for your applications. 
                       Here's a quick example to get you started:
                     </p>
