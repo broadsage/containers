@@ -264,22 +264,11 @@ EOF
 
 # 4. Add tests
 mkdir tests
-cat > tests/main.tf << 'EOF'
-terraform {
-  required_providers {
-    oci = { source = "chainguard-dev/oci" }
-  }
-}
-
-variable "digest" {
-  description = "The image digest to run tests against."
-}
-
-data "oci_exec_test" "version" {
-  digest = var.digest
-  script = "docker run --rm $IMAGE_NAME --version"
-}
-EOF
+cat > tests/main.tf
+# Create Terraform test file with:
+# - terraform providers configuration
+# - variable for image digest
+# - test execution data source
 ```
 
 ### Testing Your Image
