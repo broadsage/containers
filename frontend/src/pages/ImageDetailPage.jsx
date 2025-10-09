@@ -403,6 +403,246 @@ services:
             </Card>
           </TabsContent>
 
+          <TabsContent value="provenance">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <FileKey className="w-5 h-5" />
+                  <span>Image Signatures & Attestations</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-8">
+                  {/* Introduction */}
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                    <p className="text-gray-700 leading-relaxed">
+                      All SecureHub container images contain verifiable signatures and high-quality SBOMs (software bill of materials), 
+                      features that enable users to confirm the origin of each image build and have a detailed list of everything that is packed within.
+                    </p>
+                    <p className="text-gray-700 mt-3 leading-relaxed">
+                      You'll need <code className="bg-white px-2 py-1 rounded text-sm font-mono">cosign</code> and{' '}
+                      <code className="bg-white px-2 py-1 rounded text-sm font-mono">jq</code> in order to download and verify image attestations.
+                    </p>
+                  </div>
+
+                  {/* Registry Information */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Registry and Tags</h3>
+                    <p className="text-gray-600 mb-4">
+                      Attestations are provided per image build, so you'll need to specify the correct tag and registry when pulling attestations from an image with cosign.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
+                        <code className="text-sm font-mono font-semibold text-gray-900 mt-0.5">securehub.io/public</code>
+                        <span className="text-gray-600">- the Public Registry contains our <strong>Starter Images</strong></span>
+                      </div>
+                      <div className="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg">
+                        <code className="text-sm font-mono font-semibold text-gray-900 mt-0.5">securehub.io/$ORGANIZATION</code>
+                        <span className="text-gray-600">- contains all <strong>Production Images</strong> that your organisation has access to</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verifying Image Signatures */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Verifying Image Signatures</h3>
+                    <p className="text-gray-600 mb-4">
+                      The <strong>{image.name}</strong> SecureHub Containers are signed using Sigstore, and you can check the included signatures using cosign.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-gray-900">Starter Images</h4>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              navigator.clipboard.writeText(`cosign verify \\\n  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\\n  --certificate-identity=https://github.com/securehub/images/.github/workflows/release.yaml@refs/heads/main \\\n  securehub.io/public/${image.name}:${image.latestTag} | jq`);
+                            }}
+                          >
+                            <Copy className="w-4 h-4 mr-2" />
+                            Copy
+                          </Button>
+                        </div>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                          <pre>{`cosign verify \\
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\
+  --certificate-identity=https://github.com/securehub/images/.github/workflows/release.yaml@refs/heads/main \\
+  securehub.io/public/${image.name}:${image.latestTag} | jq`}</pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-gray-900">Production Images</h4>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              navigator.clipboard.writeText(`cosign verify \\\n  --certificate-oidc-issuer=https://issuer.securehub.io \\\n  --certificate-identity-regexp="https://issuer.securehub.io/.*" \\\n  securehub.io/$ORGANIZATION/${image.name}:${image.latestTag} | jq`);
+                            }}
+                          >
+                            <Copy className="w-4 h-4 mr-2" />
+                            Copy
+                          </Button>
+                        </div>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                          <pre>{`cosign verify \\
+  --certificate-oidc-issuer=https://issuer.securehub.io \\
+  --certificate-identity-regexp="https://issuer.securehub.io/.*" \\
+  securehub.io/$ORGANIZATION/${image.name}:${image.latestTag} | jq`}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Attestation Types */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Downloading Image Attestations</h3>
+                    <p className="text-gray-600 mb-4">
+                      The following attestations for the {image.name} image can be obtained and verified via cosign:
+                    </p>
+                    
+                    <div className="overflow-x-auto mb-6">
+                      <table className="w-full border">
+                        <thead className="bg-gray-50">
+                          <tr>
+                            <th className="text-left py-3 px-4 font-semibold text-gray-900 border-b">Attestation Type</th>
+                            <th className="text-left py-3 px-4 font-semibold text-gray-900 border-b">Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="border-b hover:bg-gray-50">
+                            <td className="py-3 px-4">
+                              <code className="text-sm bg-gray-100 px-2 py-1 rounded">https://slsa.dev/provenance/v1</code>
+                            </td>
+                            <td className="py-3 px-4 text-gray-600">
+                              The SLSA 1.0 provenance attestation contains information about the image build environment.
+                            </td>
+                          </tr>
+                          <tr className="border-b hover:bg-gray-50">
+                            <td className="py-3 px-4">
+                              <code className="text-sm bg-gray-100 px-2 py-1 rounded">https://apko.dev/image-configuration</code>
+                            </td>
+                            <td className="py-3 px-4 text-gray-600">
+                              Contains the configuration used by that particular image build, including direct dependencies, user accounts, and entry point.
+                            </td>
+                          </tr>
+                          <tr className="hover:bg-gray-50">
+                            <td className="py-3 px-4">
+                              <code className="text-sm bg-gray-100 px-2 py-1 rounded">https://spdx.dev/Document</code>
+                            </td>
+                            <td className="py-3 px-4 text-gray-600">
+                              Contains the image SBOM (Software Bill of Materials) in SPDX format.
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <p className="text-gray-600 mb-4">
+                      To download an attestation, use the <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">cosign download attestation</code> command 
+                      and provide both the predicate type and the build platform. For example, the following command will obtain the SBOM:
+                    </p>
+
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-gray-900">Download SBOM Attestation</h4>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              navigator.clipboard.writeText(`cosign download attestation \\\n  --platform=linux/amd64 \\\n  --predicate-type=https://spdx.dev/Document \\\n  securehub.io/public/${image.name}:${image.latestTag} | jq -r .payload | base64 -d | jq .predicate`);
+                            }}
+                          >
+                            <Copy className="w-4 h-4 mr-2" />
+                            Copy
+                          </Button>
+                        </div>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                          <pre>{`cosign download attestation \\
+  --platform=linux/amd64 \\
+  --predicate-type=https://spdx.dev/Document \\
+  securehub.io/public/${image.name}:${image.latestTag} | jq -r .payload | base64 -d | jq .predicate`}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Verifying Attestations */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Verifying Image Attestations</h3>
+                    <p className="text-gray-600 mb-4">
+                      You can use the <code className="bg-gray-100 px-2 py-1 rounded text-sm font-mono">cosign verify-attestation</code> command 
+                      to check the signatures of the {image.name} image attestations:
+                    </p>
+
+                    <div className="space-y-4">
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-gray-900">Verify Attestation</h4>
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => {
+                              navigator.clipboard.writeText(`cosign verify-attestation \\\n  --type https://spdx.dev/Document \\\n  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\\n  --certificate-identity=https://github.com/securehub/images/.github/workflows/release.yaml@refs/heads/main \\\n  securehub.io/public/${image.name}:${image.latestTag}`);
+                            }}
+                          >
+                            <Copy className="w-4 h-4 mr-2" />
+                            Copy
+                          </Button>
+                        </div>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                          <pre>{`cosign verify-attestation \\
+  --type https://spdx.dev/Document \\
+  --certificate-oidc-issuer=https://token.actions.githubusercontent.com \\
+  --certificate-identity=https://github.com/securehub/images/.github/workflows/release.yaml@refs/heads/main \\
+  securehub.io/public/${image.name}:${image.latestTag}`}</pre>
+                        </div>
+                      </div>
+
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <h5 className="font-semibold text-green-900 mb-2">Expected Verification Output:</h5>
+                        <div className="bg-white border border-green-200 p-3 rounded font-mono text-xs text-gray-700 overflow-x-auto">
+                          <pre>{`Verification for securehub.io/public/${image.name}:${image.latestTag} --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - Existence of the claims in the transparency log was verified offline
+  - The code-signing certificate was verified using trusted certificate authority certificates
+
+Certificate subject: https://github.com/securehub/images/.github/workflows/release.yaml@refs/heads/main
+Certificate issuer URL: https://token.actions.githubusercontent.com
+GitHub Workflow Trigger: schedule
+GitHub Workflow SHA: da283c26829d46c2d2883de5ff98bee672428696
+GitHub Workflow Name: .github/workflows/release.yaml
+...`}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Info */}
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+                    <div className="flex items-start space-x-3">
+                      <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-amber-900 mb-2">Important Notes</h4>
+                        <ul className="space-y-1 text-sm text-amber-800">
+                          <li>• By default, commands will fetch attestations for the <code className="bg-white px-1.5 py-0.5 rounded">latest</code> tag</li>
+                          <li>• You can specify a different tag to fetch attestations from a specific version</li>
+                          <li>• Replace the <code className="bg-white px-1.5 py-0.5 rounded">--predicate-type</code> parameter to download different attestations</li>
+                          <li>• Ensure you have cosign and jq installed before running these commands</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="versions">
             <Card>
               <CardHeader>
