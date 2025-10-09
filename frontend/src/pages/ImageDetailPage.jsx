@@ -85,9 +85,7 @@ const ImageDetailPage = () => {
                 <div>
                   <div className="flex items-center space-x-2 mb-2">
                     <h1 className="text-2xl font-bold text-gray-900">{image.name}</h1>
-                    {image.isFree && (
-                      <Badge className="bg-blue-50 text-blue-700 text-xs">Free</Badge>
-                    )}
+                    <Badge className="bg-green-50 text-green-700 text-xs">Open Source</Badge>
                   </div>
                   <p className="text-gray-600 text-sm mb-3">{image.description}</p>
                   
