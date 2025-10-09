@@ -17,27 +17,25 @@ const Footer = () => {
               <span className="text-xl font-bold">SecureHub</span>
             </Link>
             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Build, ship, and run secure software with minimal, hardened container images. 
-              Trusted by developers worldwide for secure-by-default containers.
+              Free, open-source platform providing secure container images with enterprise-grade features. 
+              Built by the community, for the community.
             </p>
             
-            {/* Newsletter */}
+            {/* Community CTA */}
             <div>
-              <h4 className="text-sm font-semibold mb-3">Stay updated</h4>
+              <h4 className="text-sm font-semibold mb-3">Join Our Community</h4>
               <div className="flex space-x-2">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="bg-gray-800 border-gray-700 text-white text-sm placeholder:text-gray-500 focus:border-[#fd366e] focus:ring-[#fd366e]"
-                />
                 <Button 
                   style={{ backgroundColor: '#fd366e' }}
                   className="text-white hover:opacity-90 text-sm"
                   size="sm"
                 >
-                  Subscribe
+                  Contribute on GitHub
                 </Button>
               </div>
+              <p className="text-xs text-gray-500 mt-2">
+                Help us improve security for everyone
+              </p>
             </div>
           </div>
 
