@@ -196,15 +196,15 @@ const ImageDetailPage = () => {
                     <div className="space-y-8">
                   {/* Main Description */}
                   <div>
-                    <p className="text-gray-700 text-lg leading-relaxed">
+                    <p className="text-gray-700 text-sm leading-relaxed">
                       {image.description}. Minimal Wolfi-based container image that is regularly updated and secure-by-default.
                     </p>
                   </div>
 
                   {/* Download Section */}
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Download this Container Image</h3>
-                    <p className="text-gray-700 mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Download this Container Image</h3>
+                    <p className="text-gray-700 text-sm mb-3">
                       For those with access, this container image is available on <code className="bg-gray-100 px-2 py-1 rounded">securehub.io</code>:
                     </p>
                     <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
