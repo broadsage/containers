@@ -10,7 +10,7 @@ sidebar_position: 8
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="mysql" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>mysql <span className="badge badge-community">Community</span></h2>
+      <h2 style="margin: 0;">mysql **Community**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>MySQL is an open-source relational database</p>
     
   

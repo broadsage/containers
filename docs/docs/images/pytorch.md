@@ -10,7 +10,7 @@ sidebar_position: 11
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="pytorch" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>pytorch <span className="badge badge-verified">Verified</span></h2>
+      <h2 style="margin: 0;">pytorch **Verified**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Tensors and Dynamic neural networks in Python</p>
     
   

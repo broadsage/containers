@@ -10,7 +10,7 @@ sidebar_position: 14
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://www.svgrepo.com/show/353952/kafka-icon.svg" alt="kafka" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>kafka <span className="badge badge-community">Community</span></h2>
+      <h2 style="margin: 0;">kafka **Community**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Distributed event streaming platform</p>
     
   

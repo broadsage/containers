@@ -10,7 +10,7 @@ sidebar_position: 6
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="go" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>go <span className="badge badge-community">Community</span></h2>
+      <h2 style="margin: 0;">go **Community**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Go is an open source programming language</p>
     
   

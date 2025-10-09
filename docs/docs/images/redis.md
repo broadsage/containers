@@ -10,7 +10,7 @@ sidebar_position: 5
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="redis" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>redis <span className="badge badge-verified">Verified</span></h2>
+      <h2 style="margin: 0;">redis **Verified**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>In-memory data structure store, used as database, cache</p>
     
   

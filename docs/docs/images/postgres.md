@@ -10,7 +10,7 @@ sidebar_position: 3
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="postgres" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>postgres <span className="badge badge-verified">Verified</span></h2>
+      <h2 style="margin: 0;">postgres **Verified**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Powerful, open source object-relational database system</p>
     
   

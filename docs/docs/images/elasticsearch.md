@@ -10,7 +10,7 @@ sidebar_position: 13
   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://www.svgrepo.com/show/373574/elasticsearch.svg" alt="elasticsearch" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
-      <h2 style={{margin: 0}}>elasticsearch <span className="badge badge-verified">Verified</span></h2>
+      <h2 style="margin: 0;">elasticsearch **Verified**</h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Distributed, RESTful search and analytics engine</p>
     
   
