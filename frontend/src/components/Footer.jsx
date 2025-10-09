@@ -9,75 +9,20 @@ const Footer = () => {
       <div className="container mx-auto px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <Shield className="h-7 w-7" style={{ color: '#fd366e' }} />
-              <span className="text-xl font-bold">SecureHub</span>
-            </Link>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Free, open-source platform providing secure container images with enterprise-grade features. 
-              Built by the community, for the community.
-            </p>
-            
-            {/* Community CTA */}
-            <div>
-              <h4 className="text-sm font-semibold mb-3">Join Our Community</h4>
-              <div className="flex space-x-2">
-                <Button 
-                  style={{ backgroundColor: '#fd366e' }}
-                  className="text-white hover:opacity-90 text-sm"
-                  size="sm"
-                >
-                  Contribute on GitHub
-                </Button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Help us improve security for everyone
-              </p>
-            </div>
-          </div>
-
-          {/* Features Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Features</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Container Images
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  SBOM Generation
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Vulnerability Scanning
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Provenance Tracking
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Image Signing
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Daily Updates
-                </Link>
-              </li>
-            </ul>
+            <Link to="/" className="flex items-center space-x-2 mb-3">
+              <Shield className="h-6 w-6" style={{ color: '#fd366e' }} />
+              <span className="text-lg font-bold">SecureHub</span>
+            </Link>
+            <p className="text-gray-400 text-sm leading-relaxed">
+              Free, open-source platform for secure container images.
+            </p>
           </div>
 
           {/* Community Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Community</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-sm font-semibold mb-3">Community</h4>
+            <ul className="space-y-2">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
                   GitHub
@@ -90,22 +35,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Forum
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
                   Contribute
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Code of Conduct
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Contributors
                 </a>
               </li>
             </ul>
@@ -113,21 +43,11 @@ const Footer = () => {
 
           {/* Resources Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-sm font-semibold mb-3">Resources</h4>
+            <ul className="space-y-2">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
                   Documentation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Courses
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Events & Webinars
                 </a>
               </li>
               <li>
@@ -137,49 +57,29 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Trust Center
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Community
+                  Roadmap
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* About Column */}
+          {/* Legal Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">About</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-sm font-semibold mb-3">Legal</h4>
+            <ul className="space-y-2">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Mission
+                  Privacy
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Team
+                  Terms
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Sponsors
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Roadmap
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Changelog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Contact
+                  License
                 </a>
               </li>
             </ul>
