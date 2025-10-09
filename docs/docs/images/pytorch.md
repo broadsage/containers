@@ -6,7 +6,7 @@ sidebar_position: 11
 
 # pytorch
 
-<div className="image-card">
+
   <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="pytorch" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>

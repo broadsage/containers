@@ -6,7 +6,7 @@ sidebar_position: 13
 
 # elasticsearch
 
-<div className="image-card">
+
   <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
     <img src="https://www.svgrepo.com/show/373574/elasticsearch.svg" alt="elasticsearch" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>

@@ -6,7 +6,7 @@ sidebar_position: 4
 
 # python
 
-<div className="image-card">
+
   <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
