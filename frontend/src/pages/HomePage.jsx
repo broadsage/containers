@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import CategoryFilter from '../components/CategoryFilter';
 import ImageCard from '../components/ImageCard';
+import Footer from '../components/Footer';
 import { dockerImages } from '../mockData';
 import { Button } from '../components/ui/button';
 
