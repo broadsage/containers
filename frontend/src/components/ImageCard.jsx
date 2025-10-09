@@ -60,18 +60,13 @@ const ImageCard = ({ image }) => {
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between mb-1.5">
+            <div className="flex items-center justify-between mb-2">
               <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#fd366e] transition-colors">
                 {image.name}
               </h3>
+              {/* Docker Hub style badge */}
+              {image.badge && renderBadge(image.badge)}
             </div>
-            
-            {/* Docker Hub style badge */}
-            {image.badge && (
-              <div className="mb-2">
-                {renderBadge(image.badge)}
-              </div>
-            )}
             
             <div className="flex items-center text-xs text-gray-500 mb-1">
               <Clock className="w-3 h-3 mr-1" />
