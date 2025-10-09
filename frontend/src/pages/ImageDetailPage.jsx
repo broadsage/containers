@@ -1180,6 +1180,9 @@ GitHub Workflow Name: .github/workflows/release.yaml
           </TabsContent>
         </Tabs>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
