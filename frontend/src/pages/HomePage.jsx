@@ -11,6 +11,7 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllImages, setShowAllImages] = useState(false);
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
 
   const filteredImages = useMemo(() => {
     let filtered = dockerImages;
