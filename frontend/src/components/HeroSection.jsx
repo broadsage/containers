@@ -25,11 +25,11 @@ const HeroSection = ({ onSearch }) => {
         {/* Hero Text */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            Eliminate your CVEs
+            Free & Secure Container Images for Everyone
           </h1>
           <p className="text-base text-gray-600 max-w-3xl mx-auto">
-            Build, ship, and run secure software with minimal, hardened container images —
-            rebuilt from source daily and guarded under our industry-leading remediation SLA.
+            Community-driven platform providing minimal, hardened container images with SBOM, vulnerability scanning, 
+            and provenance tracking — completely free and open for the entire developer community.
           </p>
         </div>
 
