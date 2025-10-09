@@ -226,22 +226,12 @@ cat > image.yaml
 # - version tags
 
 # 3. Create documentation
-cat > README.md << 'EOF'
-# myapp
-
-Description of the application and image.
-
-## Usage
-
-```bash
-docker run cgr.dev/chainguard/myapp:latest
-```
-
-## Tags
-
-- `latest` - Latest stable version
-- `1.0` - Version 1.0.x
-EOF
+# Create README.md documentation
+cat > README.md
+# Add documentation with:
+# - Application description
+# - Usage examples
+# - Available tags
 
 # 4. Add tests
 mkdir tests
