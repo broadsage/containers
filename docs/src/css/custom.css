@@ -4,27 +4,64 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+/* Chainguard branding colors */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #fd366e;
+  --ifm-color-primary-dark: #fc1056;
+  --ifm-color-primary-darker: #eb0d4f;
+  --ifm-color-primary-darkest: #c20a41;
+  --ifm-color-primary-light: #fd5c86;
+  --ifm-color-primary-lighter: #fd6992;
+  --ifm-color-primary-lightest: #fe95b3;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(253, 54, 110, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* Dark mode adjustments */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #fd6992;
+  --ifm-color-primary-dark: #fd4c7d;
+  --ifm-color-primary-darker: #fd3974;
+  --ifm-color-primary-darkest: #fc1056;
+  --ifm-color-primary-light: #fd86a7;
+  --ifm-color-primary-lighter: #fd93b1;
+  --ifm-color-primary-lightest: #feb9d0;
+  --docusaurus-highlighted-code-line-bg: rgba(253, 54, 110, 0.3);
+}
+
+/* Custom styling for image cards */
+.image-card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  transition: box-shadow 0.2s ease;
+}
+
+.image-card:hover {
+  box-shadow: 0 4px 12px rgba(253, 54, 110, 0.15);
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-official {
+  background-color: #0066cc;
+  color: white;
+}
+
+.badge-community {
+  background-color: #28a745;
+  color: white;
+}
+
+.badge-verified {
+  background-color: #fd366e;
+  color: white;
 }
