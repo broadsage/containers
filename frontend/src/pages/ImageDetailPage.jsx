@@ -170,10 +170,11 @@ const ImageDetailPage = () => {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-5 mb-8">
             <TabsTrigger value="specification">Specification</TabsTrigger>
             <TabsTrigger value="vulnerabilities">Vulnerabilities</TabsTrigger>
             <TabsTrigger value="sbom">SBOM</TabsTrigger>
+            <TabsTrigger value="provenance">Provenance</TabsTrigger>
             <TabsTrigger value="versions">Versions</TabsTrigger>
           </TabsList>
 
