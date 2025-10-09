@@ -12,9 +12,9 @@ sidebar_position: 12
     <div>
       <h2 style={{margin: 0}}>jenkins <span className="badge badge-official">Official</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Jenkins automation server</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

@@ -12,9 +12,9 @@ sidebar_position: 5
     <div>
       <h2 style={{margin: 0}}>redis <span className="badge badge-verified">Verified</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>In-memory data structure store, used as database, cache</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

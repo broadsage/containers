@@ -12,9 +12,9 @@ sidebar_position: 13
     <div>
       <h2 style={{margin: 0}}>elasticsearch <span className="badge badge-verified">Verified</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Distributed, RESTful search and analytics engine</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

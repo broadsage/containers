@@ -12,9 +12,9 @@ sidebar_position: 9
     <div>
       <h2 style={{margin: 0}}>mongodb <span className="badge badge-verified">Verified</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>MongoDB is a source-available cross-platform document-oriented database</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

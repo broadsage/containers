@@ -12,9 +12,9 @@ sidebar_position: 6
     <div>
       <h2 style={{margin: 0}}>go <span className="badge badge-community">Community</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Go is an open source programming language</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

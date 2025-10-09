@@ -12,9 +12,9 @@ sidebar_position: 8
     <div>
       <h2 style={{margin: 0}}>mysql <span className="badge badge-community">Community</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>MySQL is an open-source relational database</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

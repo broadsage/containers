@@ -12,9 +12,9 @@ sidebar_position: 15
     <div>
       <h2 style={{margin: 0}}>docker <span className="badge badge-official">Official</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Docker container runtime</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

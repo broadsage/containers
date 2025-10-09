@@ -12,9 +12,9 @@ sidebar_position: 10
     <div>
       <h2 style={{margin: 0}}>tensorflow <span className="badge badge-community">Community</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>An end-to-end open source platform for machine learning</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

@@ -12,9 +12,9 @@ sidebar_position: 4
     <div>
       <h2 style={{margin: 0}}>python <span className="badge badge-official">Official</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Python is a programming language that lets you work quickly</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

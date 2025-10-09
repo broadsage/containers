@@ -12,9 +12,9 @@ sidebar_position: 7
     <div>
       <h2 style={{margin: 0}}>php <span className="badge badge-official">Official</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Popular general-purpose scripting language</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

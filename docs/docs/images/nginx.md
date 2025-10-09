@@ -12,9 +12,9 @@ sidebar_position: 2
     <div>
       <h2 style={{margin: 0}}>nginx <span className="badge badge-community">Community</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>High-performance HTTP server and reverse proxy</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 

@@ -12,9 +12,9 @@ sidebar_position: 14
     <div>
       <h2 style={{margin: 0}}>kafka <span className="badge badge-community">Community</span></h2>
       <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Distributed event streaming platform</p>
-    </div>
-  </div>
-</div>
+    
+  
+
 
 ## Overview
 
