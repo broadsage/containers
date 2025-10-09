@@ -1,47 +1,98 @@
 ---
+title: Introduction
+slug: /
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Chainguard Images Documentation
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Welcome to the official documentation for **Chainguard Images** - the most secure container images for your software supply chain.
 
-## Getting Started
+## What are Chainguard Images?
 
-Get started by **creating a new site**.
+Chainguard Images are **distroless**, **minimal**, and **secure** container images that provide a safer foundation for your applications. Built with a security-first approach, these images dramatically reduce your attack surface while maintaining full functionality.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Key Features
 
-### What you'll need
+🔒 **Zero Known Vulnerabilities**: Our images start with zero known CVEs  
+📦 **Minimal Size**: 80% smaller than traditional container images  
+🚀 **Production Ready**: Used by thousands of organizations in production  
+✅ **Always Updated**: Rebuilt nightly with the latest security patches  
+🔍 **Full Transparency**: Complete SBOM and provenance data included  
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## Quick Start
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+### 1. Pull Your First Image
 
 ```bash
-cd my-website
-npm run start
+# Pull the Node.js image
+docker pull cgr.dev/chainguard/node:latest
+
+# Run it
+docker run -it cgr.dev/chainguard/node:latest
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### 2. Explore the Catalog
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+Browse our [**Image Catalog**](./images/overview) to find the perfect image for your needs:
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+- **[Node.js](./images/node)** - JavaScript runtime
+- **[Python](./images/python)** - Python interpreter  
+- **[Nginx](./images/nginx)** - Web server
+- **[PostgreSQL](./images/postgres)** - Database
+- **[And many more...](./images/overview)**
+
+### 3. Learn the Basics
+
+Read our [**Getting Started Guide**](./getting-started) for detailed setup instructions and best practices.
+
+## Why Choose Chainguard Images?
+
+### Traditional Images vs Chainguard Images
+
+| Aspect | Traditional Images | Chainguard Images |
+|--------|-------------------|------------------|
+| **Size** | 200MB - 1GB+ | 20MB - 200MB |
+| **Vulnerabilities** | 50-200+ CVEs | 0 known CVEs |
+| **Package Manager** | ✅ Included | ❌ Removed (distroless) |
+| **Shell Access** | ✅ Available | ❌ Not available (distroless) |
+| **Security Updates** | Manual/Weekly | Automated/Nightly |
+| **SBOM Included** | ❌ Usually not | ✅ Always |
+
+### Security Benefits
+
+1. **Reduced Attack Surface**: No package managers, shells, or unnecessary tools
+2. **Faster Patching**: Automated security updates within hours of disclosure
+3. **Supply Chain Security**: Full provenance and SBOM for compliance
+4. **FIPS Compliance**: Available for regulated environments
+
+## Architecture Support
+
+All Chainguard Images support:
+- **linux/amd64** (Intel/AMD 64-bit)
+- **linux/arm64** (ARM 64-bit, including Apple Silicon)
+
+## Registry Information
+
+**Registry**: `cgr.dev/chainguard/`  
+**Authentication**: Public images require no credentials  
+**Rate Limits**: Generous limits for open source usage  
+**Mirrors**: Available globally with CDN acceleration  
+
+## Getting Help
+
+- 📚 **[Browse Documentation](./images/overview)** - Comprehensive guides and references
+- 🐛 **[Report Issues](https://github.com/chainguard-images/images/issues)** - Bug reports and feature requests  
+- 💬 **[Join Discussions](https://github.com/chainguard-images/images/discussions)** - Community Q&A
+- 🔐 **[Security Reports](mailto:security@chainguard.dev)** - Responsible disclosure
+
+## Next Steps
+
+1. **[🚀 Getting Started](./getting-started)** - Set up your first Chainguard image
+2. **[📦 Browse Images](./images/overview)** - Explore our complete catalog  
+3. **[🛡️ Security Guide](./guides/vulnerabilities)** - Learn about our security practices
+4. **[🤝 Community](./guides/community)** - Connect with other users
+
+---
+
+*Ready to secure your software supply chain? Let's get started!* 🚀
