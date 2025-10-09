@@ -170,48 +170,126 @@ const ImageDetailPage = () => {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 mb-8">
+            <TabsTrigger value="specification">Specification</TabsTrigger>
             <TabsTrigger value="vulnerabilities">Vulnerabilities</TabsTrigger>
             <TabsTrigger value="sbom">SBOM</TabsTrigger>
+            <TabsTrigger value="versions">Versions</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview">
+          <TabsContent value="specification">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <Package className="w-5 h-5" />
-                  <span>Image Overview</span>
+                  <FileText className="w-5 h-5" />
+                  <span>Image Specification</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Description</h3>
-                    <p className="text-gray-600">{image.description}</p>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Overview</h3>
+                    <p className="text-gray-600 mb-4">{image.description}</p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="border-l-4 border-[#fd366e] pl-4">
+                        <p className="text-sm text-gray-500">Category</p>
+                        <p className="font-semibold text-gray-900 capitalize">{image.category}</p>
+                      </div>
+                      <div className="border-l-4 border-[#fd366e] pl-4">
+                        <p className="text-sm text-gray-500">License</p>
+                        <p className="font-semibold text-gray-900">Apache-2.0</p>
+                      </div>
+                      <div className="border-l-4 border-[#fd366e] pl-4">
+                        <p className="text-sm text-gray-500">Architecture</p>
+                        <p className="font-semibold text-gray-900">amd64, arm64</p>
+                      </div>
+                      <div className="border-l-4 border-[#fd366e] pl-4">
+                        <p className="text-sm text-gray-500">OS</p>
+                        <p className="font-semibold text-gray-900">Linux</p>
+                      </div>
+                    </div>
                   </div>
                   
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Category</h3>
-                    <Badge variant="secondary">{image.category}</Badge>
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Pull Command</h3>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Pull Command</h3>
                     <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
                       docker pull securehub.io/{image.name}:{image.latestTag}
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Security Features</h3>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600">
-                      <li>Rebuilt from source daily</li>
-                      <li>Minimal attack surface</li>
-                      <li>Industry-leading remediation SLA</li>
-                      <li>Continuous vulnerability scanning</li>
-                      {image.fips && <li>FIPS 140-2 compliant</li>}
+                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Docker Compose</h3>
+                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                      <pre>{`version: '3.8'
+services:
+  ${image.name}:
+    image: securehub.io/${image.name}:${image.latestTag}
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production`}</pre>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Security Features</h3>
+                    <ul className="space-y-2">
+                      <li className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-gray-900">Rebuilt from source daily</p>
+                          <p className="text-sm text-gray-600">Automatic rebuilds ensure latest security patches</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-gray-900">Minimal attack surface</p>
+                          <p className="text-sm text-gray-600">Only essential packages included</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-gray-900">Industry-leading remediation SLA</p>
+                          <p className="text-sm text-gray-600">Critical vulnerabilities patched within 24 hours</p>
+                        </div>
+                      </li>
+                      <li className="flex items-start space-x-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-gray-900">Continuous vulnerability scanning</p>
+                          <p className="text-sm text-gray-600">Automated scanning with every build</p>
+                        </div>
+                      </li>
+                      {image.fips && (
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">FIPS 140-2 compliant</p>
+                            <p className="text-sm text-gray-600">Meets federal cryptographic standards</p>
+                          </div>
+                        </li>
+                      )}
                     </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Image Layers</h3>
+                    <div className="space-y-2">
+                      {[
+                        { command: 'FROM alpine:3.19', size: '7.3 MB' },
+                        { command: `RUN apk add --no-cache ${image.name}`, size: image.size },
+                        { command: 'COPY . /app', size: '2.1 MB' },
+                        { command: 'WORKDIR /app', size: '0 B' },
+                        { command: `CMD ["${image.name}"]`, size: '0 B' }
+                      ].map((layer, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                          <code className="text-sm text-gray-700">{layer.command}</code>
+                          <span className="text-sm font-medium text-gray-600">{layer.size}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </CardContent>
