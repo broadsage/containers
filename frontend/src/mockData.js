@@ -63,7 +63,8 @@ export const dockerImages = [
     description: 'Python is a programming language that lets you work quickly',
     downloads: 3450000,
     size: '50MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource', 'verified']
   },
   {
     id: 5,
@@ -76,7 +77,8 @@ export const dockerImages = [
     description: 'In-memory data structure store, used as database, cache',
     downloads: 1670000,
     size: '35MB',
-    fips: true
+    fips: true,
+    badges: ['official', 'verified']
   },
   {
     id: 6,
@@ -89,7 +91,8 @@ export const dockerImages = [
     description: 'Go is an open source programming language',
     downloads: 890000,
     size: '340MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource']
   },
   {
     id: 7,
