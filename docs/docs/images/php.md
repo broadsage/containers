@@ -7,7 +7,7 @@ sidebar_position: 7
 # php
 
 
-  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="php" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style={{margin: 0}}>php <span className="badge badge-official">Official</span></h2>

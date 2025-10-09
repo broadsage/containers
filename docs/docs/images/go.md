@@ -7,7 +7,7 @@ sidebar_position: 6
 # go
 
 
-  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="go" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style={{margin: 0}}>go <span className="badge badge-community">Community</span></h2>

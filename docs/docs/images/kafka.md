@@ -7,7 +7,7 @@ sidebar_position: 14
 # kafka
 
 
-  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://www.svgrepo.com/show/353952/kafka-icon.svg" alt="kafka" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style={{margin: 0}}>kafka <span className="badge badge-community">Community</span></h2>

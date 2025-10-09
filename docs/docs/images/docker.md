@@ -7,7 +7,7 @@ sidebar_position: 15
 # docker
 
 
-  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style={{margin: 0}}>docker <span className="badge badge-official">Official</span></h2>

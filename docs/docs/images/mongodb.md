@@ -7,7 +7,7 @@ sidebar_position: 9
 # mongodb
 
 
-  <div style={{display: 'flex', alignItems: 'center', marginBottom: '1rem'}}>
+  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="mongodb" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style={{margin: 0}}>mongodb <span className="badge badge-verified">Verified</span></h2>
