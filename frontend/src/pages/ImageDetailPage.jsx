@@ -919,26 +919,28 @@ GitHub Workflow Name: .github/workflows/release.yaml
           </TabsContent>
 
           <TabsContent value="versions">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Layers className="w-5 h-5" />
-                  <span>Available Versions</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {[
-                    { tag: image.latestTag, status: 'latest', date: image.lastChanged, vulns: { critical: 0, high: 1, medium: 1, low: 1 } },
-                    { tag: '24.9.0', status: 'stable', date: '2 days ago', vulns: { critical: 1, high: 2, medium: 2, low: 1 } },
-                    { tag: '24.8.0', status: 'stable', date: '1 week ago', vulns: { critical: 2, high: 3, medium: 3, low: 2 } },
-                    { tag: '24.7.1', status: 'stable', date: '2 weeks ago', vulns: { critical: 3, high: 4, medium: 4, low: 3 } },
-                    { tag: '24.7.0', status: 'deprecated', date: '3 weeks ago', vulns: { critical: 5, high: 6, medium: 5, low: 4 } },
-                  ].map((version, index) => (
-                    <div 
-                      key={index} 
-                      className="flex items-center justify-between p-4 border rounded-lg hover:border-[#fd366e] transition-all hover:shadow-md"
-                    >
+            <div className="relative">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center space-x-2">
+                    <Layers className="w-5 h-5" />
+                    <span>Available Versions</span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {[
+                      { tag: image.latestTag, status: 'latest', date: image.lastChanged, vulns: { critical: 0, high: 1, medium: 1, low: 1 }, size: image.size, arch: 'x86_64 + arm64' },
+                      { tag: '24.9.0', status: 'stable', date: '2 days ago', vulns: { critical: 1, high: 2, medium: 2, low: 1 }, size: '48MB', arch: 'x86_64 + arm64' },
+                      { tag: '24.8.0', status: 'stable', date: '1 week ago', vulns: { critical: 2, high: 3, medium: 3, low: 2 }, size: '47MB', arch: 'x86_64 + arm64' },
+                      { tag: '24.7.1', status: 'stable', date: '2 weeks ago', vulns: { critical: 3, high: 4, medium: 4, low: 3 }, size: '46MB', arch: 'x86_64 + arm64' },
+                      { tag: '24.7.0', status: 'deprecated', date: '3 weeks ago', vulns: { critical: 5, high: 6, medium: 5, low: 4 }, size: '45MB', arch: 'x86_64 + arm64' },
+                    ].map((version, index) => (
+                      <div 
+                        key={index} 
+                        className="flex items-center justify-between p-4 border rounded-lg hover:border-[#fd366e] transition-all hover:shadow-md cursor-pointer"
+                        onClick={() => setSelectedVersion(version)}
+                      >
                       <div className="flex items-center space-x-4">
                         <div className="flex flex-col">
                           <div className="flex items-center space-x-2 mb-1">
