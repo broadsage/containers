@@ -196,21 +196,22 @@ const ImageDetailPage = () => {
                   {/* Main Description */}
                   <div>
                     <p className="text-gray-700 text-sm leading-relaxed">
-                      {image.description}. Minimal Wolfi-based container image that is regularly updated and secure-by-default.
+                      {image.description}. Minimal Wolfi-based container image that is regularly updated and secure-by-default. 
+                      Free for everyone, maintained by the open-source community.
                     </p>
                   </div>
 
                   {/* Download Section */}
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Download this Container Image</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">Pull this Container Image</h3>
                     <p className="text-gray-700 text-sm mb-3">
-                      For those with access, this container image is available on <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">securehub.io</code>:
+                      This container image is freely available on <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">securehub.io</code>:
                     </p>
                     <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
-                      docker pull securehub.io/ORGANIZATION/{image.name}:{image.latestTag}
+                      docker pull securehub.io/{image.name}:{image.latestTag}
                     </div>
                     <p className="text-xs text-gray-600 mt-2">
-                      Be sure to replace the <code className="bg-gray-100 px-1.5 py-0.5 rounded text-xs">ORGANIZATION</code> placeholder with the name used for your organization's private repository.
+                      All images are available to everyone at no cost. Join our community to contribute and help improve these images.
                     </p>
                   </div>
 
