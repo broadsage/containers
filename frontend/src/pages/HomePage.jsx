@@ -114,12 +114,11 @@ const HomePage = () => {
                           <h3 className="text-base font-semibold text-gray-900 hover:text-[#fd366e] transition-colors">
                             {image.name}
                           </h3>
-                          {image.isFree && (
-                            <span className="text-xs text-blue-700 font-medium">Free</span>
-                          )}
+                          <span className="text-xs text-green-700 font-medium">Open Source</span>
                           {image.fips && (
                             <>
-                              <span className="text-xs text-blue-600">• FIPS available</span>
+                              <span className="text-xs text-gray-400">•</span>
+                              <span className="text-xs text-blue-600">FIPS available</span>
                             </>
                           )}
                         </div>
