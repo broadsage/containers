@@ -36,14 +36,12 @@ const ImageCard = ({ image }) => {
               <h3 className="text-base font-semibold text-gray-900 group-hover:text-[#fd366e] transition-colors">
                 {image.name}
               </h3>
-              {image.isFree && (
-                <Badge 
-                  variant="secondary" 
-                  className="bg-blue-50 text-blue-700 hover:bg-blue-100 text-xs"
-                >
-                  Free
-                </Badge>
-              )}
+              <Badge 
+                variant="secondary" 
+                className="bg-green-50 text-green-700 hover:bg-green-100 text-xs"
+              >
+                Community
+              </Badge>
             </div>
             
             <div className="flex items-center text-xs text-gray-500 mb-1">
