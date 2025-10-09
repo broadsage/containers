@@ -105,7 +105,8 @@ export const dockerImages = [
     description: 'Popular general-purpose scripting language',
     downloads: 1230000,
     size: '78MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource']
   },
   {
     id: 8,
@@ -118,7 +119,8 @@ export const dockerImages = [
     description: 'MySQL is an open-source relational database',
     downloads: 2120000,
     size: '145MB',
-    fips: false
+    fips: false,
+    badges: ['opensource', 'verified']
   },
   {
     id: 9,
@@ -131,7 +133,8 @@ export const dockerImages = [
     description: 'MongoDB is a source-available cross-platform document-oriented database',
     downloads: 1780000,
     size: '420MB',
-    fips: true
+    fips: true,
+    badges: ['verified']
   },
   {
     id: 10,
@@ -144,7 +147,8 @@ export const dockerImages = [
     description: 'An end-to-end open source platform for machine learning',
     downloads: 560000,
     size: '1.2GB',
-    fips: false
+    fips: false,
+    badges: ['opensource', 'verified']
   },
   {
     id: 11,
@@ -157,7 +161,8 @@ export const dockerImages = [
     description: 'Tensors and Dynamic neural networks in Python',
     downloads: 480000,
     size: '980MB',
-    fips: false
+    fips: false,
+    badges: ['opensource']
   },
   {
     id: 12,
@@ -170,7 +175,8 @@ export const dockerImages = [
     description: 'Jenkins automation server',
     downloads: 670000,
     size: '280MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource', 'verified']
   },
   {
     id: 13,
@@ -183,7 +189,8 @@ export const dockerImages = [
     description: 'Distributed, RESTful search and analytics engine',
     downloads: 890000,
     size: '520MB',
-    fips: true
+    fips: true,
+    badges: ['verified']
   },
   {
     id: 14,
@@ -196,7 +203,8 @@ export const dockerImages = [
     description: 'Distributed event streaming platform',
     downloads: 720000,
     size: '380MB',
-    fips: false
+    fips: false,
+    badges: ['opensource', 'verified']
   },
   {
     id: 15,
@@ -209,7 +217,8 @@ export const dockerImages = [
     description: 'Docker container runtime',
     downloads: 5670000,
     size: '95MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource', 'verified']
   },
 ];
 
