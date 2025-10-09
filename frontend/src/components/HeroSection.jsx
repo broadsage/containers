@@ -23,11 +23,11 @@ const HeroSection = ({ onSearch }) => {
     <div className="relative bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="container mx-auto px-8">
         {/* Hero Text */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">
             Eliminate your CVEs
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base text-gray-600 max-w-3xl mx-auto">
             Build, ship, and run secure software with minimal, hardened container images —
             rebuilt from source daily and guarded under our industry-leading remediation SLA.
           </p>
