@@ -10,7 +10,7 @@ const ImageCard = ({ image }) => {
   return (
     <Card 
       className="hover:shadow-lg transition-all duration-300 cursor-pointer group border border-gray-200"
-      onClick={() => navigate(`/image/${image.id}`)}
+      onClick={() => navigate(`/image/${image.name}`)}
     >
       <CardContent className="p-6">
         <div className="flex items-start space-x-4">
