@@ -83,33 +83,33 @@ const ImageDetailPage = () => {
                 </div>
                 
                 <div>
-                  <div className="flex items-center space-x-2 mb-2">
+                  <div className="flex items-center space-x-3 mb-3">
                     <h1 className="text-2xl font-bold text-gray-900">{image.name}</h1>
+                    
+                    {/* Docker Hub style badge */}
+                    {image.badge && (
+                      <>
+                        {image.badge === 'official' && (
+                          <div className="inline-flex items-center space-x-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs font-medium text-blue-700">
+                            <CheckCircle className="w-3.5 h-3.5" />
+                            <span>Official Image</span>
+                          </div>
+                        )}
+                        {image.badge === 'community' && (
+                          <div className="inline-flex items-center space-x-1 px-2 py-1 bg-green-50 border border-green-200 rounded text-xs font-medium text-green-700">
+                            <Shield className="w-3.5 h-3.5" />
+                            <span>Community</span>
+                          </div>
+                        )}
+                        {image.badge === 'verified' && (
+                          <div className="inline-flex items-center space-x-1 px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs font-medium text-purple-700">
+                            <CheckCircle className="w-3.5 h-3.5" />
+                            <span>Verified Publisher</span>
+                          </div>
+                        )}
+                      </>
+                    )}
                   </div>
-                  
-                  {/* Docker Hub style badge */}
-                  {image.badge && (
-                    <div className="mb-3">
-                      {image.badge === 'official' && (
-                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-blue-50 border border-blue-200 rounded text-xs font-medium text-blue-700">
-                          <CheckCircle className="w-3.5 h-3.5" />
-                          <span>Official Image</span>
-                        </div>
-                      )}
-                      {image.badge === 'community' && (
-                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-green-50 border border-green-200 rounded text-xs font-medium text-green-700">
-                          <Shield className="w-3.5 h-3.5" />
-                          <span>Community</span>
-                        </div>
-                      )}
-                      {image.badge === 'verified' && (
-                        <div className="inline-flex items-center space-x-1 px-2 py-1 bg-purple-50 border border-purple-200 rounded text-xs font-medium text-purple-700">
-                          <CheckCircle className="w-3.5 h-3.5" />
-                          <span>Verified Publisher</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
                   
                   <p className="text-gray-600 text-sm mb-3">{image.description}</p>
                   
