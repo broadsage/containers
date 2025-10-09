@@ -22,7 +22,7 @@ export const dockerImages = [
     downloads: 1250000,
     size: '45MB',
     fips: false,
-    badges: ['official', 'opensource', 'verified']
+    badge: 'official'
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ export const dockerImages = [
     downloads: 2340000,
     size: '25MB',
     fips: false,
-    badges: ['official', 'opensource']
+    badge: 'community'
   },
   {
     id: 3,
@@ -50,7 +50,7 @@ export const dockerImages = [
     downloads: 1890000,
     size: '120MB',
     fips: false,
-    badges: ['official', 'opensource', 'verified']
+    badge: 'verified'
   },
   {
     id: 4,
@@ -64,7 +64,7 @@ export const dockerImages = [
     downloads: 3450000,
     size: '50MB',
     fips: false,
-    badges: ['official', 'opensource', 'verified']
+    badge: 'official'
   },
   {
     id: 5,
@@ -78,7 +78,7 @@ export const dockerImages = [
     downloads: 1670000,
     size: '35MB',
     fips: true,
-    badges: ['official', 'verified']
+    badge: 'verified'
   },
   {
     id: 6,
@@ -92,7 +92,7 @@ export const dockerImages = [
     downloads: 890000,
     size: '340MB',
     fips: false,
-    badges: ['official', 'opensource']
+    badge: 'community'
   },
   {
     id: 7,
@@ -106,7 +106,7 @@ export const dockerImages = [
     downloads: 1230000,
     size: '78MB',
     fips: false,
-    badges: ['official', 'opensource']
+    badge: 'official'
   },
   {
     id: 8,
@@ -120,7 +120,7 @@ export const dockerImages = [
     downloads: 2120000,
     size: '145MB',
     fips: false,
-    badges: ['opensource', 'verified']
+    badge: 'community'
   },
   {
     id: 9,
@@ -134,7 +134,7 @@ export const dockerImages = [
     downloads: 1780000,
     size: '420MB',
     fips: true,
-    badges: ['verified']
+    badge: 'verified'
   },
   {
     id: 10,
@@ -148,7 +148,7 @@ export const dockerImages = [
     downloads: 560000,
     size: '1.2GB',
     fips: false,
-    badges: ['opensource', 'verified']
+    badge: 'community'
   },
   {
     id: 11,
@@ -162,7 +162,7 @@ export const dockerImages = [
     downloads: 480000,
     size: '980MB',
     fips: false,
-    badges: ['opensource']
+    badge: 'verified'
   },
   {
     id: 12,
@@ -176,7 +176,7 @@ export const dockerImages = [
     downloads: 670000,
     size: '280MB',
     fips: false,
-    badges: ['official', 'opensource', 'verified']
+    badge: 'official'
   },
   {
     id: 13,
@@ -190,7 +190,7 @@ export const dockerImages = [
     downloads: 890000,
     size: '520MB',
     fips: true,
-    badges: ['verified']
+    badge: 'verified'
   },
   {
     id: 14,
@@ -204,7 +204,7 @@ export const dockerImages = [
     downloads: 720000,
     size: '380MB',
     fips: false,
-    badges: ['opensource', 'verified']
+    badge: 'community'
   },
   {
     id: 15,
@@ -218,7 +218,7 @@ export const dockerImages = [
     downloads: 5670000,
     size: '95MB',
     fips: false,
-    badges: ['official', 'opensource', 'verified']
+    badge: 'official'
   },
 ];
 
