@@ -1007,20 +1007,175 @@ GitHub Workflow Name: .github/workflows/release.yaml
                   ))}
                 </div>
 
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <div className="flex items-start space-x-3">
-                    <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-blue-900 mb-1">Version Policy</h4>
-                      <p className="text-sm text-blue-800">
-                        We recommend always using the latest tag for production deployments. 
-                        Deprecated versions are no longer receiving security updates and should be upgraded immediately.
-                      </p>
+                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div className="flex items-start space-x-3">
+                      <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-blue-900 mb-1">Version Policy</h4>
+                        <p className="text-sm text-blue-800">
+                          We recommend always using the latest tag for production deployments. 
+                          Deprecated versions are no longer receiving security updates and should be upgraded immediately.
+                        </p>
+                      </div>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+
+              {/* Side Panel for Version Details */}
+              {selectedVersion && (
+                <div className="fixed top-0 right-0 h-full w-2/5 bg-white shadow-2xl z-50 overflow-y-auto border-l border-gray-200">
+                  <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <img src={image.logo} alt={image.name} className="w-12 h-12" />
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900">{image.name}</h3>
+                          <code className="text-sm text-gray-600">{selectedVersion.tag}</code>
+                        </div>
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => setSelectedVersion(null)}
+                      >
+                        <XCircle className="w-5 h-5" />
+                      </Button>
+                    </div>
+
+                    {/* Architecture badges */}
+                    <div className="flex items-center space-x-2 mb-4">
+                      <Badge variant="outline" className="text-xs">x86_64</Badge>
+                      <Badge variant="outline" className="text-xs">arm64</Badge>
+                      <span className="text-sm text-gray-600">• {selectedVersion.size}</span>
+                    </div>
+
+                    {/* Sub-tabs */}
+                    <Tabs value={versionDetailTab} onValueChange={setVersionDetailTab}>
+                      <TabsList className="grid w-full grid-cols-3">
+                        <TabsTrigger value="packages">Packages</TabsTrigger>
+                        <TabsTrigger value="specifications">Specifications</TabsTrigger>
+                        <TabsTrigger value="vulnerabilities">Vulnerabilities</TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                  </div>
+
+                  <div className="p-6">
+                    {versionDetailTab === 'packages' && (
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-gray-900 mb-4">Packages ({sbom.length})</h4>
+                        <div className="space-y-2">
+                          {sbom.map((pkg, idx) => (
+                            <div key={idx} className="p-3 border rounded-lg hover:bg-gray-50 transition-colors">
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <p className="font-medium text-gray-900">{pkg.name}</p>
+                                  <p className="text-sm text-gray-600">Version: {pkg.version}</p>
+                                </div>
+                                <Badge variant="outline" className="text-xs">{pkg.license}</Badge>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {versionDetailTab === 'specifications' && (
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-gray-900 mb-4">Configuration</h4>
+                        <div className="border rounded-lg overflow-hidden">
+                          <table className="w-full text-sm">
+                            <tbody>
+                              <tr className="border-b hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">Tag</td>
+                                <td className="py-2 px-3 text-gray-700">{selectedVersion.tag}</td>
+                              </tr>
+                              <tr className="border-b hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">Size</td>
+                                <td className="py-2 px-3 text-gray-700">{selectedVersion.size}</td>
+                              </tr>
+                              <tr className="border-b hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">Architecture</td>
+                                <td className="py-2 px-3 text-gray-700">{selectedVersion.arch}</td>
+                              </tr>
+                              <tr className="border-b hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">User</td>
+                                <td className="py-2 px-3 text-gray-700">65532</td>
+                              </tr>
+                              <tr className="border-b hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">Working Dir</td>
+                                <td className="py-2 px-3 text-gray-700">/home/build</td>
+                              </tr>
+                              <tr className="hover:bg-gray-50">
+                                <td className="py-2 px-3 font-medium text-gray-900">Last Changed</td>
+                                <td className="py-2 px-3 text-gray-700">{selectedVersion.date}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div className="mt-4">
+                          <h5 className="font-semibold text-gray-900 mb-2">Pull Command</h5>
+                          <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
+                            docker pull securehub.io/{image.name}:{selectedVersion.tag}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {versionDetailTab === 'vulnerabilities' && (
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-gray-900 mb-4">Vulnerabilities</h4>
+                        
+                        {/* Vulnerability Summary */}
+                        <div className="grid grid-cols-2 gap-3 mb-6">
+                          {selectedVersion.vulns.critical > 0 && (
+                            <div className="p-3 border border-red-200 bg-red-50 rounded-lg">
+                              <p className="text-xs text-red-600 font-medium">Critical</p>
+                              <p className="text-2xl font-bold text-red-700">{selectedVersion.vulns.critical}</p>
+                            </div>
+                          )}
+                          {selectedVersion.vulns.high > 0 && (
+                            <div className="p-3 border border-orange-200 bg-orange-50 rounded-lg">
+                              <p className="text-xs text-orange-600 font-medium">High</p>
+                              <p className="text-2xl font-bold text-orange-700">{selectedVersion.vulns.high}</p>
+                            </div>
+                          )}
+                          {selectedVersion.vulns.medium > 0 && (
+                            <div className="p-3 border border-yellow-200 bg-yellow-50 rounded-lg">
+                              <p className="text-xs text-yellow-600 font-medium">Medium</p>
+                              <p className="text-2xl font-bold text-yellow-700">{selectedVersion.vulns.medium}</p>
+                            </div>
+                          )}
+                          {selectedVersion.vulns.low > 0 && (
+                            <div className="p-3 border border-blue-200 bg-blue-50 rounded-lg">
+                              <p className="text-xs text-blue-600 font-medium">Low</p>
+                              <p className="text-2xl font-bold text-blue-700">{selectedVersion.vulns.low}</p>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Vulnerability List */}
+                        <div className="space-y-2">
+                          {vulnerabilities.slice(0, selectedVersion.vulns.critical + selectedVersion.vulns.high).map((vuln, idx) => (
+                            <div key={idx} className={`p-3 border rounded-lg ${getSeverityColor(vuln.severity)}`}>
+                              <div className="flex items-center justify-between mb-2">
+                                <Badge className={getSeverityColor(vuln.severity)}>
+                                  {vuln.severity.toUpperCase()}
+                                </Badge>
+                                <span className="font-semibold text-sm">{vuln.cve}</span>
+                              </div>
+                              <p className="text-xs text-gray-700">Package: {vuln.package} ({vuln.version})</p>
+                              <p className="text-xs text-gray-700">Fixed in: {vuln.fixed}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              )}
+            </div>
           </TabsContent>
         </Tabs>
       </div>
