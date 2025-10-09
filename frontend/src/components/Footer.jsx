@@ -1,0 +1,267 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Shield, Twitter, Linkedin, Youtube, Github, Mail } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+
+const Footer = () => {
+  return (
+    <footer className="bg-gray-900 text-white">
+      {/* Main Footer Content */}
+      <div className="container mx-auto px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-2">
+            <Link to="/" className="flex items-center space-x-2 mb-4">
+              <Shield className="h-7 w-7" style={{ color: '#fd366e' }} />
+              <span className="text-xl font-bold">SecureHub</span>
+            </Link>
+            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+              Build, ship, and run secure software with minimal, hardened container images. 
+              Trusted by developers worldwide for secure-by-default containers.
+            </p>
+            
+            {/* Newsletter */}
+            <div>
+              <h4 className="text-sm font-semibold mb-3">Stay updated</h4>
+              <div className="flex space-x-2">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="bg-gray-800 border-gray-700 text-white text-sm placeholder:text-gray-500 focus:border-[#fd366e] focus:ring-[#fd366e]"
+                />
+                <Button 
+                  style={{ backgroundColor: '#fd366e' }}
+                  className="text-white hover:opacity-90 text-sm"
+                  size="sm"
+                >
+                  Subscribe
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Product Column */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4">Product</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Containers
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Libraries
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  VMs
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Integrations
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Pricing
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Roadmap
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Solutions Column */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4">Solutions</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  FedRAMP
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  PCI DSS
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Golden Images
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  CVE Remediation
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Public Sector
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Enterprise
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4">Resources</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Documentation
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Courses
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Events & Webinars
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Trust Center
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Community
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4">Company</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Customers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Partners
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Newsroom
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            {/* Copyright and Legal Links */}
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6">
+              <p className="text-xs text-gray-500">
+                © 2025 SecureHub. All Rights Reserved.
+              </p>
+              <div className="flex space-x-4 text-xs">
+                <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+                <span className="text-gray-700">•</span>
+                <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                  Terms of Use
+                </a>
+                <span className="text-gray-700">•</span>
+                <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                  Cookie Policy
+                </a>
+                <span className="text-gray-700">•</span>
+                <a href="#" className="text-gray-500 hover:text-white transition-colors">
+                  Security
+                </a>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center space-x-4">
+              <a
+                href="#"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                aria-label="Twitter"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                aria-label="YouTube"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
+              <a
+                href="#"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+                aria-label="GitHub"
+              >
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Tagline */}
+      <div className="bg-gray-950 py-3">
+        <div className="container mx-auto px-8 text-center">
+          <p className="text-xs text-gray-600">
+            Safe Source for Open Source™
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
