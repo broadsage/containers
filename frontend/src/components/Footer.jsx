@@ -254,7 +254,7 @@ const Footer = () => {
       <div className="bg-gray-950 py-3">
         <div className="container mx-auto px-8 text-center">
           <p className="text-xs text-gray-600">
-            Safe Source for Open Source™
+            Free & Open Source Container Security for Everyone 🌍
           </p>
         </div>
       </div>
