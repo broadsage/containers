@@ -358,6 +358,22 @@ services:
                 </CardTitle>
               </CardHeader>
               <CardContent>
+                <div className="mb-6">
+                  <p className="text-sm text-gray-600 mb-4">
+                    Complete software bill of materials for {image.name}:{image.latestTag}. 
+                    This SBOM is generated in SPDX format and includes all dependencies.
+                  </p>
+                  <div className="flex items-center space-x-4 text-sm">
+                    <div className="flex items-center space-x-2">
+                      <span className="font-medium text-gray-900">Format:</span>
+                      <Badge variant="outline">SPDX 2.3</Badge>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="font-medium text-gray-900">Total Packages:</span>
+                      <span className="text-gray-600">{sbom.length}</span>
+                    </div>
+                  </div>
+                </div>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -381,6 +397,109 @@ services:
                       ))}
                     </tbody>
                   </table>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="versions">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Layers className="w-5 h-5" />
+                  <span>Available Versions</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  {[
+                    { tag: image.latestTag, status: 'latest', date: image.lastChanged, vulns: { critical: 0, high: 1, medium: 1, low: 1 } },
+                    { tag: '24.9.0', status: 'stable', date: '2 days ago', vulns: { critical: 1, high: 2, medium: 2, low: 1 } },
+                    { tag: '24.8.0', status: 'stable', date: '1 week ago', vulns: { critical: 2, high: 3, medium: 3, low: 2 } },
+                    { tag: '24.7.1', status: 'stable', date: '2 weeks ago', vulns: { critical: 3, high: 4, medium: 4, low: 3 } },
+                    { tag: '24.7.0', status: 'deprecated', date: '3 weeks ago', vulns: { critical: 5, high: 6, medium: 5, low: 4 } },
+                  ].map((version, index) => (
+                    <div 
+                      key={index} 
+                      className="flex items-center justify-between p-4 border rounded-lg hover:border-[#fd366e] transition-all hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-4">
+                        <div className="flex flex-col">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <code className="text-lg font-semibold text-gray-900">{version.tag}</code>
+                            {version.status === 'latest' && (
+                              <Badge style={{ backgroundColor: '#fd366e' }} className="text-white">
+                                Latest
+                              </Badge>
+                            )}
+                            {version.status === 'deprecated' && (
+                              <Badge variant="outline" className="border-yellow-500 text-yellow-700">
+                                Deprecated
+                              </Badge>
+                            )}
+                          </div>
+                          <div className="flex items-center space-x-4 text-sm text-gray-600">
+                            <span className="flex items-center space-x-1">
+                              <Clock className="w-4 h-4" />
+                              <span>Updated {version.date}</span>
+                            </span>
+                            <span>•</span>
+                            <span>{image.size}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-3">
+                        {/* Vulnerability badges */}
+                        {version.vulns.critical > 0 && (
+                          <div className="flex items-center space-x-1">
+                            <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                            <span className="text-sm font-medium text-red-600">{version.vulns.critical} C</span>
+                          </div>
+                        )}
+                        {version.vulns.high > 0 && (
+                          <div className="flex items-center space-x-1">
+                            <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
+                            <span className="text-sm font-medium text-orange-600">{version.vulns.high} H</span>
+                          </div>
+                        )}
+                        {version.vulns.medium > 0 && (
+                          <div className="flex items-center space-x-1">
+                            <span className="w-2 h-2 bg-yellow-600 rounded-full"></span>
+                            <span className="text-sm font-medium text-yellow-600">{version.vulns.medium} M</span>
+                          </div>
+                        )}
+                        {version.vulns.low > 0 && (
+                          <div className="flex items-center space-x-1">
+                            <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                            <span className="text-sm font-medium text-blue-600">{version.vulns.low} L</span>
+                          </div>
+                        )}
+                        
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          className="ml-4"
+                        >
+                          <Download className="w-4 h-4 mr-2" />
+                          Pull
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <div className="flex items-start space-x-3">
+                    <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-blue-900 mb-1">Version Policy</h4>
+                      <p className="text-sm text-blue-800">
+                        We recommend always using the latest tag for production deployments. 
+                        Deprecated versions are no longer receiving security updates and should be upgraded immediately.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
