@@ -120,51 +120,51 @@ const ImageDetailPage = () => {
         </Card>
 
         {/* Vulnerability Summary */}
-        <div className="grid grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-4 gap-4 mb-6">
           <Card className="border-red-200">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Critical</p>
-                  <p className="text-3xl font-bold text-red-600">{vulnCounts.critical}</p>
+                  <p className="text-xs text-gray-600 mb-0.5">Critical</p>
+                  <p className="text-2xl font-bold text-red-600">{vulnCounts.critical}</p>
                 </div>
-                <XCircle className="w-10 h-10 text-red-600" />
+                <XCircle className="w-8 h-8 text-red-600" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="border-orange-200">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">High</p>
-                  <p className="text-3xl font-bold text-orange-600">{vulnCounts.high}</p>
+                  <p className="text-xs text-gray-600 mb-0.5">High</p>
+                  <p className="text-2xl font-bold text-orange-600">{vulnCounts.high}</p>
                 </div>
-                <AlertTriangle className="w-10 h-10 text-orange-600" />
+                <AlertTriangle className="w-8 h-8 text-orange-600" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="border-yellow-200">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Medium</p>
-                  <p className="text-3xl font-bold text-yellow-600">{vulnCounts.medium}</p>
+                  <p className="text-xs text-gray-600 mb-0.5">Medium</p>
+                  <p className="text-2xl font-bold text-yellow-600">{vulnCounts.medium}</p>
                 </div>
-                <AlertTriangle className="w-10 h-10 text-yellow-600" />
+                <AlertTriangle className="w-8 h-8 text-yellow-600" />
               </div>
             </CardContent>
           </Card>
           
           <Card className="border-blue-200">
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600 mb-1">Low</p>
-                  <p className="text-3xl font-bold text-blue-600">{vulnCounts.low}</p>
+                  <p className="text-xs text-gray-600 mb-0.5">Low</p>
+                  <p className="text-2xl font-bold text-blue-600">{vulnCounts.low}</p>
                 </div>
-                <CheckCircle className="w-10 h-10 text-blue-600" />
+                <CheckCircle className="w-8 h-8 text-blue-600" />
               </div>
             </CardContent>
           </Card>
