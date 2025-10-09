@@ -278,46 +278,46 @@ services:
 
                   {/* What are SecureHub Containers */}
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">What are SecureHub Containers?</h3>
-                    <p className="text-gray-700 mb-4">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">What are SecureHub Containers?</h3>
+                    <p className="text-gray-700 text-sm mb-3">
                       SecureHub Containers are built with Wolfi, our minimal Linux undistro designed for container and cloud-native applications.
                     </p>
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-                      <h4 className="font-semibold text-gray-900 mb-3">Main Features:</h4>
-                      <ul className="space-y-3">
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-gray-900 mb-3 text-sm">Main Features:</h4>
+                      <ul className="space-y-2.5">
+                        <li className="flex items-start space-x-2.5">
+                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-medium text-gray-900">Minimal design</p>
-                            <p className="text-sm text-gray-600">Without unnecessary software bloat</p>
+                            <p className="font-medium text-gray-900 text-sm">Minimal design</p>
+                            <p className="text-xs text-gray-600">Without unnecessary software bloat</p>
                           </div>
                         </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <li className="flex items-start space-x-2.5">
+                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-medium text-gray-900">Daily builds</p>
-                            <p className="text-sm text-gray-600">Container images are up-to-date with available security patches</p>
+                            <p className="font-medium text-gray-900 text-sm">Daily builds</p>
+                            <p className="text-xs text-gray-600">Container images are up-to-date with available security patches</p>
                           </div>
                         </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <li className="flex items-start space-x-2.5">
+                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-medium text-gray-900">High quality SBOMs</p>
-                            <p className="text-sm text-gray-600">Attesting to the provenance of all artifacts within the image</p>
+                            <p className="font-medium text-gray-900 text-sm">High quality SBOMs</p>
+                            <p className="text-xs text-gray-600">Attesting to the provenance of all artifacts within the image</p>
                           </div>
                         </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <li className="flex items-start space-x-2.5">
+                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-medium text-gray-900">Verifiable signatures</p>
-                            <p className="text-sm text-gray-600">Provided by Sigstore for supply chain security</p>
+                            <p className="font-medium text-gray-900 text-sm">Verifiable signatures</p>
+                            <p className="text-xs text-gray-600">Provided by Sigstore for supply chain security</p>
                           </div>
                         </li>
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                        <li className="flex items-start space-x-2.5">
+                          <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                           <div>
-                            <p className="font-medium text-gray-900">Reproducible builds</p>
-                            <p className="text-sm text-gray-600">With Cosign and apko for enhanced security</p>
+                            <p className="font-medium text-gray-900 text-sm">Reproducible builds</p>
+                            <p className="text-xs text-gray-600">With Cosign and apko for enhanced security</p>
                           </div>
                         </li>
                       </ul>
