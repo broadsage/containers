@@ -18,9 +18,9 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
             Directory
           </Link>
-          <Link to="/docs" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+          <a href="http://localhost:3002" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
             Documentation
-          </Link>
+          </a>
           <Link to="/community" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
             Community
           </Link>
