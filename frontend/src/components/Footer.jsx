@@ -39,75 +39,75 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Product Column */}
+          {/* Features Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Product</h4>
+            <h4 className="text-sm font-semibold mb-4">Features</h4>
             <ul className="space-y-2.5">
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Containers
+                  Container Images
                 </Link>
               </li>
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Libraries
+                  SBOM Generation
                 </Link>
               </li>
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  VMs
+                  Vulnerability Scanning
                 </Link>
               </li>
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Integrations
+                  Provenance Tracking
                 </Link>
               </li>
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Pricing
+                  Image Signing
                 </Link>
               </li>
               <li>
                 <Link to="/" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Roadmap
+                  Daily Updates
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Solutions Column */}
+          {/* Community Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Solutions</h4>
+            <h4 className="text-sm font-semibold mb-4">Community</h4>
             <ul className="space-y-2.5">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  FedRAMP
+                  GitHub
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  PCI DSS
+                  Discord
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Golden Images
+                  Forum
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  CVE Remediation
+                  Contribute
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Public Sector
+                  Code of Conduct
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Enterprise
+                  Contributors
                 </a>
               </li>
             </ul>
