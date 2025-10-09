@@ -322,67 +322,112 @@ services:
                     </div>
                   </div>
 
-                  {/* Licenses */}
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Licenses</h3>
-                    <p className="text-gray-700 mb-4">
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Sidebar - Right Side */}
+              <div className="space-y-6">
+                {/* Licenses Card */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Licenses</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-gray-700 mb-4">
                       SecureHub container images contain software packages that are direct or transitive dependencies. 
                       The following licenses were found in the "{image.latestTag}" tag of this image:
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mb-4">
                       {['Apache-2.0', 'MIT', 'BSD-3-Clause', 'GPL-2.0', 'LGPL-2.1'].map((license) => (
-                        <Badge key={license} variant="outline" className="text-sm">
+                        <Badge key={license} variant="outline" className="text-xs">
                           {license}
                         </Badge>
                       ))}
                     </div>
-                    <p className="text-sm text-gray-600 mt-4">
-                      For a complete list of licenses, please refer to this Image's <a href="#" className="text-[#fd366e] hover:underline">SBOM</a>.
-                    </p>
-                  </div>
+                    <button 
+                      className="text-sm text-[#fd366e] hover:underline font-medium"
+                      onClick={() => setActiveTab('sbom')}
+                    >
+                      View more
+                    </button>
+                    <div className="mt-4 pt-4 border-t">
+                      <a 
+                        href="#" 
+                        className="text-sm text-gray-700 hover:text-gray-900 underline"
+                      >
+                        Software license agreement
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
 
-                  {/* Compliance */}
-                  {image.fips && (
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                      <h3 className="text-xl font-semibold text-blue-900 mb-3">Compliance</h3>
-                      <p className="text-blue-800">
+                {/* Compliance Card - Only show if FIPS */}
+                {image.fips && (
+                  <Card className="border-blue-200 bg-blue-50">
+                    <CardHeader>
+                      <CardTitle className="text-base text-blue-900">Compliance</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-blue-800">
                         A FIPS validated version of this image is available for FedRAMP compliance. STIG is included with FIPS image.
                       </p>
-                    </div>
-                  )}
+                    </CardContent>
+                  </Card>
+                )}
 
-                  {/* Related Images */}
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Related Images</h3>
-                    <div className="grid grid-cols-3 gap-4">
-                      {dockerImages.filter(img => img.category === image.category && img.id !== image.id).slice(0, 3).map((relatedImg) => (
-                        <Card 
-                          key={relatedImg.id} 
-                          className="hover:shadow-lg transition-all cursor-pointer"
-                          onClick={() => navigate(`/image/${relatedImg.name}`)}
-                        >
-                          <CardContent className="p-4">
-                            <div className="flex items-center space-x-3">
-                              <img src={relatedImg.logo} alt={relatedImg.name} className="w-10 h-10" />
-                              <div>
-                                <p className="font-semibold text-gray-900">{relatedImg.name}</p>
-                                {relatedImg.fips && <Badge className="mt-1 bg-blue-600">FIPS</Badge>}
-                              </div>
+                {/* Related Images Card */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Related images</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      {dockerImages
+                        .filter(img => img.category === image.category && img.id !== image.id)
+                        .slice(0, 3)
+                        .map((relatedImg) => (
+                          <div 
+                            key={relatedImg.id} 
+                            className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-gray-200"
+                            onClick={() => navigate(`/image/${relatedImg.name}`)}
+                          >
+                            <img 
+                              src={relatedImg.logo} 
+                              alt={relatedImg.name} 
+                              className="w-10 h-10 flex-shrink-0" 
+                            />
+                            <div className="flex-1 min-w-0">
+                              <p className="font-semibold text-gray-900 text-sm truncate">
+                                {relatedImg.name}
+                              </p>
+                              {relatedImg.fips && (
+                                <Badge className="mt-1 bg-blue-600 text-xs">FIPS</Badge>
+                              )}
                             </div>
-                          </CardContent>
-                        </Card>
-                      ))}
+                          </div>
+                        ))}
                     </div>
-                  </div>
+                  </CardContent>
+                </Card>
 
-                  {/* Category */}
-                  <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Category</h3>
-                    <Badge variant="secondary" className="text-sm capitalize">{image.category}</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                {/* Category Card */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base">Category</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <Badge 
+                      variant="secondary" 
+                      className="text-sm capitalize"
+                    >
+                      {image.category}
+                    </Badge>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </TabsContent>
 
           <TabsContent value="specifications">
