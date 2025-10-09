@@ -21,7 +21,8 @@ export const dockerImages = [
     description: 'Node.js JavaScript runtime built on Chrome\'s V8 JavaScript engine',
     downloads: 1250000,
     size: '45MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource', 'verified']
   },
   {
     id: 2,
@@ -34,7 +35,8 @@ export const dockerImages = [
     description: 'High-performance HTTP server and reverse proxy',
     downloads: 2340000,
     size: '25MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource']
   },
   {
     id: 3,
@@ -47,7 +49,8 @@ export const dockerImages = [
     description: 'Powerful, open source object-relational database system',
     downloads: 1890000,
     size: '120MB',
-    fips: false
+    fips: false,
+    badges: ['official', 'opensource', 'verified']
   },
   {
     id: 4,
