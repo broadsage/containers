@@ -102,11 +102,11 @@ const HeroSection = ({ onSearch }) => {
         {/* Search Bar */}
         <div className="max-w-2xl mx-auto">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
               type="text"
               placeholder="Search SecureHub Containers"
-              className="pl-12 pr-4 py-6 text-base border-gray-300 focus:border-[#fd366e] focus:ring-[#fd366e]"
+              className="pl-10 pr-4 py-2.5 text-sm border-gray-300 focus:border-[#fd366e] focus:ring-[#fd366e]"
               value={searchQuery}
               onChange={handleSearch}
             />
