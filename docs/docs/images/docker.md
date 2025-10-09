@@ -11,7 +11,7 @@ sidebar_position: 15
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="docker" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">docker **Official**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Docker container runtime</p>
+      **Docker container runtime**
     
   
 

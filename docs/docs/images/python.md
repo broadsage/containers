@@ -11,7 +11,7 @@ sidebar_position: 4
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="python" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">python **Official**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Python is a programming language that lets you work quickly</p>
+      **Python is a programming language that lets you work quickly**
     
   
 

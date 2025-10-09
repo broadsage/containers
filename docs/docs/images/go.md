@@ -11,7 +11,7 @@ sidebar_position: 6
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="go" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">go **Community**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Go is an open source programming language</p>
+      **Go is an open source programming language**
     
   
 

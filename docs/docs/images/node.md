@@ -11,7 +11,7 @@ sidebar_position: 1
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="node" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">node **Official**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Node.js JavaScript runtime built on Chrome's V8 JavaScript engine</p>
+      **Node.js JavaScript runtime built on Chrome's V8 JavaScript engine**
     
   
 

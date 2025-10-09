@@ -11,7 +11,7 @@ sidebar_position: 11
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" alt="pytorch" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">pytorch **Verified**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Tensors and Dynamic neural networks in Python</p>
+      **Tensors and Dynamic neural networks in Python**
     
   
 

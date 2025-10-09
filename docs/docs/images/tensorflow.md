@@ -11,7 +11,7 @@ sidebar_position: 10
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="tensorflow" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">tensorflow **Community**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>An end-to-end open source platform for machine learning</p>
+      **An end-to-end open source platform for machine learning**
     
   
 

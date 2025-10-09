@@ -11,7 +11,7 @@ sidebar_position: 12
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="jenkins" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">jenkins **Official**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Jenkins automation server</p>
+      **Jenkins automation server**
     
   
 

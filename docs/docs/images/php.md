@@ -11,7 +11,7 @@ sidebar_position: 7
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="php" width="64" height="64" style={{marginRight: '1rem'}} />
     <div>
       <h2 style="margin: 0;">php **Official**</h2>
-      <p style={{margin: 0, color: 'var(--ifm-color-emphasis-600)'}}>Popular general-purpose scripting language</p>
+      **Popular general-purpose scripting language**
     
   
 
