@@ -170,15 +170,219 @@ const ImageDetailPage = () => {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8">
-            <TabsTrigger value="specification">Specification</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6 mb-8">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="specifications">Specifications</TabsTrigger>
             <TabsTrigger value="vulnerabilities">Vulnerabilities</TabsTrigger>
             <TabsTrigger value="sbom">SBOM</TabsTrigger>
             <TabsTrigger value="provenance">Provenance</TabsTrigger>
             <TabsTrigger value="versions">Versions</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="specification">
+          <TabsContent value="overview">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <Package className="w-5 h-5" />
+                  <span>SecureHub Container for {image.name}</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-8">
+                  {/* Main Description */}
+                  <div>
+                    <p className="text-gray-700 text-lg leading-relaxed">
+                      {image.description}. Minimal Wolfi-based container image that is regularly updated and secure-by-default.
+                    </p>
+                  </div>
+
+                  {/* Download Section */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Download this Container Image</h3>
+                    <p className="text-gray-700 mb-4">
+                      For those with access, this container image is available on <code className="bg-gray-100 px-2 py-1 rounded">securehub.io</code>:
+                    </p>
+                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                      docker pull securehub.io/ORGANIZATION/{image.name}:{image.latestTag}
+                    </div>
+                    <p className="text-sm text-gray-600 mt-3">
+                      Be sure to replace the <code className="bg-gray-100 px-1.5 py-0.5 rounded">ORGANIZATION</code> placeholder with the name used for your organization's private repository.
+                    </p>
+                  </div>
+
+                  {/* Compatibility Notes */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Compatibility Notes</h3>
+                    <p className="text-gray-700 leading-relaxed">
+                      SecureHub's {image.name} image is built with security-first principles. The image has few-to-zero CVEs 
+                      and does not run as the root user, ensuring a minimal attack surface for production deployments.
+                    </p>
+                  </div>
+
+                  {/* Getting Started */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Getting Started</h3>
+                    <p className="text-gray-700 mb-4">
+                      The {image.name} container provides a reliable and secure environment for your applications. 
+                      Here's a quick example to get you started:
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Basic Usage</h4>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                          <pre>{`# Pull the image
+docker pull securehub.io/${image.name}:${image.latestTag}
+
+# Run a container
+docker run -it securehub.io/${image.name}:${image.latestTag}`}</pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Using in Dockerfile</h4>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                          <pre>{`FROM securehub.io/${image.name}:${image.latestTag}
+
+# Copy your application
+COPY . /app
+WORKDIR /app
+
+# Set the entrypoint
+CMD ["your-application"]`}</pre>
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Docker Compose Example</h4>
+                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                          <pre>{`version: '3.8'
+services:
+  app:
+    image: securehub.io/${image.name}:${image.latestTag}
+    ports:
+      - "8080:8080"
+    environment:
+      - ENV=production
+    volumes:
+      - ./data:/app/data`}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* What are SecureHub Containers */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">What are SecureHub Containers?</h3>
+                    <p className="text-gray-700 mb-4">
+                      SecureHub Containers are built with Wolfi, our minimal Linux undistro designed for container and cloud-native applications.
+                    </p>
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                      <h4 className="font-semibold text-gray-900 mb-3">Main Features:</h4>
+                      <ul className="space-y-3">
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">Minimal design</p>
+                            <p className="text-sm text-gray-600">Without unnecessary software bloat</p>
+                          </div>
+                        </li>
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">Daily builds</p>
+                            <p className="text-sm text-gray-600">Container images are up-to-date with available security patches</p>
+                          </div>
+                        </li>
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">High quality SBOMs</p>
+                            <p className="text-sm text-gray-600">Attesting to the provenance of all artifacts within the image</p>
+                          </div>
+                        </li>
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">Verifiable signatures</p>
+                            <p className="text-sm text-gray-600">Provided by Sigstore for supply chain security</p>
+                          </div>
+                        </li>
+                        <li className="flex items-start space-x-3">
+                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="font-medium text-gray-900">Reproducible builds</p>
+                            <p className="text-sm text-gray-600">With Cosign and apko for enhanced security</p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Licenses */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Licenses</h3>
+                    <p className="text-gray-700 mb-4">
+                      SecureHub container images contain software packages that are direct or transitive dependencies. 
+                      The following licenses were found in the "{image.latestTag}" tag of this image:
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {['Apache-2.0', 'MIT', 'BSD-3-Clause', 'GPL-2.0', 'LGPL-2.1'].map((license) => (
+                        <Badge key={license} variant="outline" className="text-sm">
+                          {license}
+                        </Badge>
+                      ))}
+                    </div>
+                    <p className="text-sm text-gray-600 mt-4">
+                      For a complete list of licenses, please refer to this Image's <a href="#" className="text-[#fd366e] hover:underline">SBOM</a>.
+                    </p>
+                  </div>
+
+                  {/* Compliance */}
+                  {image.fips && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                      <h3 className="text-xl font-semibold text-blue-900 mb-3">Compliance</h3>
+                      <p className="text-blue-800">
+                        A FIPS validated version of this image is available for FedRAMP compliance. STIG is included with FIPS image.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Related Images */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Related Images</h3>
+                    <div className="grid grid-cols-3 gap-4">
+                      {dockerImages.filter(img => img.category === image.category && img.id !== image.id).slice(0, 3).map((relatedImg) => (
+                        <Card 
+                          key={relatedImg.id} 
+                          className="hover:shadow-lg transition-all cursor-pointer"
+                          onClick={() => navigate(`/image/${relatedImg.name}`)}
+                        >
+                          <CardContent className="p-4">
+                            <div className="flex items-center space-x-3">
+                              <img src={relatedImg.logo} alt={relatedImg.name} className="w-10 h-10" />
+                              <div>
+                                <p className="font-semibold text-gray-900">{relatedImg.name}</p>
+                                {relatedImg.fips && <Badge className="mt-1 bg-blue-600">FIPS</Badge>}
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Category */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Category</h3>
+                    <Badge variant="secondary" className="text-sm capitalize">{image.category}</Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="specifications">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
