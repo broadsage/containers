@@ -232,10 +232,10 @@ const ImageDetailPage = () => {
                       Here's a quick example to get you started:
                     </p>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Basic Usage</h4>
-                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                        <h4 className="font-semibold text-gray-900 mb-2 text-sm">Basic Usage</h4>
+                        <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
                           <pre>{`# Pull the image
 docker pull securehub.io/${image.name}:${image.latestTag}
 
@@ -245,8 +245,8 @@ docker run -it securehub.io/${image.name}:${image.latestTag}`}</pre>
                       </div>
 
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Using in Dockerfile</h4>
-                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                        <h4 className="font-semibold text-gray-900 mb-2 text-sm">Using in Dockerfile</h4>
+                        <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
                           <pre>{`FROM securehub.io/${image.name}:${image.latestTag}
 
 # Copy your application
@@ -259,8 +259,8 @@ CMD ["your-application"]`}</pre>
                       </div>
 
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Docker Compose Example</h4>
-                        <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
+                        <h4 className="font-semibold text-gray-900 mb-2 text-sm">Docker Compose Example</h4>
+                        <div className="bg-gray-900 text-white p-3 rounded-lg font-mono text-xs">
                           <pre>{`version: '3.8'
 services:
   app:
