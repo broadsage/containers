@@ -18,25 +18,21 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
             Directory
           </Link>
-          <Link to="/security" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-            Security Advisories
+          <Link to="/docs" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            Documentation
           </Link>
-          <Link to="/pricing" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
-            Pricing
+          <Link to="/community" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            Community
           </Link>
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="border-gray-300 text-gray-700 hover:bg-gray-50"
-          >
-            Sign in
-          </Button>
+          <Link to="/contribute" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">
+            Contribute
+          </Link>
           <Button 
             size="sm"
             style={{ backgroundColor: '#fd366e' }}
             className="text-white hover:opacity-90 transition-opacity"
           >
-            Request a trial
+            Get Started Free
           </Button>
         </nav>
       </div>
