@@ -180,15 +180,18 @@ const ImageDetailPage = () => {
           </TabsList>
 
           <TabsContent value="overview">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Package className="w-5 h-5" />
-                  <span>SecureHub Container for {image.name}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Main Content - Left Side */}
+              <div className="lg:col-span-2">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2">
+                      <Package className="w-5 h-5" />
+                      <span>SecureHub Container for {image.name}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-8">
                   {/* Main Description */}
                   <div>
                     <p className="text-gray-700 text-lg leading-relaxed">
