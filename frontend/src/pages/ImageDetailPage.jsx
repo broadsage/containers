@@ -385,115 +385,136 @@ services:
           <TabsContent value="specifications">
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <FileText className="w-5 h-5" />
-                  <span>Image Specification</span>
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <FileText className="w-5 h-5" />
+                    <span>Specifications and Configuration</span>
+                  </div>
+                  <div className="text-sm font-normal text-gray-600">
+                    Tag: <code className="bg-gray-100 px-2 py-1 rounded">{image.latestTag}</code>
+                  </div>
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Overview</h3>
-                    <p className="text-gray-600 mb-4">{image.description}</p>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="border-l-4 border-[#fd366e] pl-4">
-                        <p className="text-sm text-gray-500">Category</p>
-                        <p className="font-semibold text-gray-900 capitalize">{image.category}</p>
-                      </div>
-                      <div className="border-l-4 border-[#fd366e] pl-4">
-                        <p className="text-sm text-gray-500">License</p>
-                        <p className="font-semibold text-gray-900">Apache-2.0</p>
-                      </div>
-                      <div className="border-l-4 border-[#fd366e] pl-4">
-                        <p className="text-sm text-gray-500">Architecture</p>
-                        <p className="font-semibold text-gray-900">amd64, arm64</p>
-                      </div>
-                      <div className="border-l-4 border-[#fd366e] pl-4">
-                        <p className="text-sm text-gray-500">OS</p>
-                        <p className="font-semibold text-gray-900">Linux</p>
-                      </div>
-                    </div>
+                  {/* Configuration Table */}
+                  <div className="overflow-x-auto border rounded-lg">
+                    <table className="w-full">
+                      <tbody>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900 w-48">Has apk?</td>
+                          <td className="py-3 px-4 text-gray-700">no</td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Has a shell?</td>
+                          <td className="py-3 px-4 text-gray-700">yes</td>
+                        </tr>
+                        <tr className="border-b bg-gray-50">
+                          <td colSpan="2" className="py-2"></td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">User</td>
+                          <td className="py-3 px-4">
+                            <code className="bg-gray-100 px-2 py-1 rounded text-sm">65532</code>
+                          </td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Environment variables</td>
+                          <td className="py-3 px-4">
+                            <div className="space-y-1 font-mono text-sm">
+                              <div><code className="bg-gray-100 px-2 py-1 rounded">LANG=en_US.UTF-8</code></div>
+                              <div><code className="bg-gray-100 px-2 py-1 rounded">PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin</code></div>
+                              <div><code className="bg-gray-100 px-2 py-1 rounded">SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt</code></div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Entrypoint</td>
+                          <td className="py-3 px-4 text-gray-500">—</td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">CMD</td>
+                          <td className="py-3 px-4 text-gray-500">—</td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Volumes</td>
+                          <td className="py-3 px-4 text-gray-500">—</td>
+                        </tr>
+                        <tr className="border-b hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Working directory</td>
+                          <td className="py-3 px-4">
+                            <code className="bg-gray-100 px-2 py-1 rounded text-sm">/home/build</code>
+                          </td>
+                        </tr>
+                        <tr className="hover:bg-gray-50">
+                          <td className="py-3 px-4 font-semibold text-gray-900">Stop signal</td>
+                          <td className="py-3 px-4 text-gray-500">—</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  
+
+                  {/* Raw Configuration */}
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Pull Command</h3>
-                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
-                      docker pull securehub.io/{image.name}:{image.latestTag}
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-semibold text-gray-900">Raw configuration</h3>
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
+                        onClick={() => {
+                          const config = JSON.stringify({
+                            User: "65532",
+                            Env: [
+                              "LANG=en_US.UTF-8",
+                              "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin",
+                              "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+                            ],
+                            WorkingDir: "/home/build",
+                            Labels: {
+                              "org.opencontainers.image.vendor": "SecureHub",
+                              "org.opencontainers.image.authors": "SecureHub Team https://securehub.io/",
+                              "org.opencontainers.image.created": new Date().toISOString(),
+                              "org.opencontainers.image.source": `https://github.com/securehub/images/tree/main/images/${image.name}`,
+                              "org.opencontainers.image.url": `https://securehub.io/directory/image/${image.name}/overview`
+                            }
+                          }, null, 2);
+                          navigator.clipboard.writeText(config);
+                        }}
+                      >
+                        <Copy className="w-4 h-4 mr-2" />
+                        Copy
+                      </Button>
+                    </div>
+                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                      <pre>{`{
+  "User": "65532",
+  "Env": [
+    "LANG=en_US.UTF-8",
+    "PATH=/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin",
+    "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+  ],
+  "WorkingDir": "/home/build",
+  "Labels": {
+    "org.opencontainers.image.vendor": "SecureHub",
+    "org.opencontainers.image.authors": "SecureHub Team https://securehub.io/",
+    "org.opencontainers.image.created": "${new Date().toISOString()}",
+    "org.opencontainers.image.source": "https://github.com/securehub/images/tree/main/images/${image.name}",
+    "org.opencontainers.image.url": "https://securehub.io/directory/image/${image.name}/overview"
+  }
+}`}</pre>
                     </div>
                   </div>
 
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Docker Compose</h3>
-                    <div className="bg-gray-900 text-white p-4 rounded-lg font-mono text-sm">
-                      <pre>{`version: '3.8'
-services:
-  ${image.name}:
-    image: securehub.io/${image.name}:${image.latestTag}
-    ports:
-      - "8080:8080"
-    environment:
-      - NODE_ENV=production`}</pre>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Security Features</h3>
-                    <ul className="space-y-2">
-                      <li className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-gray-900">Rebuilt from source daily</p>
-                          <p className="text-sm text-gray-600">Automatic rebuilds ensure latest security patches</p>
-                        </div>
-                      </li>
-                      <li className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-gray-900">Minimal attack surface</p>
-                          <p className="text-sm text-gray-600">Only essential packages included</p>
-                        </div>
-                      </li>
-                      <li className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-gray-900">Industry-leading remediation SLA</p>
-                          <p className="text-sm text-gray-600">Critical vulnerabilities patched within 24 hours</p>
-                        </div>
-                      </li>
-                      <li className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <p className="font-medium text-gray-900">Continuous vulnerability scanning</p>
-                          <p className="text-sm text-gray-600">Automated scanning with every build</p>
-                        </div>
-                      </li>
-                      {image.fips && (
-                        <li className="flex items-start space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                          <div>
-                            <p className="font-medium text-gray-900">FIPS 140-2 compliant</p>
-                            <p className="text-sm text-gray-600">Meets federal cryptographic standards</p>
-                          </div>
-                        </li>
-                      )}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-3 text-lg">Image Layers</h3>
-                    <div className="space-y-2">
-                      {[
-                        { command: 'FROM alpine:3.19', size: '7.3 MB' },
-                        { command: `RUN apk add --no-cache ${image.name}`, size: image.size },
-                        { command: 'COPY . /app', size: '2.1 MB' },
-                        { command: 'WORKDIR /app', size: '0 B' },
-                        { command: `CMD ["${image.name}"]`, size: '0 B' }
-                      ].map((layer, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                          <code className="text-sm text-gray-700">{layer.command}</code>
-                          <span className="text-sm font-medium text-gray-600">{layer.size}</span>
-                        </div>
-                      ))}
+                  {/* Additional Info */}
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div className="flex items-start space-x-3">
+                      <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm text-blue-800">
+                          This configuration is for the <code className="bg-white px-1.5 py-0.5 rounded">{image.latestTag}</code> tag. 
+                          Different versions may have different configurations. Check the specific version's specifications for accurate information.
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
