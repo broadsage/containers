@@ -66,14 +66,10 @@ const ImageCard = ({ image }) => {
               </h3>
             </div>
             
-            {/* Docker Hub style badges */}
-            {image.badges && image.badges.length > 0 && (
-              <div className="flex flex-wrap gap-1 mb-2">
-                {image.badges.map((badge, index) => (
-                  <React.Fragment key={index}>
-                    {renderBadge(badge)}
-                  </React.Fragment>
-                ))}
+            {/* Docker Hub style badge */}
+            {image.badge && (
+              <div className="mb-2">
+                {renderBadge(image.badge)}
               </div>
             )}
             
