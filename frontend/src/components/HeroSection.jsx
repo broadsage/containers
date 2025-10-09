@@ -60,42 +60,42 @@ const HeroSection = ({ onSearch }) => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-4 gap-6 mb-10">
           <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <h3 className="text-gray-600 text-sm font-medium flex items-center gap-2">
+            <div className="flex items-center justify-center mb-1">
+              <h3 className="text-gray-600 text-xs font-medium flex items-center gap-1.5">
                 Projects
-                <Info className="w-4 h-4 text-gray-400" />
+                <Info className="w-3.5 h-3.5 text-gray-400" />
               </h3>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.projects.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.projects.toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <h3 className="text-gray-600 text-sm font-medium flex items-center gap-2">
+            <div className="flex items-center justify-center mb-1">
+              <h3 className="text-gray-600 text-xs font-medium flex items-center gap-1.5">
                 Versions
-                <Info className="w-4 h-4 text-gray-400" />
+                <Info className="w-3.5 h-3.5 text-gray-400" />
               </h3>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.versions.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.versions.toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <h3 className="text-gray-600 text-sm font-medium flex items-center gap-2">
+            <div className="flex items-center justify-center mb-1">
+              <h3 className="text-gray-600 text-xs font-medium flex items-center gap-1.5">
                 Images
-                <Info className="w-4 h-4 text-gray-400" />
+                <Info className="w-3.5 h-3.5 text-gray-400" />
               </h3>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.images.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.images.toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <div className="flex items-center justify-center mb-2">
-              <h3 className="text-gray-600 text-sm font-medium flex items-center gap-2">
+            <div className="flex items-center justify-center mb-1">
+              <h3 className="text-gray-600 text-xs font-medium flex items-center gap-1.5">
                 Builds
-                <Info className="w-4 h-4 text-gray-400" />
+                <Info className="w-3.5 h-3.5 text-gray-400" />
               </h3>
             </div>
-            <p className="text-3xl font-bold text-gray-900">{stats.builds.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-gray-900">{stats.builds.toLocaleString()}</p>
           </div>
         </div>
 
