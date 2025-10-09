@@ -150,33 +150,33 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Column */}
+          {/* About Column */}
           <div>
-            <h4 className="text-sm font-semibold mb-4">Company</h4>
+            <h4 className="text-sm font-semibold mb-4">About</h4>
             <ul className="space-y-2.5">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  About Us
+                  Mission
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Customers
+                  Team
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Partners
+                  Sponsors
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Careers
+                  Roadmap
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">
-                  Newsroom
+                  Changelog
                 </a>
               </li>
               <li>
