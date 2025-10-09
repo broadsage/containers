@@ -16,11 +16,11 @@ const ImageCard = ({ image }) => {
             <span>Official Image</span>
           </div>
         );
-      case 'opensource':
+      case 'community':
         return (
           <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-green-50 border border-green-200 rounded text-[10px] font-medium text-green-700">
             <Shield className="w-2.5 h-2.5" />
-            <span>Open Source</span>
+            <span>Community</span>
           </div>
         );
       case 'verified':
