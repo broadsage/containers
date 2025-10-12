@@ -108,7 +108,7 @@ backend:
   - task: "Backend API endpoints for tab data"
     implemented: true
     working: true
-    file: "/app/apps/api/app/routers/versions.py"
+    file: "/app/backend/app/routers/versions.py"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
@@ -116,6 +116,9 @@ backend:
         - working: true
         - agent: "main"
         - comment: "All API endpoints are working correctly: /provenance, /specifications, /advisories return proper JSON data"
+        - working: true
+        - agent: "testing"
+        - comment: "Comprehensive backend testing completed successfully. All 6 API endpoints tested for 3 images (node, nginx, postgres): versions, vulnerabilities, sbom, provenance, specifications, advisories. All endpoints return 200 OK with proper JSON data structure. Total 19 tests passed (100% success rate). Health endpoint also working correctly."
 
 frontend:
   - task: "Complete AdvisoriesTab.tsx component"
