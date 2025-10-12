@@ -163,8 +163,24 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
         {activeTab === 'overview' && <OverviewTab image={image} />}
         {activeTab === 'vulnerabilities' && <VulnerabilitiesTab vulnerabilities={vulnerabilities} />}
         {activeTab === 'sbom' && <SBOMTab packages={sbom} />}
-        {activeTab === 'provenance' && provenance && <ProvenanceTab provenance={provenance} />}
-        {activeTab === 'specifications' && specifications && <SpecificationsTab specifications={specifications} />}
+        {activeTab === 'provenance' && (
+          provenance ? (
+            <ProvenanceTab provenance={provenance} />
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-600">Loading provenance information...</p>
+            </div>
+          )
+        )}
+        {activeTab === 'specifications' && (
+          specifications ? (
+            <SpecificationsTab specifications={specifications} />
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-gray-600">Loading specifications...</p>
+            </div>
+          )
+        )}
         {activeTab === 'comparison' && <ComparisonTab imageName={image.name} />}
         {activeTab === 'advisories' && <AdvisoriesTab advisories={advisories} />}
       </div>
