@@ -1,40 +1,33 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import CategoryFilter from '../components/CategoryFilter';
 import ImageCard from '../components/ImageCard';
 import Footer from '../components/Footer';
+import { ErrorBoundary } from '../components/ErrorBoundary';
 import { dockerImages } from '../data/mockData';
+import { useImageFilters } from '../hooks/useImageFilters';
+import { PAGINATION } from '../constants';
 import { Button } from '@repo/ui';
+import type { ViewMode } from '../constants';
 
 export default function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showAllImages, setShowAllImages] = useState(false);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [viewMode, setViewMode] = useState<ViewMode>('grid');
 
-  const filteredImages = useMemo(() => {
-    let filtered = dockerImages;
-
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(img => img.category === selectedCategory);
-    }
-
-    // Filter by search query
-    if (searchQuery) {
-      filtered = filtered.filter(img => 
-        img.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        img.description.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    return filtered;
-  }, [selectedCategory, searchQuery]);
-
-  const displayedImages = showAllImages ? filteredImages : filteredImages.slice(0, 15);
+  const {
+    selectedCategory,
+    displayedImages,
+    hasMore,
+    remainingCount,
+    handleCategoryChange,
+    handleSearchChange,
+    handleLoadMore,
+  } = useImageFilters({ 
+    images: dockerImages,
+    initialPageSize: PAGINATION.DEFAULT_PAGE_SIZE,
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
