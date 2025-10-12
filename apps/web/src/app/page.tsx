@@ -33,77 +33,111 @@ export default function HomePage() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         <Header />
-        <HeroSection onSearch={handleSearchChange} />
+        <ModernHero onSearch={handleSearchChange} />
       
-      <div className="container mx-auto px-8 py-12">
-        <div className="flex gap-8">
-          {/* Sidebar */}
-          <aside className="w-64 flex-shrink-0">
-            <CategoryFilter 
-              selectedCategory={selectedCategory}
-              onCategoryChange={handleCategoryChange}
-            />
-          </aside>
+        <div className="container mx-auto px-6 lg:px-8 py-16">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Sidebar */}
+            <aside className="lg:w-80 flex-shrink-0">
+              <ModernCategoryFilter 
+                selectedCategory={selectedCategory}
+                onCategoryChange={handleCategoryChange}
+              />
+            </aside>
 
-          {/* Main Content */}
-          <main className="flex-1">
-            <div className="mb-6 flex items-center justify-between">
-              <p className="text-gray-600 text-sm">
-                Showing {displayedImages.length} of {filteredImages.length} images
-              </p>
-              <div className="flex items-center space-x-2">
-                <button
-                  onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded ${viewMode === 'grid' ? 'bg-gray-200' : 'bg-gray-100 hover:bg-gray-200'}`}
-                  title="Grid view"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setViewMode('list')}
-                  className={`p-2 rounded ${viewMode === 'list' ? 'bg-gray-200' : 'bg-gray-100 hover:bg-gray-200'}`}
-                  title="List view"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                  </svg>
-                </button>
+            {/* Main Content */}
+            <main className="flex-1">
+              {/* Toolbar */}
+              <div className="mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    {selectedCategory === 'all' ? 'All Images' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
+                  </h2>
+                  <p className="text-gray-600 text-sm mt-1">
+                    Showing {displayedImages.length} of {filteredImages.length} secure container images
+                  </p>
+                </div>
+                
+                <div className="flex items-center space-x-2 bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2.5 rounded-lg transition-all ${
+                      viewMode === 'grid' 
+                        ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md' 
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                    title="Grid view"
+                  >
+                    <Grid3x3 className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2.5 rounded-lg transition-all ${
+                      viewMode === 'list' 
+                        ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md' 
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
+                    title="List view"
+                  >
+                    <List className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                {displayedImages.map((image) => (
-                  <ImageCard key={image.id} image={image} />
-                ))}
-              </div>
-            ) : (
-              <div className="space-y-3 mb-8">
-                {displayedImages.map((image) => (
-                  <ImageCard key={image.id} image={image} />
-                ))}
-              </div>
-            )}
+              {/* Image Grid/List */}
+              {viewMode === 'grid' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+                  {displayedImages.map((image) => (
+                    <ModernImageCard key={image.id} image={image} />
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-4 mb-12">
+                  {displayedImages.map((image) => (
+                    <ModernImageCard key={image.id} image={image} />
+                  ))}
+                </div>
+              )}
 
-            {hasMore && (
-              <div className="text-center">
-                <Button
-                  onClick={handleLoadMore}
-                  variant="outline"
-                  size="lg"
-                  className="border-primary text-primary hover:bg-primary hover:text-white"
-                >
-                  Load More Images ({remainingCount} more)
-                </Button>
-              </div>
-            )}
-          </main>
+              {/* Load More Button */}
+              {hasMore && (
+                <div className="text-center">
+                  <Button
+                    onClick={handleLoadMore}
+                    size="lg"
+                    className="bg-gradient-to-r from-primary-600 to-secondary-600 text-white hover:from-primary-700 hover:to-secondary-700 shadow-lg hover:shadow-xl transition-all duration-300 px-8"
+                  >
+                    Load More Images ({remainingCount} more)
+                  </Button>
+                </div>
+              )}
+
+              {/* Empty State */}
+              {displayedImages.length === 0 && (
+                <div className="text-center py-16">
+                  <div className="w-24 h-24 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                    <svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">No images found</h3>
+                  <p className="text-gray-600 mb-6">Try adjusting your search or filter criteria</p>
+                  <Button
+                    onClick={() => {
+                      handleCategoryChange('all');
+                      handleSearchChange('');
+                    }}
+                    variant="outline"
+                  >
+                    Clear Filters
+                  </Button>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
-      </div>
 
         <Footer />
       </div>
