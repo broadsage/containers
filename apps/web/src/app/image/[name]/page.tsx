@@ -1,22 +1,54 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
+import TabNavigation from '../../../components/TabNavigation';
+import TagsTab from '../../../components/tabs/TagsTab';
+import OverviewTab from '../../../components/tabs/OverviewTab';
+import VulnerabilitiesTab from '../../../components/tabs/VulnerabilitiesTab';
+import SBOMTab from '../../../components/tabs/SBOMTab';
 import { dockerImages } from '../../../data/mockData';
-import { ArrowLeft, Download, Shield, Clock, Package } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Shield, Star } from 'lucide-react';
 import { Button } from '@repo/ui';
 
 export default function ImageDetailPage({ params }: { params: Promise<{ name: string }> }) {
   const router = useRouter();
   const resolvedParams = use(params);
   const image = dockerImages.find(img => img.name === resolvedParams.name);
+  
+  const [activeTab, setActiveTab] = useState('tags');
+  const [copied, setCopied] = useState(false);
+
+  // Mock data for tabs
+  const [versions, setVersions] = useState([]);
+  const [vulnerabilities, setVulnerabilities] = useState([]);
+  const [sbom, setSbom] = useState([]);
+
+  useEffect(() => {
+    // Fetch data from API
+    const fetchData = async () => {
+      try {
+        const versionsRes = await fetch(`/api/v1/images/${resolvedParams.name}/versions`);
+        const vulnRes = await fetch(`/api/v1/images/${resolvedParams.name}/vulnerabilities`);
+        const sbomRes = await fetch(`/api/v1/images/${resolvedParams.name}/sbom`);
+        
+        if (versionsRes.ok) setVersions(await versionsRes.json());
+        if (vulnRes.ok) setVulnerabilities(await vulnRes.json());
+        if (sbomRes.ok) setSbom(await sbomRes.json());
+      } catch (error) {
+        console.error('Error fetching image data:', error);
+      }
+    };
+
+    fetchData();
+  }, [resolvedParams.name]);
 
   if (!image) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen">
         <Header />
         <div className="container mx-auto px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Image Not Found</h1>
@@ -27,129 +59,117 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
     );
   }
 
+  const copyPullCommand = () => {
+    const command = `docker pull hub.opensource.dev/${image.name}:latest`;
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const renderBadge = () => {
+    const badges = {
+      official: { icon: Shield, text: 'Official', color: 'from-blue-500 to-cyan-500' },
+      verified: { icon: Star, text: 'Verified', color: 'from-purple-500 to-pink-500' },
+      community: { icon: Shield, text: 'Community', color: 'from-green-500 to-emerald-500' },
+    };
+    const badge = badges[image.badge];
+    const Icon = badge.icon;
+    return (
+      <span className={`inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r ${badge.color} text-white rounded-full text-sm font-semibold`}>
+        <Icon className="w-4 h-4" />
+        <span>{badge.text}</span>
+      </span>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Header />
       
-      <div className="container mx-auto px-8 py-8">
-        {/* Back Button */}
-        <button
-          onClick={() => router.back()}
-          className="flex items-center text-gray-600 hover:text-gray-900 mb-6 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Directory
-        </button>
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-16">
+        <div className="container mx-auto px-6 lg:px-8">
+          <button
+            onClick={() => router.back()}
+            className="flex items-center text-gray-300 hover:text-white mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Directory
+          </button>
 
-        {/* Image Header */}
-        <div className="bg-white rounded-lg border border-gray-200 p-8 mb-6">
-          <div className="flex items-start space-x-6">
-            <div className="w-24 h-24 bg-gray-50 rounded-lg p-4">
-              <img 
-                src={image.logo} 
-                alt={image.name} 
-                className="w-full h-full object-contain"
-              />
+          <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
+            {/* Logo */}
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur-2xl opacity-50"></div>
+              <div className="relative w-32 h-32 bg-white rounded-2xl p-6 shadow-2xl">
+                <img 
+                  src={image.logo} 
+                  alt={image.name} 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              {image.fips && (
+                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs px-3 py-1 rounded-full font-bold shadow-lg">
+                  FIPS
+                </span>
+              )}
             </div>
             
+            {/* Info */}
             <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{image.name}</h1>
-              <p className="text-gray-600 mb-4">{image.description}</p>
+              <div className="flex items-center space-x-4 mb-4">
+                <h1 className="text-4xl font-bold text-white">{image.name}</h1>
+                {renderBadge()}
+              </div>
+              <p className="text-xl text-gray-300 mb-6">{image.description}</p>
               
-              <div className="flex items-center space-x-6 text-sm text-gray-500">
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>Updated {image.lastChanged}</span>
-                </div>
-                <div className="flex items-center">
-                  <Download className="w-4 h-4 mr-2" />
-                  <span>{image.downloads.toLocaleString()} downloads</span>
-                </div>
-                <div className="flex items-center">
-                  <Package className="w-4 h-4 mr-2" />
-                  <span>{image.size}</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Pull Image
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        {/* Quick Start */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Start</h2>
-          
-          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto">
-            <code>docker pull cgr.dev/chainguard/{image.name}:{image.latestTag}</code>
-          </div>
-        </div>
-
-        {/* Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">About this image</h2>
-              <p className="text-gray-600 leading-relaxed">
-                {image.description}
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Tags</h2>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                  {image.latestTag}
-                </span>
-                <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                  latest
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Image Info</h3>
-              <dl className="space-y-3">
-                <div>
-                  <dt className="text-sm text-gray-500">Size</dt>
-                  <dd className="text-sm font-medium text-gray-900">{image.size}</dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-gray-500">Downloads</dt>
-                  <dd className="text-sm font-medium text-gray-900">{image.downloads.toLocaleString()}</dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-gray-500">Category</dt>
-                  <dd className="text-sm font-medium text-gray-900 capitalize">{image.category}</dd>
-                </div>
-                <div>
-                  <dt className="text-sm text-gray-500">License</dt>
-                  <dd className="text-sm font-medium text-gray-900">{image.isFree ? 'Free' : 'Commercial'}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Security</h3>
-              <div className="flex items-center space-x-2 text-sm text-green-600">
-                <Shield className="w-5 h-5" />
-                <span>No known vulnerabilities</span>
+              {/* Quick Pull */}
+              <div className="flex items-center space-x-3">
+                <code className="flex-1 bg-black/30 backdrop-blur-lg border border-white/20 text-white px-6 py-4 rounded-xl font-mono text-sm">
+                  docker pull hub.opensource.dev/{image.name}:latest
+                </code>
+                <Button
+                  onClick={copyPullCommand}
+                  size="lg"
+                  className="bg-white text-gray-900 hover:bg-gray-100"
+                >
+                  {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                </Button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Tab Navigation */}
+      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+
+      {/* Tab Content */}
+      <div className="container mx-auto px-6 lg:px-8 py-12">
+        {activeTab === 'tags' && <TagsTab imageName={image.name} versions={versions} />}
+        {activeTab === 'overview' && <OverviewTab image={image} />}
+        {activeTab === 'vulnerabilities' && <VulnerabilitiesTab vulnerabilities={vulnerabilities} />}
+        {activeTab === 'sbom' && <SBOMTab packages={sbom} />}
+        {activeTab === 'provenance' && (
+          <div className="text-center py-16">
+            <p className="text-gray-600">Provenance information coming soon</p>
+          </div>
+        )}
+        {activeTab === 'specifications' && (
+          <div className="text-center py-16">
+            <p className="text-gray-600">Specifications coming soon</p>
+          </div>
+        )}
+        {activeTab === 'comparison' && (
+          <div className="text-center py-16">
+            <p className="text-gray-600">Comparison tool coming soon</p>
+          </div>
+        )}
+        {activeTab === 'advisories' && (
+          <div className="text-center py-16">
+            <p className="text-gray-600">Security advisories coming soon</p>
+          </div>
+        )}
       </div>
 
       <Footer />
