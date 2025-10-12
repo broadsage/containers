@@ -37,7 +37,7 @@ class Database:
     
     def get_collection(self, name: str):
         """Get a collection from the database"""
-        if not self.db:
+        if self.db is None:
             raise Exception("Database not initialized")
         return self.db[name]
 
