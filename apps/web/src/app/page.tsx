@@ -41,7 +41,7 @@ export default function HomePage() {
           <aside className="w-64 flex-shrink-0">
             <CategoryFilter 
               selectedCategory={selectedCategory}
-              onCategoryChange={setSelectedCategory}
+              onCategoryChange={handleCategoryChange}
             />
           </aside>
 
