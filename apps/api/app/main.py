@@ -9,6 +9,8 @@ import logging
 from .core.config import settings
 from .core.database import database
 from .routers import images_router, health_router
+from .routers.versions import router as versions_router
+from .routers.helm import router as helm_router
 
 # Configure logging
 logging.basicConfig(
