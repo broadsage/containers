@@ -18,6 +18,7 @@ export default function HomePage() {
 
   const {
     selectedCategory,
+    filteredImages,
     displayedImages,
     hasMore,
     remainingCount,
