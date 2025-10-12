@@ -87,12 +87,12 @@ const ModernImageCard: React.FC<ModernImageCardProps> = ({ image }) => {
           <div className="space-y-2 mb-4">
             <div className="flex items-center text-xs text-gray-500">
               <Clock className="w-3.5 h-3.5 mr-1.5" />
-              <span>{image.last_changed}</span>
+              <span>{image.lastChanged || 'Recently'}</span>
             </div>
             
             <div className="flex items-center text-xs text-gray-500">
               <Tag className="w-3.5 h-3.5 mr-1.5" />
-              <span>{image.latest_tag}</span>
+              <span>{image.latestTag || 'latest'}</span>
             </div>
 
             <div className="flex items-center text-xs text-gray-500">
