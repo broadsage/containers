@@ -16,8 +16,14 @@ export const PORTS = {
 } as const;
 
 export const BRAND_COLORS = {
-  PRIMARY: '#fd366e',
-  PRIMARY_HOVER: '#ea1350',
+  PRIMARY: '#6366f1',
+  PRIMARY_HOVER: '#4f46e5',
+  SECONDARY: '#8b5cf6',
+  SECONDARY_HOVER: '#7c3aed',
+  SUCCESS: '#10b981',
+  WARNING: '#f59e0b',
+  DANGER: '#ef4444',
+  ACCENT: '#06b6d4',
 } as const;
 
 export const PAGINATION = {
