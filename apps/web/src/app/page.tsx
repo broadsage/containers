@@ -2,15 +2,16 @@
 
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
-import CategoryFilter from '../components/CategoryFilter';
-import ImageCard from '../components/ImageCard';
+import ModernHero from '../components/ModernHero';
+import ModernCategoryFilter from '../components/ModernCategoryFilter';
+import ModernImageCard from '../components/ModernImageCard';
 import Footer from '../components/Footer';
 import { ErrorBoundary } from '../components/ErrorBoundary';
 import { dockerImages } from '../data/mockData';
 import { useImageFilters } from '../hooks/useImageFilters';
 import { PAGINATION } from '../constants';
 import { Button } from '@repo/ui';
+import { Grid3x3, List } from 'lucide-react';
 import type { ViewMode } from '../constants';
 
 export default function HomePage() {
