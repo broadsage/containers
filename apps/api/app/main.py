@@ -59,6 +59,8 @@ app.add_middleware(
 # Include routers
 app.include_router(health_router, prefix="/api")
 app.include_router(images_router, prefix=settings.API_V1_PREFIX)
+app.include_router(versions_router, prefix=settings.API_V1_PREFIX)
+app.include_router(helm_router, prefix=settings.API_V1_PREFIX)
 
 
 # Root endpoint
