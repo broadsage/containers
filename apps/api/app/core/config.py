@@ -3,7 +3,6 @@ Configuration management
 """
 from typing import List
 from pydantic_settings import BaseSettings
-from pydantic import validator
 
 
 class Settings(BaseSettings):
@@ -24,9 +23,7 @@ class Settings(BaseSettings):
     
     def get_cors_origins(self) -> List[str]:
         """Parse CORS origins from string"""
-        if isinstance(self.CORS_ORIGINS, str):
-            return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
-        return self.CORS_ORIGINS
+        return [origin.strip() for origin in self.CORS_ORIGINS.split(",")]
     
     # Environment
     ENVIRONMENT: str = "development"
@@ -38,7 +35,7 @@ class Settings(BaseSettings):
     
     class Config:
         env_file = ".env"
-        case_sensitive = True
+        case_sensitive = False
 
 
 settings = Settings()
