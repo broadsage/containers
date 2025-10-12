@@ -26,10 +26,13 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
   const [activeTab, setActiveTab] = useState('tags');
   const [copied, setCopied] = useState(false);
 
-  // Mock data for tabs
+  // State for tab data
   const [versions, setVersions] = useState([]);
   const [vulnerabilities, setVulnerabilities] = useState([]);
   const [sbom, setSbom] = useState([]);
+  const [provenance, setProvenance] = useState(null);
+  const [specifications, setSpecifications] = useState(null);
+  const [advisories, setAdvisories] = useState([]);
 
   useEffect(() => {
     // Fetch data from API
@@ -38,10 +41,16 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
         const versionsRes = await fetch(`/api/v1/images/${resolvedParams.name}/versions`);
         const vulnRes = await fetch(`/api/v1/images/${resolvedParams.name}/vulnerabilities`);
         const sbomRes = await fetch(`/api/v1/images/${resolvedParams.name}/sbom`);
+        const provenanceRes = await fetch(`/api/v1/images/${resolvedParams.name}/provenance`);
+        const specsRes = await fetch(`/api/v1/images/${resolvedParams.name}/specifications`);
+        const advisoriesRes = await fetch(`/api/v1/images/${resolvedParams.name}/advisories`);
         
         if (versionsRes.ok) setVersions(await versionsRes.json());
         if (vulnRes.ok) setVulnerabilities(await vulnRes.json());
         if (sbomRes.ok) setSbom(await sbomRes.json());
+        if (provenanceRes.ok) setProvenance(await provenanceRes.json());
+        if (specsRes.ok) setSpecifications(await specsRes.json());
+        if (advisoriesRes.ok) setAdvisories(await advisoriesRes.json());
       } catch (error) {
         console.error('Error fetching image data:', error);
       }
