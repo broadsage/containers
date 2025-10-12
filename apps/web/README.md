@@ -88,13 +88,24 @@ Required variables:
 - `NEXT_PUBLIC_APP_URL` - Frontend app URL
 - `NEXT_PUBLIC_ENABLE_ANALYTICS` - Enable analytics (true/false)
 
-## 📝 Scripts
+## 📝 Development
 
-- `yarn dev` - Start development server
-- `yarn build` - Build for production
-- `yarn start` - Start production server
-- `yarn lint` - Run ESLint
-- `yarn type-check` - Run TypeScript compiler check
+### Start Development Server
+```bash
+python -m app.main
+# Or
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
+```
+
+### Seed Database
+```bash
+python scripts/seed_data.py
+```
+
+### Run Tests
+```bash
+pytest
+```
 
 ## 🎨 Styling
 
