@@ -30,7 +30,11 @@ class Settings(BaseSettings):
     
     # Environment
     ENVIRONMENT: str = "development"
-    DEBUG: bool = True
+    DEBUG: str = "true"
+    
+    def is_debug(self) -> bool:
+        """Check if debug mode is enabled"""
+        return self.DEBUG.lower() in ("true", "1", "yes")
     
     class Config:
         env_file = ".env"
