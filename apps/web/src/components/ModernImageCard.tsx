@@ -107,7 +107,7 @@ const ModernImageCard: React.FC<ModernImageCardProps> = ({ image }) => {
               <span className="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-lg">
                 {image.size}
               </span>
-              {image.is_free && (
+              {image.isFree && (
                 <span className="inline-flex items-center px-2.5 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-lg">
                   Free
                 </span>
