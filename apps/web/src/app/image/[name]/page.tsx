@@ -37,13 +37,15 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
   useEffect(() => {
     // Fetch data from API
     const fetchData = async () => {
+      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8001/api/v1';
+      
       try {
-        const versionsRes = await fetch(`/api/v1/images/${resolvedParams.name}/versions`);
-        const vulnRes = await fetch(`/api/v1/images/${resolvedParams.name}/vulnerabilities`);
-        const sbomRes = await fetch(`/api/v1/images/${resolvedParams.name}/sbom`);
-        const provenanceRes = await fetch(`/api/v1/images/${resolvedParams.name}/provenance`);
-        const specsRes = await fetch(`/api/v1/images/${resolvedParams.name}/specifications`);
-        const advisoriesRes = await fetch(`/api/v1/images/${resolvedParams.name}/advisories`);
+        const versionsRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/versions`);
+        const vulnRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/vulnerabilities`);
+        const sbomRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/sbom`);
+        const provenanceRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/provenance`);
+        const specsRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/specifications`);
+        const advisoriesRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/advisories`);
         
         if (versionsRes.ok) setVersions(await versionsRes.json());
         if (vulnRes.ok) setVulnerabilities(await vulnRes.json());
