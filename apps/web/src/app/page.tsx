@@ -87,15 +87,15 @@ export default function HomePage() {
               </div>
             )}
 
-            {!showAllImages && filteredImages.length > 15 && (
+            {hasMore && (
               <div className="text-center">
                 <Button
-                  onClick={() => setShowAllImages(true)}
+                  onClick={handleLoadMore}
                   variant="outline"
                   size="lg"
                   className="border-primary text-primary hover:bg-primary hover:text-white"
                 >
-                  Load More Images ({filteredImages.length - 15} more)
+                  Load More Images ({remainingCount} more)
                 </Button>
               </div>
             )}
