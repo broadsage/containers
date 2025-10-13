@@ -27,56 +27,65 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-24">
       {/* Categories Section */}
-      <div className="p-6 border-b border-gray-200">
-        <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
+      <div className="p-4 border-b border-gray-200">
+        <h3 className="text-xs font-semibold text-gray-900 mb-3 uppercase tracking-wider">
           Categories
         </h3>
-        <div className="space-y-2">
+        <div className="space-y-1.5">
           {allCategories.map((category) => (
-            <FilterButton
+            <button
               key={category.id}
-              id={category.id}
-              name={category.name}
-              icon={Layers}
-              isSelected={selectedCategory === category.id}
               onClick={() => onCategoryChange(category.id)}
-              variant="default"
-            />
+              className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm transition-all flex items-center space-x-2 ${
+                selectedCategory === category.id
+                  ? 'bg-gray-900 text-white font-medium'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <Layers className={`w-3.5 h-3.5 ${
+                selectedCategory === category.id ? 'text-white' : 'text-gray-400'
+              }`} />
+              <span className="capitalize text-xs">{category.name}</span>
+            </button>
           ))}
         </div>
       </div>
 
       {/* Badge Filters Section */}
       {onBadgeChange && (
-        <div className="p-6 border-b border-gray-200">
-          <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
+        <div className="p-4 border-b border-gray-200">
+          <h3 className="text-xs font-semibold text-gray-900 mb-3 uppercase tracking-wider">
             Filter by Type
           </h3>
-          <div className="space-y-2">
-            {BADGE_FILTERS.map((badge) => (
-              <FilterButton
-                key={badge.id}
-                id={badge.id}
-                name={badge.name}
-                icon={badge.icon}
-                isSelected={selectedBadge === badge.id}
-                onClick={() => onBadgeChange(badge.id)}
-                variant="colored"
-                color={badge.color}
-                bg={badge.bg}
-                border={badge.border}
-              />
-            ))}
+          <div className="space-y-1.5">
+            {BADGE_FILTERS.map((badge) => {
+              const Icon = badge.icon;
+              return (
+                <button
+                  key={badge.id}
+                  onClick={() => onBadgeChange(badge.id)}
+                  className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm transition-all flex items-center space-x-2 ${
+                    selectedBadge === badge.id
+                      ? `${badge.bg || 'bg-gray-100'} ${badge.border || 'border-gray-300'} border font-medium`
+                      : 'hover:bg-gray-50 border border-transparent'
+                  }`}
+                >
+                  {Icon && <Icon className={`w-3.5 h-3.5 ${badge.color || 'text-gray-600'}`} />}
+                  <span className={`text-xs ${
+                    selectedBadge === badge.id 
+                      ? badge.color || 'text-gray-900'
+                      : 'text-gray-700'
+                  }`}>
+                    {badge.name}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Info Section */}
-      <div className="p-6 bg-gray-50">
-        <p className="text-xs text-gray-600 leading-relaxed">
-          Browse our curated collection of secure container images with vulnerability scanning and SBOM support.
-        </p>
-      </div>
+      {/* Info Section - Removed for compact design */}
     </div>
   );
 };
