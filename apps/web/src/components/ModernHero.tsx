@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, TrendingUp, Shield, Zap, Globe } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { stats } from '../data/mockData';
 
 interface ModernHeroProps {
@@ -49,60 +49,44 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 lg:py-32">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-40 left-1/2 w-80 h-80 bg-accent-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-      </div>
-
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          {/* Badge */}
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-full px-4 py-2 mb-8 animate-fade-in">
-            <Zap className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm text-white">Secure, Minimal, & Free</span>
-          </div>
-
+    <div className="relative overflow-hidden bg-white py-16 lg:py-24">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-5xl mx-auto mb-16">
           {/* Main Heading */}
-          <h1 className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Build Secure Software with
-            <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-secondary-400 to-accent-400">
-              Hardened Containers
-            </span>
+          <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Eliminate your CVEs
           </h1>
 
           {/* Subheading */}
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-            Open-source container registry with minimal, secure images.
-            <br />
-            Built daily with comprehensive SBOM and zero-CVE commitment.
+          <p className="text-lg lg:text-xl text-gray-600 mb-12 leading-relaxed max-w-4xl mx-auto">
+            Build, ship, and run secure software with minimal, hardened container images —
+            <br className="hidden sm:block" />
+            rebuilt from source daily and guarded under our industry-leading remediation SLA.
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity"></div>
-              <div className="relative flex items-center bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <Search className="absolute left-6 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search container images..."
-                  className="w-full pl-14 pr-6 py-5 text-gray-900 placeholder-gray-400 focus:outline-none text-lg"
-                  value={searchQuery}
-                  onChange={handleSearch}
-                />
-                <button className="absolute right-2 bg-gradient-to-r from-primary-600 to-secondary-600 text-white px-8 py-3 rounded-xl font-semibold hover:from-primary-700 hover:to-secondary-700 transition-all duration-300 shadow-lg">
-                  Search
-                </button>
-              </div>
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="relative flex items-center bg-white border-2 border-gray-300 rounded-lg shadow-sm hover:border-gray-400 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+              <Search className="absolute left-4 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search container images..."
+                className="w-full pl-12 pr-32 py-4 text-gray-900 placeholder-gray-400 focus:outline-none"
+                value={searchQuery}
+                onChange={handleSearch}
+              />
+              <button 
+                onClick={() => onSearch(searchQuery)}
+                className="absolute right-2 bg-gray-900 text-white px-6 py-2.5 rounded-md font-medium hover:bg-gray-800 transition-colors"
+              >
+                Search
+              </button>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <span className="text-gray-400 text-sm">Popular:</span>
+          <div className="flex flex-wrap justify-center items-center gap-3">
+            <span className="text-gray-500 text-sm font-medium">Popular:</span>
             {['Node.js', 'Python', 'Go', 'Nginx', 'PostgreSQL'].map((tech) => (
               <button
                 key={tech}
@@ -110,7 +94,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
                   setSearchQuery(tech.toLowerCase());
                   onSearch(tech.toLowerCase());
                 }}
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/20 rounded-lg text-white text-sm transition-all duration-300 hover:scale-105"
+                className="px-4 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm rounded-md transition-colors border border-gray-200"
               >
                 {tech}
               </button>
@@ -119,45 +103,33 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="glass text-center p-8 rounded-2xl group hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl mx-auto mb-4 group-hover:rotate-12 transition-transform">
-              <Globe className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto border-t border-gray-200 pt-12">
+          <div className="text-center">
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
               {animatedStats.projects.toLocaleString()}
             </h3>
-            <p className="text-gray-300 text-sm font-medium">Projects</p>
+            <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">Projects</p>
           </div>
 
-          <div className="glass text-center p-8 rounded-2xl group hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl mx-auto mb-4 group-hover:rotate-12 transition-transform">
-              <TrendingUp className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-2">
+          <div className="text-center">
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
               {animatedStats.versions.toLocaleString()}
             </h3>
-            <p className="text-gray-300 text-sm font-medium">Versions</p>
+            <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">Versions</p>
           </div>
 
-          <div className="glass text-center p-8 rounded-2xl group hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl mx-auto mb-4 group-hover:rotate-12 transition-transform">
-              <Shield className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-2">
+          <div className="text-center">
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
               {animatedStats.images.toLocaleString()}
             </h3>
-            <p className="text-gray-300 text-sm font-medium">Images</p>
+            <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">Images</p>
           </div>
 
-          <div className="glass text-center p-8 rounded-2xl group hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl mx-auto mb-4 group-hover:rotate-12 transition-transform">
-              <Zap className="w-7 h-7 text-white" />
-            </div>
-            <h3 className="text-4xl font-bold text-white mb-2">
+          <div className="text-center">
+            <h3 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-2">
               {(animatedStats.builds / 1000000).toFixed(0)}M+
             </h3>
-            <p className="text-gray-300 text-sm font-medium">Builds</p>
+            <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">Builds</p>
           </div>
         </div>
       </div>
