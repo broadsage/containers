@@ -30,7 +30,7 @@ import { Badge } from './ui/Badge';
                 </span>
               )}
             </div>
-            {renderBadge(image.badge)}
+            <Badge type={image.badge} size="md" />
           </div>
 
           {/* Title */}
