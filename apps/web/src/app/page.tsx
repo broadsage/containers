@@ -36,7 +36,7 @@ export default function HomePage() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-white">
         <Header />
         <ModernHero onSearch={handleSearchChange} />
       
