@@ -40,10 +40,10 @@ export default function HomePage() {
         <Header />
         <ModernHero onSearch={handleSearchChange} />
       
-        <div className="container mx-auto px-6 lg:px-8 py-16">
-          <div className="flex flex-col lg:flex-row gap-8">
+        <div className="container mx-auto px-6 lg:px-8 py-12">
+          <div className="flex flex-col lg:flex-row gap-6">
             {/* Sidebar */}
-            <aside className="lg:w-80 flex-shrink-0">
+            <aside className="lg:w-64 flex-shrink-0">
               <ModernCategoryFilter 
                 selectedCategory={selectedCategory}
                 onCategoryChange={handleCategoryChange}
