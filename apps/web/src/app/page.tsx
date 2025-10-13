@@ -19,11 +19,13 @@ export default function HomePage() {
 
   const {
     selectedCategory,
+    selectedBadge,
     filteredImages,
     displayedImages,
     hasMore,
     remainingCount,
     handleCategoryChange,
+    handleBadgeChange,
     handleSearchChange,
     handleLoadMore,
   } = useImageFilters({ 
