@@ -2,41 +2,13 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Clock, Tag, CheckCircle, Shield, Award } from 'lucide-react';
+import { Clock, Tag } from 'lucide-react';
 import { DockerImage } from '../types';
+import { Badge } from './ui/Badge';
 
 interface ImageCardProps {
   image: DockerImage;
 }
-
-const ImageCard: React.FC<ImageCardProps> = ({ image }) => {
-  const renderBadge = (badgeType: 'official' | 'community' | 'verified') => {
-    switch (badgeType) {
-      case 'official':
-        return (
-          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-blue-50 border border-blue-200 rounded text-[10px] font-medium text-blue-700">
-            <CheckCircle className="w-2.5 h-2.5" />
-            <span>Official Image</span>
-          </div>
-        );
-      case 'community':
-        return (
-          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-green-50 border border-green-200 rounded text-[10px] font-medium text-green-700">
-            <Shield className="w-2.5 h-2.5" />
-            <span>Community</span>
-          </div>
-        );
-      case 'verified':
-        return (
-          <div className="inline-flex items-center space-x-1 px-1.5 py-0.5 bg-purple-50 border border-purple-200 rounded text-[10px] font-medium text-purple-700">
-            <Award className="w-2.5 h-2.5" />
-            <span>Verified Publisher</span>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
 
   return (
     <Link href={`/image/${image.name}`}>
