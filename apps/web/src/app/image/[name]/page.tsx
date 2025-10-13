@@ -119,6 +119,7 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
             <div className="flex-1">
               <div className="flex items-center space-x-4 mb-4">
                 <h1 className="text-4xl font-bold text-white">{image.name}</h1>
+                <Badge type={image.badge} size="lg" />
               </div>
               <p className="text-xl text-gray-300 mb-6">{image.description}</p>
               
