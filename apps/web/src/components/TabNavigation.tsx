@@ -2,14 +2,15 @@
 
 import React from 'react';
 import { 
-  Tags, 
+  Tag, 
   FileText, 
+  ShieldAlert, 
+  Package2, 
+  FileCheck, 
+  Settings, 
   GitCompare, 
-  Shield, 
-  FileCode, 
-  Package, 
-  AlertTriangle, 
-  Bell 
+  Bell,
+  LucideIcon
 } from 'lucide-react';
 
 interface Tab {
