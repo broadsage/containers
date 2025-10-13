@@ -255,8 +255,14 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
                 <h1 className="text-3xl font-bold text-gray-900">{image.name}</h1>
                 <Badge type={image.badge} size="md" />
               </div>
-              <div className="flex items-center space-x-3 mb-4">
-                <span className="text-sm text-gray-600 flex items-center">
+              
+              {/* Description */}
+              <p className="text-base text-gray-600 mb-4 leading-relaxed max-w-3xl">
+                {image.description}
+              </p>
+              
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-gray-500 flex items-center">
                   <Clock className="w-4 h-4 mr-1" />
                   Last changed {image.lastChanged}
                 </span>
