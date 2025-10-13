@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Layers } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { categories } from '../data/mockData';
-import { FilterButton } from './ui/FilterButton';
 import { BADGE_FILTERS } from '../constants/filters';
 
 interface ModernCategoryFilterProps {
@@ -20,32 +19,32 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
   onBadgeChange
 }) => {
   const allCategories = [
-    { id: 'all', name: 'all' },
-    ...categories
+    { id: 'all', name: 'All Images' },
+    ...categories.map(cat => ({ id: cat.id, name: cat.name }))
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-24">
+    <div className="space-y-6">
       {/* Categories Section */}
-      <div className="p-4 border-b border-gray-200">
-        <h3 className="text-xs font-semibold text-gray-900 mb-3 uppercase tracking-wider">
+      <div>
+        <h3 className="text-sm font-semibold text-gray-900 mb-3">
           Categories
         </h3>
-        <div className="space-y-1.5">
+        <div className="space-y-0.5">
           {allCategories.map((category) => (
             <button
               key={category.id}
               onClick={() => onCategoryChange(category.id)}
-              className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm transition-all flex items-center space-x-2 ${
+              className={`w-full text-left px-2 py-1.5 text-sm transition-colors flex items-center justify-between group ${
                 selectedCategory === category.id
-                  ? 'bg-gray-900 text-white font-medium'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'text-gray-900 font-medium'
+                  : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              <Layers className={`w-3.5 h-3.5 ${
-                selectedCategory === category.id ? 'text-white' : 'text-gray-400'
-              }`} />
-              <span className="capitalize text-xs">{category.name}</span>
+              <span className="capitalize">{category.name}</span>
+              {selectedCategory === category.id && (
+                <Check className="w-4 h-4 text-blue-600" />
+              )}
             </button>
           ))}
         </div>
@@ -53,31 +52,30 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
 
       {/* Badge Filters Section */}
       {onBadgeChange && (
-        <div className="p-4 border-b border-gray-200">
-          <h3 className="text-xs font-semibold text-gray-900 mb-3 uppercase tracking-wider">
-            Filter by Type
+        <div>
+          <h3 className="text-sm font-semibold text-gray-900 mb-3">
+            Type
           </h3>
-          <div className="space-y-1.5">
+          <div className="space-y-0.5">
             {BADGE_FILTERS.map((badge) => {
               const Icon = badge.icon;
               return (
                 <button
                   key={badge.id}
                   onClick={() => onBadgeChange(badge.id)}
-                  className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm transition-all flex items-center space-x-2 ${
+                  className={`w-full text-left px-2 py-1.5 text-sm transition-colors flex items-center justify-between group ${
                     selectedBadge === badge.id
-                      ? `${badge.bg || 'bg-gray-100'} ${badge.border || 'border-gray-300'} border font-medium`
-                      : 'hover:bg-gray-50 border border-transparent'
+                      ? 'text-gray-900 font-medium'
+                      : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  {Icon && <Icon className={`w-3.5 h-3.5 ${badge.color || 'text-gray-600'}`} />}
-                  <span className={`text-xs ${
-                    selectedBadge === badge.id 
-                      ? badge.color || 'text-gray-900'
-                      : 'text-gray-700'
-                  }`}>
-                    {badge.name}
-                  </span>
+                  <div className="flex items-center space-x-2">
+                    {Icon && <Icon className={`w-3.5 h-3.5 ${badge.color || 'text-gray-400'}`} />}
+                    <span>{badge.name}</span>
+                  </div>
+                  {selectedBadge === badge.id && (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  )}
                 </button>
               );
             })}
@@ -85,9 +83,23 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
         </div>
       )}
 
-      {/* Info Section - Removed for compact design */}
+      {/* View All Button */}
+      <div className="pt-4 border-t border-gray-200">
+        <button
+          onClick={() => {
+            onCategoryChange('all');
+            if (onBadgeChange) onBadgeChange('all');
+          }}
+          className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+        >
+          View all images
+        </button>
+      </div>
     </div>
   );
+};
+
+export default ModernCategoryFilter;
 };
 
 export default ModernCategoryFilter;
