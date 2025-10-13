@@ -59,17 +59,30 @@ export default function HomePage() {
                   <h2 className="text-2xl font-bold text-gray-900">
                     {selectedCategory === 'all' ? 'All Images' : selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}
                   </h2>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Showing {displayedImages.length} of {filteredImages.length} secure container images
-                  </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <p className="text-gray-600 text-sm">
+                      Showing {displayedImages.length} of {filteredImages.length} images
+                    </p>
+                    {(selectedCategory !== 'all' || selectedBadge !== 'all') && (
+                      <button
+                        onClick={() => {
+                          handleCategoryChange('all');
+                          handleBadgeChange('all');
+                        }}
+                        className="text-xs text-blue-600 hover:text-blue-700 font-medium underline"
+                      >
+                        Clear filters
+                      </button>
+                    )}
+                  </div>
                 </div>
                 
-                <div className="flex items-center space-x-2 bg-white rounded-xl shadow-sm border border-gray-200 p-1">
+                <div className="flex items-center space-x-2 bg-white rounded-lg shadow-sm border border-gray-200 p-1">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2.5 rounded-lg transition-all ${
+                    className={`p-2.5 rounded-md transition-all ${
                       viewMode === 'grid' 
-                        ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md' 
+                        ? 'bg-gray-900 text-white' 
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                     title="Grid view"
@@ -78,9 +91,9 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2.5 rounded-lg transition-all ${
+                    className={`p-2.5 rounded-md transition-all ${
                       viewMode === 'list' 
-                        ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md' 
+                        ? 'bg-gray-900 text-white' 
                         : 'text-gray-600 hover:bg-gray-100'
                     }`}
                     title="List view"
