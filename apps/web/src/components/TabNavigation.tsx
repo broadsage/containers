@@ -37,11 +37,10 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
   ];
 
   return (
-    <div className="border-b border-gray-200 bg-white sticky top-20 z-40 shadow-sm">
+    <div className="border-b border-gray-200 bg-white">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex overflow-x-auto hide-scrollbar">
           {tabs.map((tab) => {
-            const Icon = tab.icon;
             const isActive = activeTab === tab.id;
             
             return (
@@ -49,19 +48,18 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
                 key={tab.id}
                 onClick={() => onTabChange(tab.id)}
                 className={`
-                  relative flex items-center space-x-2 px-6 py-4 text-sm font-medium whitespace-nowrap
-                  transition-all duration-300 border-b-2
+                  relative px-4 py-3 text-sm font-medium whitespace-nowrap
+                  transition-colors border-b-2
                   ${isActive 
-                    ? 'text-primary-600 border-primary-600' 
-                    : 'text-gray-600 border-transparent hover:text-gray-900 hover:border-gray-300'
+                    ? 'text-gray-900 border-blue-600' 
+                    : 'text-gray-600 border-transparent hover:text-gray-900'
                   }
                 `}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-primary-600' : 'text-gray-500'}`} />
                 <span>{tab.label}</span>
                 {tab.count !== undefined && (
                   <span className={`
-                    px-2 py-0.5 text-xs font-semibold rounded-full
+                    ml-2 px-1.5 py-0.5 text-xs font-semibold rounded
                     ${tab.count === 0 
                       ? 'bg-green-100 text-green-700' 
                       : 'bg-red-100 text-red-700'
@@ -69,10 +67,6 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
                   `}>
                     {tab.count}
                   </span>
-                )}
-                
-                {isActive && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full"></div>
                 )}
               </button>
             );
