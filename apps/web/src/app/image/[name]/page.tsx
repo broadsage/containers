@@ -28,12 +28,12 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
   const [copied, setCopied] = useState(false);
 
   // State for tab data
-  const [versions, setVersions] = useState([]);
-  const [vulnerabilities, setVulnerabilities] = useState([]);
-  const [sbom, setSbom] = useState([]);
-  const [provenance, setProvenance] = useState(null);
-  const [specifications, setSpecifications] = useState(null);
-  const [advisories, setAdvisories] = useState([]);
+  const [versions, setVersions] = useState<any[]>([]);
+  const [vulnerabilities, setVulnerabilities] = useState<any[]>([]);
+  const [sbom, setSbom] = useState<any[]>([]);
+  const [provenance, setProvenance] = useState<any>(null);
+  const [specifications, setSpecifications] = useState<any>(null);
+  const [advisories, setAdvisories] = useState<any[]>([]);
 
   useEffect(() => {
     // Fetch data from API with fallback to mock data
