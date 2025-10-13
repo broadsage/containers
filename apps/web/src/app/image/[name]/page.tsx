@@ -318,15 +318,31 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
 
       {/* Tab Content */}
       <div className="container mx-auto px-6 lg:px-8 py-8">
-        {activeTab === 'tags' && <TagsTab imageName={image.name} versions={versions} />}
+        {activeTab === 'tags' && (
+          versions.length > 0 ? (
+            <TagsTab imageName={image.name} versions={versions} />
+          ) : (
+            <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
+              <p className="text-gray-600">Loading available tags...</p>
+            </div>
+          )
+        )}
         {activeTab === 'overview' && <OverviewTab image={image} />}
         {activeTab === 'vulnerabilities' && <VulnerabilitiesTab vulnerabilities={vulnerabilities} />}
-        {activeTab === 'sbom' && <SBOMTab packages={sbom} />}
+        {activeTab === 'sbom' && (
+          sbom.length > 0 ? (
+            <SBOMTab packages={sbom} />
+          ) : (
+            <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
+              <p className="text-gray-600">Loading SBOM data...</p>
+            </div>
+          )
+        )}
         {activeTab === 'provenance' && (
           provenance ? (
             <ProvenanceTab provenance={provenance} />
           ) : (
-            <div className="text-center py-16">
+            <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
               <p className="text-gray-600">Loading provenance information...</p>
             </div>
           )
@@ -335,7 +351,7 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
           specifications ? (
             <SpecificationsTab specifications={specifications} />
           ) : (
-            <div className="text-center py-16">
+            <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
               <p className="text-gray-600">Loading specifications...</p>
             </div>
           )
