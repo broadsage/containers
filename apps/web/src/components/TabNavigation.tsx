@@ -43,6 +43,7 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
         <div className="flex overflow-x-auto hide-scrollbar">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
+            const Icon = tab.icon;
             
             return (
               <button
@@ -50,17 +51,18 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange })
                 onClick={() => onTabChange(tab.id)}
                 className={`
                   relative px-4 py-3 text-sm font-medium whitespace-nowrap
-                  transition-colors border-b-2
+                  transition-colors border-b-2 flex items-center space-x-2
                   ${isActive 
                     ? 'text-gray-900 border-blue-600' 
                     : 'text-gray-600 border-transparent hover:text-gray-900'
                   }
                 `}
               >
+                <Icon className="w-4 h-4" />
                 <span>{tab.label}</span>
                 {tab.count !== undefined && (
                   <span className={`
-                    ml-2 px-1.5 py-0.5 text-xs font-semibold rounded
+                    px-1.5 py-0.5 text-xs font-semibold rounded
                     ${tab.count === 0 
                       ? 'bg-green-100 text-green-700' 
                       : 'bg-red-100 text-red-700'
