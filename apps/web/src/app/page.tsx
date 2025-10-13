@@ -44,12 +44,14 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Sidebar */}
             <aside className="lg:w-64 flex-shrink-0">
-              <ModernCategoryFilter 
-                selectedCategory={selectedCategory}
-                onCategoryChange={handleCategoryChange}
-                selectedBadge={selectedBadge}
-                onBadgeChange={handleBadgeChange}
-              />
+              <div className="lg:sticky lg:top-24">
+                <ModernCategoryFilter 
+                  selectedCategory={selectedCategory}
+                  onCategoryChange={handleCategoryChange}
+                  selectedBadge={selectedBadge}
+                  onBadgeChange={handleBadgeChange}
+                />
+              </div>
             </aside>
 
             {/* Main Content */}
