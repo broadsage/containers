@@ -22,16 +22,22 @@ const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
         <div className="flex items-start justify-between mb-3">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center flex-shrink-0">
-              <img 
-                src={image.logo} 
-                alt={image.name} 
-                className="w-6 h-6 object-contain"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
+            <div className="relative w-12 h-12 flex items-center justify-center flex-shrink-0">
+              {/* Subtle gradient glow behind logo */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 rounded-lg blur-sm"></div>
+              
+              {/* Logo container with white background */}
+              <div className="relative w-10 h-10 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center">
+                <img 
+                  src={image.logo} 
+                  alt={image.name} 
+                  className="w-6 h-6 object-contain"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
+                />
+              </div>
             </div>
             
             {/* Name */}
