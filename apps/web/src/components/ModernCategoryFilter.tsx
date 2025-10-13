@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Shield, Award, Star } from 'lucide-react';
+import { Shield, Award, Star, Layers } from 'lucide-react';
 import { categories } from '../data/mockData';
 
 interface ModernCategoryFilterProps {
@@ -17,6 +17,11 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
   selectedBadge = 'all',
   onBadgeChange
 }) => {
+  const allCategories = [
+    { id: 'all', name: 'all', icon: Layers },
+    ...categories.map(cat => ({ ...cat, icon: Layers }))
+  ];
+
   const badges = [
     { id: 'all', name: 'All', icon: null },
     { id: 'official', name: 'Official', icon: Shield, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200' },
@@ -31,36 +36,34 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
         <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
           Categories
         </h3>
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => onCategoryChange('all')}
-            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-              selectedCategory === 'all'
-                ? 'bg-gray-900 text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            all
-          </button>
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => onCategoryChange(category.id)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
-                selectedCategory === category.id
-                  ? 'bg-gray-900 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
+        <div className="space-y-2">
+          {allCategories.map((category) => {
+            const Icon = category.icon;
+            return (
+              <button
+                key={category.id}
+                onClick={() => onCategoryChange(category.id)}
+                className={`w-full text-left px-3 py-2.5 rounded-md transition-all flex items-center space-x-2 ${
+                  selectedCategory === category.id
+                    ? 'bg-gray-900 text-white border-2 border-gray-900'
+                    : 'hover:bg-gray-50 border-2 border-transparent text-gray-700'
+                }`}
+              >
+                {Icon && <Icon className={`w-4 h-4 ${
+                  selectedCategory === category.id ? 'text-white' : 'text-gray-500'
+                }`} />}
+                <span className="text-sm font-medium capitalize">
+                  {category.name}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
       {/* Badge Filters Section */}
       {onBadgeChange && (
-        <div className="p-6">
+        <div className="p-6 border-b border-gray-200">
           <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
             Filter by Type
           </h3>
@@ -93,7 +96,7 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
       )}
 
       {/* Info Section */}
-      <div className="p-6 bg-gray-50 border-t border-gray-200">
+      <div className="p-6 bg-gray-50">
         <p className="text-xs text-gray-600 leading-relaxed">
           Browse our curated collection of secure container images with vulnerability scanning and SBOM support.
         </p>
