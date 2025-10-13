@@ -8,6 +8,7 @@ interface UseImageFiltersProps {
 
 export function useImageFilters({ images, initialPageSize = 15 }: UseImageFiltersProps) {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedBadge, setSelectedBadge] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [showAllImages, setShowAllImages] = useState(false);
 
@@ -17,6 +18,11 @@ export function useImageFilters({ images, initialPageSize = 15 }: UseImageFilter
     // Filter by category
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(img => img.category === selectedCategory);
+    }
+
+    // Filter by badge type
+    if (selectedBadge !== 'all') {
+      filtered = filtered.filter(img => img.badge === selectedBadge);
     }
 
     // Filter by search query
@@ -30,7 +36,7 @@ export function useImageFilters({ images, initialPageSize = 15 }: UseImageFilter
     }
 
     return filtered;
-  }, [images, selectedCategory, searchQuery]);
+  }, [images, selectedCategory, selectedBadge, searchQuery]);
 
   const displayedImages = useMemo(() => {
     return showAllImages ? filteredImages : filteredImages.slice(0, initialPageSize);
@@ -44,6 +50,11 @@ export function useImageFilters({ images, initialPageSize = 15 }: UseImageFilter
     setShowAllImages(false); // Reset pagination when changing category
   }, []);
 
+  const handleBadgeChange = useCallback((badge: string) => {
+    setSelectedBadge(badge);
+    setShowAllImages(false); // Reset pagination when changing badge
+  }, []);
+
   const handleSearchChange = useCallback((query: string) => {
     setSearchQuery(query);
     setShowAllImages(false); // Reset pagination when searching
@@ -55,12 +66,14 @@ export function useImageFilters({ images, initialPageSize = 15 }: UseImageFilter
 
   return {
     selectedCategory,
+    selectedBadge,
     searchQuery,
     filteredImages,
     displayedImages,
     hasMore,
     remainingCount,
     handleCategoryChange,
+    handleBadgeChange,
     handleSearchChange,
     handleLoadMore,
   };
