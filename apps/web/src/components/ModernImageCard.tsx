@@ -6,6 +6,11 @@ import { Clock, Tag, Download } from 'lucide-react';
 import { DockerImage } from '../types';
 import { Badge } from './ui/Badge';
 
+interface ModernImageCardProps {
+  image: DockerImage;
+}
+
+const ModernImageCard: React.FC<ModernImageCardProps> = ({ image }) => {
   return (
     <Link href={`/image/${image.name}`}>
       <div className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-primary-200 hover:-translate-y-1">
