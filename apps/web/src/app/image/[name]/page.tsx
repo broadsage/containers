@@ -82,22 +82,6 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const renderBadge = () => {
-    const badges = {
-      official: { icon: Shield, text: 'Official', color: 'from-blue-500 to-cyan-500' },
-      verified: { icon: Star, text: 'Verified', color: 'from-purple-500 to-pink-500' },
-      community: { icon: Shield, text: 'Community', color: 'from-green-500 to-emerald-500' },
-    };
-    const badge = badges[image.badge];
-    const Icon = badge.icon;
-    return (
-      <span className={`inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r ${badge.color} text-white rounded-full text-sm font-semibold`}>
-        <Icon className="w-4 h-4" />
-        <span>{badge.text}</span>
-      </span>
-    );
-  };
-
   return (
     <div className="min-h-screen">
       <Header />
