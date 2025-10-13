@@ -83,59 +83,90 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-16">
-        <div className="container mx-auto px-6 lg:px-8">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center text-gray-300 hover:text-white mb-8 transition-colors"
+      {/* Clean Header Section */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="container mx-auto px-6 lg:px-8 py-6">
+          {/* Breadcrumb */}
+          <Link 
+            href="/"
+            className="inline-flex items-center text-sm text-gray-600 hover:text-gray-900 mb-6 transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Directory
-          </button>
+            <ArrowLeft className="w-4 h-4 mr-1" />
+            Directory
+          </Link>
 
-          <div className="flex flex-col md:flex-row items-start md:items-center space-y-6 md:space-y-0 md:space-x-8">
+          {/* Image Header */}
+          <div className="flex items-start space-x-6">
             {/* Logo */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl blur-2xl opacity-50"></div>
-              <div className="relative w-32 h-32 bg-white rounded-2xl p-6 shadow-2xl">
+            <div className="flex-shrink-0">
+              <div className="w-16 h-16 bg-gray-50 rounded-lg p-3 border border-gray-200">
                 <img 
                   src={image.logo} 
                   alt={image.name} 
                   className="w-full h-full object-contain"
                 />
               </div>
-              {image.fips && (
-                <span className="absolute -top-2 -right-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs px-3 py-1 rounded-full font-bold shadow-lg">
-                  FIPS
-                </span>
-              )}
             </div>
             
             {/* Info */}
-            <div className="flex-1">
-              <div className="flex items-center space-x-4 mb-4">
-                <h1 className="text-4xl font-bold text-white">{image.name}</h1>
-                <Badge type={image.badge} size="lg" />
+            <div className="flex-1 min-w-0">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">{image.name}</h1>
+              <div className="flex items-center space-x-3 mb-4">
+                <span className="text-sm text-gray-600 flex items-center">
+                  <Clock className="w-4 h-4 mr-1" />
+                  Last changed {image.lastChanged}
+                </span>
+                {image.fips && (
+                  <span className="text-xs font-semibold text-blue-600 px-2 py-1 bg-blue-50 rounded border border-blue-200">
+                    FIPS available
+                  </span>
+                )}
               </div>
-              <p className="text-xl text-gray-300 mb-6">{image.description}</p>
-              
-              {/* Quick Pull */}
-              <div className="flex items-center space-x-3">
-                <code className="flex-1 bg-black/30 backdrop-blur-lg border border-white/20 text-white px-6 py-4 rounded-xl font-mono text-sm">
-                  docker pull hub.opensource.dev/{image.name}:latest
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Pull Command & CTA Section */}
+      <div className="bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Docker Pull Command */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                Try this image for free
+              </h3>
+              <div className="flex items-center space-x-2">
+                <code className="flex-1 bg-gray-50 border border-gray-200 text-gray-900 px-4 py-3 rounded-md font-mono text-sm">
+                  docker pull hub.opensource.dev/{image.name}
                 </code>
-                <Button
+                <button
                   onClick={copyPullCommand}
-                  size="lg"
-                  className="bg-white text-gray-900 hover:bg-gray-100"
+                  className="p-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                  title="Copy command"
                 >
                   {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                </Button>
+                </button>
               </div>
+              <p className="text-xs text-gray-600 mt-3">
+                Need access to a specific tag? <Link href="#" className="text-blue-600 hover:text-blue-700">Contact us</Link>.
+              </p>
+            </div>
+
+            {/* CTA Card */}
+            <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <h3 className="text-sm font-semibold text-gray-900 mb-2">
+                Get full access to this image
+              </h3>
+              <p className="text-sm text-gray-600 mb-4">
+                Browse all versions, view SBOM details, and get vulnerability alerts.
+              </p>
+              <button className="w-full px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
+                Sign up for free
+              </button>
             </div>
           </div>
         </div>
@@ -145,7 +176,7 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Tab Content */}
-      <div className="container mx-auto px-6 lg:px-8 py-12">
+      <div className="container mx-auto px-6 lg:px-8 py-8">
         {activeTab === 'tags' && <TagsTab imageName={image.name} versions={versions} />}
         {activeTab === 'overview' && <OverviewTab image={image} />}
         {activeTab === 'vulnerabilities' && <VulnerabilitiesTab vulnerabilities={vulnerabilities} />}
