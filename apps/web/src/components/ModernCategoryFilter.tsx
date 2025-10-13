@@ -100,6 +100,3 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
 };
 
 export default ModernCategoryFilter;
-};
-
-export default ModernCategoryFilter;
