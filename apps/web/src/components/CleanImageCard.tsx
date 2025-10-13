@@ -69,6 +69,7 @@ const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
         <div className="mt-3 pt-3 border-t border-gray-100">
           <Badge type={image.badge} size="sm" />
         </div>
+        </div>
       </div>
     </Link>
   );
