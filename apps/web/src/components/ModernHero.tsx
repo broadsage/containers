@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
-import { stats } from '../data/mockData';
+import { stats, dockerImages } from '../data/mockData';
 
 interface ModernHeroProps {
   onSearch: (query: string) => void;
@@ -16,6 +16,15 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
     images: 0,
     builds: 0,
   });
+
+  // Featured images for scrolling animation
+  const featuredLogos = dockerImages.slice(0, 15).map(img => ({
+    name: img.name,
+    logo: img.logo,
+  }));
+
+  // Duplicate the logos for seamless infinite scroll
+  const scrollingLogos = [...featuredLogos, ...featuredLogos, ...featuredLogos];
 
   // Animate stats on mount
   useEffect(() => {
@@ -51,17 +60,19 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
   return (
     <div className="relative overflow-hidden bg-white py-16 lg:py-24">
       <div className="container mx-auto px-6 lg:px-8">
-        <div className="text-center max-w-5xl mx-auto mb-16">
+        <div className="text-center max-w-5xl mx-auto mb-12">
           {/* Main Heading */}
           <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-            Eliminate your CVEs
+            Trusted Container Images
+            <br />
+            for Modern Applications
           </h1>
 
           {/* Subheading */}
           <p className="text-lg lg:text-xl text-gray-600 mb-12 leading-relaxed max-w-4xl mx-auto">
-            Build, ship, and run secure software with minimal, hardened container images —
+            Discover secure, optimized container images with comprehensive vulnerability scanning.
             <br className="hidden sm:block" />
-            rebuilt from source daily and guarded under our industry-leading remediation SLA.
+            Browse our curated registry of pre-built images ready for production deployment.
           </p>
 
           {/* Search Bar */}
@@ -85,7 +96,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center items-center gap-3">
+          <div className="flex flex-wrap justify-center items-center gap-3 mb-12">
             <span className="text-gray-500 text-sm font-medium">Popular:</span>
             {['Node.js', 'Python', 'Go', 'Nginx', 'PostgreSQL'].map((tech) => (
               <button
@@ -98,6 +109,32 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
               >
                 {tech}
               </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Horizontal Scrolling Logos */}
+        <div className="relative mb-16 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+          
+          <div className="flex animate-scroll-left">
+            {scrollingLogos.map((item, index) => (
+              <div 
+                key={`${item.name}-${index}`}
+                className="flex-shrink-0 mx-6 flex items-center justify-center"
+                style={{ width: '120px', height: '80px' }}
+              >
+                <img
+                  src={item.logo}
+                  alt={item.name}
+                  className="w-16 h-16 object-contain opacity-40 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>
