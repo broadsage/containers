@@ -38,7 +38,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ image }) => {
                 {image.name}
               </h3>
               {/* Docker Hub style badge */}
-              {image.badge && renderBadge(image.badge)}
+              {image.badge && <Badge type={image.badge} size="sm" />}
             </div>
             
             <div className="flex items-center text-xs text-gray-500 mb-1">
