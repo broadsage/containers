@@ -27,12 +27,12 @@ interface TabNavigationProps {
 
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange }) => {
   const tabs: Tab[] = [
-    { id: 'tags', label: 'Tags', icon: Tags },
+    { id: 'tags', label: 'Tags', icon: Tag },
     { id: 'overview', label: 'Overview', icon: FileText },
-    { id: 'vulnerabilities', label: 'Vulnerabilities', icon: AlertTriangle, count: 0 },
-    { id: 'sbom', label: 'SBOM', icon: Package },
-    { id: 'provenance', label: 'Provenance', icon: Shield },
-    { id: 'specifications', label: 'Specifications', icon: FileCode },
+    { id: 'vulnerabilities', label: 'Vulnerabilities', icon: ShieldAlert, count: 0 },
+    { id: 'sbom', label: 'SBOM', icon: Package2 },
+    { id: 'provenance', label: 'Provenance', icon: FileCheck },
+    { id: 'specifications', label: 'Specifications', icon: Settings },
     { id: 'comparison', label: 'Comparison', icon: GitCompare },
     { id: 'advisories', label: 'Advisories', icon: Bell, count: 0 },
   ];
