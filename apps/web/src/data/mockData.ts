@@ -1,12 +1,12 @@
 import { Category, DockerImage, Vulnerability, SBOMPackage, Stats } from '../types';
 
 export const categories: Category[] = [
-  { id: 'featured', name: 'Featured', icon: '⭐' },
-  { id: 'starter', name: 'Starter', icon: '🚀' },
-  { id: 'ai', name: 'AI', icon: '🤖' },
-  { id: 'application', name: 'Application', icon: '📦' },
-  { id: 'base', name: 'Base', icon: '🏗️' },
-  { id: 'fips', name: 'FIPS', icon: '🔒' },
+  { id: 'featured', name: 'featured', icon: '' },
+  { id: 'starter', name: 'starter', icon: '' },
+  { id: 'ai', name: 'AI', icon: '' },
+  { id: 'application', name: 'application', icon: '' },
+  { id: 'base', name: 'base', icon: '' },
+  { id: 'fips', name: 'FIPS', icon: '' },
 ];
 
 export const dockerImages: DockerImage[] = [
