@@ -68,7 +68,12 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
         <Header />
         <div className="container mx-auto px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Image Not Found</h1>
-          <Button onClick={() => router.push('/')}>Back to Directory</Button>
+          <button 
+            onClick={() => router.push('/')}
+            className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Back to Directory
+          </button>
         </div>
         <Footer />
       </div>
