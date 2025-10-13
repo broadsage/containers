@@ -2,52 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Clock, Tag, Shield, Award, Download, Star } from 'lucide-react';
+import { Clock, Tag, Download } from 'lucide-react';
 import { DockerImage } from '../types';
-
-interface ModernImageCardProps {
-  image: DockerImage;
-}
-
-const ModernImageCard: React.FC<ModernImageCardProps> = ({ image }) => {
-  const renderBadge = (badgeType: 'official' | 'community' | 'verified') => {
-    const badges = {
-      official: {
-        icon: Shield,
-        text: 'Official',
-        colors: 'from-blue-500 to-cyan-500',
-        bg: 'bg-blue-50',
-        text_color: 'text-blue-700',
-        border: 'border-blue-200'
-      },
-      community: {
-        icon: Award,
-        text: 'Community',
-        colors: 'from-green-500 to-emerald-500',
-        bg: 'bg-green-50',
-        text_color: 'text-green-700',
-        border: 'border-green-200'
-      },
-      verified: {
-        icon: Star,
-        text: 'Verified',
-        colors: 'from-purple-500 to-pink-500',
-        bg: 'bg-purple-50',
-        text_color: 'text-purple-700',
-        border: 'border-purple-200'
-      },
-    };
-
-    const badge = badges[badgeType];
-    const Icon = badge.icon;
-
-    return (
-      <div className={`inline-flex items-center space-x-1.5 px-3 py-1.5 ${badge.bg} ${badge.border} border rounded-md`}>
-        <Icon className={`w-4 h-4 ${badge.text_color}`} />
-        <span className={`text-sm font-semibold ${badge.text_color}`}>{badge.text}</span>
-      </div>
-    );
-  };
+import { Badge } from './ui/Badge';
 
   return (
     <Link href={`/image/${image.name}`}>
