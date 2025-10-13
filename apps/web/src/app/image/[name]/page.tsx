@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import TabNavigation from '../../../components/TabNavigation';
@@ -15,8 +16,7 @@ import SpecificationsTab from '../../../components/tabs/SpecificationsTab';
 import ComparisonTab from '../../../components/tabs/ComparisonTab';
 import AdvisoriesTab from '../../../components/tabs/AdvisoriesTab';
 import { dockerImages } from '../../../data/mockData';
-import { ArrowLeft, Copy, Check } from 'lucide-react';
-import { Button } from '@repo/ui';
+import { ArrowLeft, Copy, Check, Download, Clock } from 'lucide-react';
 import { Badge } from '../../../components/ui/Badge';
 
 export default function ImageDetailPage({ params }: { params: Promise<{ name: string }> }) {
