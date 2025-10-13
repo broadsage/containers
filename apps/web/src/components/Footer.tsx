@@ -15,7 +15,7 @@ const Footer = () => {
             <Link href="/" className="inline-flex items-center space-x-3 mb-4 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                <Shield className="h-10 w-10 text-primary-600 relative" />
+                <Boxes className="h-10 w-10 text-primary-600 relative" />
               </div>
               <div className="flex flex-col">
                 <span className="text-2xl font-bold gradient-text">OpenHub</span>
