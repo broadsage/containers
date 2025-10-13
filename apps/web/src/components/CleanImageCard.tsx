@@ -33,10 +33,7 @@ const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
                   src={image.logo} 
                   alt={image.name} 
                   className="w-6 h-6 object-contain"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                  }}
+                  onError={handleImageError}
                 />
               </div>
             </div>
