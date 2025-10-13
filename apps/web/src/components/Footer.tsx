@@ -12,10 +12,13 @@ const Footer = () => {
         <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           {/* Brand Column - Takes 4 columns on large screens */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-flex items-center space-x-2 mb-4 group">
-              <Shield className="h-8 w-8 text-blue-600" />
+            <Link href="/" className="inline-flex items-center space-x-3 mb-4 group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
+                <Shield className="h-10 w-10 text-primary-600 relative" />
+              </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-gray-900">OpenHub</span>
+                <span className="text-2xl font-bold gradient-text">OpenHub</span>
                 <span className="text-xs text-gray-600">Container Registry</span>
               </div>
             </Link>
