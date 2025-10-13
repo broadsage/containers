@@ -1,60 +1,60 @@
 import React from 'react';
 import Link from 'next/link';
-import { Shield, Twitter, Linkedin, Github, Mail, Heart, Sparkles, Book, Users, Code } from 'lucide-react';
+import { Shield, Github, Twitter, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
 const Footer = () => {
-  return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-500 rounded-full blur-3xl"></div>
-      </div>
+  const currentYear = new Date().getFullYear();
 
-      <div className="container mx-auto px-6 lg:px-8 py-16 relative z-10">
+  return (
+    <footer className="bg-gray-50 border-t border-gray-200">
+      <div className="container mx-auto px-6 lg:px-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center space-x-3 mb-4 group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                <Shield className="h-10 w-10 text-primary-400 relative" />
-              </div>
+        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
+          {/* Brand Column - Takes 4 columns on large screens */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-flex items-center space-x-2 mb-4 group">
+              <Shield className="h-8 w-8 text-blue-600" />
               <div className="flex flex-col">
-                <span className="text-2xl font-bold gradient-text">OpenHub</span>
-                <span className="text-xs text-gray-400">Container Registry</span>
+                <span className="text-xl font-bold text-gray-900">OpenHub</span>
+                <span className="text-xs text-gray-600">Container Registry</span>
               </div>
             </Link>
-            <p className="text-gray-300 text-sm leading-relaxed mb-6 max-w-sm">
-              Free, open-source platform for secure, minimal container images. 
-              Built by developers, for developers. Zero CVEs, complete transparency.
+            <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-xs">
+              Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.
             </p>
-            <div className="flex items-center space-x-4">
+            
+            {/* Social Links */}
+            <div className="flex items-center space-x-3">
               <a
                 href="https://github.com"
-                className="group p-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl hover:bg-white/20 transition-all hover:scale-110"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md transition-colors"
                 aria-label="GitHub"
               >
                 <Github className="w-5 h-5" />
               </a>
               <a
                 href="https://twitter.com"
-                className="group p-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl hover:bg-white/20 transition-all hover:scale-110"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
                 href="https://linkedin.com"
-                className="group p-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl hover:bg-white/20 transition-all hover:scale-110"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href="mailto:hello@openhub.dev"
-                className="group p-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl hover:bg-white/20 transition-all hover:scale-110"
+                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-200 rounded-md transition-colors"
                 aria-label="Email"
               >
                 <Mail className="w-5 h-5" />
@@ -63,138 +63,140 @@ const Footer = () => {
           </div>
 
           {/* Product Column */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Product
-            </h4>
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Product</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Images Directory</span>
+                <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Images Directory
                 </Link>
               </li>
               <li>
-                <Link href="/helm-charts" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Helm Charts</span>
+                <Link href="/pricing" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Pricing
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">API Access</span>
-                </a>
+                <Link href="/features" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Features
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Security Scanning</span>
+                <Link href="/security" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Security
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Developers Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Developers</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/docs" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Documentation
+                </Link>
+              </li>
+              <li>
+                <Link href="/api" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  API Reference
+                </Link>
+              </li>
+              <li>
+                <Link href="/guides" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Guides
+                </Link>
+              </li>
+              <li>
+                <a 
+                  href="https://github.com/openhub" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center"
+                >
+                  GitHub
+                  <ExternalLink className="w-3 h-3 ml-1" />
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Resources Column */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center">
-              <Book className="w-4 h-4 mr-2" />
-              Resources
-            </h4>
+          {/* Company Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/docs" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Documentation</span>
+                <Link href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  About Us
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">API Reference</span>
-                </a>
+                <Link href="/blog" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Blog
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Blog</span>
-                </a>
+                <Link href="/careers" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Careers
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Tutorials</span>
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Changelog</span>
-                </a>
+                <Link href="/contact" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Community Column */}
-          <div>
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-4 flex items-center">
-              <Users className="w-4 h-4 mr-2" />
-              Community
-            </h4>
+          {/* Legal Column */}
+          <div className="lg:col-span-2">
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Discord Server</span>
-                </a>
-              </li>
-              <li>
-                <Link href="/contribute" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Contribute</span>
+                <Link href="/privacy" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Roadmap</span>
-                </a>
+                <Link href="/terms" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Terms of Service
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Support</span>
-                </a>
+                <Link href="/security-policy" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  Security Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/license" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+                  License
+                </Link>
               </li>
             </ul>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div className="border-t border-white/10 pt-8 mb-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-xl font-bold mb-2">Stay Updated</h3>
-            <p className="text-gray-300 text-sm mb-4">
-              Get notified about new images, security updates, and features
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
-              <button className="px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-secondary-700 transition-all shadow-lg hover:shadow-xl">
-                Subscribe
-              </button>
-            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-400">
-            <p className="flex items-center">
-              © 2025 OpenHub. Made with <Heart className="w-4 h-4 mx-1 text-red-500" /> by the community
-            </p>
-            <div className="flex items-center space-x-4">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <span>•</span>
-              <a href="#" className="hover:text-white transition-colors">License</a>
+        <div className="border-t border-gray-200 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-sm text-gray-600">
+              © {currentYear} OpenHub Container Registry. All rights reserved.
             </div>
-          </div>
-          <div className="flex items-center space-x-2 text-sm text-gray-400">
-            <Code className="w-4 h-4" />
-            <span>Open Source • MIT License</span>
+            <div className="flex items-center space-x-6">
+              <span className="text-sm text-gray-600">
+                Open Source • MIT License
+              </span>
+              <a 
+                href="https://status.openhub.dev" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center"
+              >
+                Status
+                <span className="ml-2 w-2 h-2 bg-green-500 rounded-full"></span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
