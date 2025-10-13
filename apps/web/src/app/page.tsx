@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import ModernHero from '../components/ModernHero';
 import ModernCategoryFilter from '../components/ModernCategoryFilter';
-import ModernImageCard from '../components/ModernImageCard';
 import CleanImageCard from '../components/CleanImageCard';
 import Footer from '../components/Footer';
 import { ErrorBoundary } from '../components/ErrorBoundary';
