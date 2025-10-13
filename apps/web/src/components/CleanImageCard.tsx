@@ -12,7 +12,7 @@ interface CleanImageCardProps {
 const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
   return (
     <Link href={`/image/${image.name}`}>
-      <div className="group relative bg-white border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-md transition-all duration-200 p-4">
+      <div className="group relative bg-[#FAFAFA] border border-gray-200 rounded-lg hover:border-gray-300 hover:shadow-md transition-all duration-200 p-4">
         {/* Header with Logo and Badge */}
         <div className="flex items-start justify-between mb-3">
           {/* Logo */}
