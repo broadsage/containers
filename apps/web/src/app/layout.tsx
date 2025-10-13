@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   keywords: ['docker', 'containers', 'security', 'chainguard', 'images', 'minimal', 'secure'],
   authors: [{ name: APP_NAME }],
   creator: APP_NAME,
+  icons: {
+    icon: '/icon',
+    apple: '/apple-icon',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
