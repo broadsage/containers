@@ -10,6 +10,7 @@ interface ImageCardProps {
   image: DockerImage;
 }
 
+const ImageCard: React.FC<ImageCardProps> = ({ image }) => {
   return (
     <Link href={`/image/${image.name}`}>
       <div className="bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-all duration-300 cursor-pointer group p-4">
