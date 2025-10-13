@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Shield, Menu, X, Sparkles } from 'lucide-react';
+import { Boxes, Menu, X, Sparkles } from 'lucide-react';
 import { Button } from '@repo/ui';
 
 const Header = () => {
