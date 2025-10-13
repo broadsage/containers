@@ -106,15 +106,15 @@ export default function HomePage() {
 
               {/* Image Grid/List */}
               {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-12">
                   {displayedImages.map((image) => (
-                    <ModernImageCard key={image.id} image={image} />
+                    <CleanImageCard key={image.id} image={image} />
                   ))}
                 </div>
               ) : (
-                <div className="space-y-4 mb-12">
+                <div className="grid grid-cols-1 gap-3 mb-12">
                   {displayedImages.map((image) => (
-                    <ModernImageCard key={image.id} image={image} />
+                    <CleanImageCard key={image.id} image={image} />
                   ))}
                 </div>
               )}
