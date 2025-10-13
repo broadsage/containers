@@ -1,73 +1,101 @@
 'use client';
 
 import React from 'react';
-import { Check, Filter } from 'lucide-react';
+import { Shield, Award, Star } from 'lucide-react';
 import { categories } from '../data/mockData';
 
 interface ModernCategoryFilterProps {
   selectedCategory: string;
   onCategoryChange: (category: string) => void;
+  selectedBadge?: string;
+  onBadgeChange?: (badge: string) => void;
 }
 
 const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({ 
   selectedCategory, 
-  onCategoryChange 
+  onCategoryChange,
+  selectedBadge = 'all',
+  onBadgeChange
 }) => {
-  const allCategories = [
-    { id: 'all', name: 'All Images', icon: '🌐' },
-    ...categories
+  const badges = [
+    { id: 'all', name: 'All', icon: null },
+    { id: 'official', name: 'Official', icon: Shield, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200' },
+    { id: 'community', name: 'Community', icon: Award, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
+    { id: 'verified', name: 'Verified', icon: Star, color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-200' },
   ];
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-24">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-bold text-gray-900 flex items-center">
-          <Filter className="w-5 h-5 mr-2 text-primary-600" />
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 sticky top-24">
+      {/* Categories Section */}
+      <div className="p-6 border-b border-gray-200">
+        <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
           Categories
         </h3>
-        {selectedCategory !== 'all' && (
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => onCategoryChange('all')}
-            className="text-xs text-primary-600 hover:text-primary-700 font-medium"
-          >
-            Clear
-          </button>
-        )}
-      </div>
-
-      {/* Category Pills */}
-      <div className="space-y-2">
-        {allCategories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => onCategoryChange(category.id)}
-            className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 flex items-center justify-between group ${
-              selectedCategory === category.id
-                ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg scale-105'
-                : 'text-gray-700 hover:bg-gray-50 hover:scale-102'
+            className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+              selectedCategory === 'all'
+                ? 'bg-gray-900 text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
-            <div className="flex items-center space-x-3">
-              <span className="text-xl">{category.icon}</span>
-              <span className="font-medium">{category.name}</span>
-            </div>
-            {selectedCategory === category.id && (
-              <div className="bg-white/20 backdrop-blur-lg rounded-lg p-1">
-                <Check className="w-4 h-4" />
-              </div>
-            )}
+            all
           </button>
-        ))}
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => onCategoryChange(category.id)}
+              className={`px-3 py-1.5 text-sm font-medium rounded-md transition-all ${
+                selectedCategory === category.id
+                  ? 'bg-gray-900 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Pro tip */}
-      <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100">
-        <p className="text-xs text-gray-700 flex items-start">
-          <span className="text-lg mr-2">💡</span>
-          <span>
-            <strong className="font-semibold text-gray-900">Pro tip:</strong> Use the search bar above to find specific images quickly
-          </span>
+      {/* Badge Filters Section */}
+      {onBadgeChange && (
+        <div className="p-6">
+          <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
+            Filter by Type
+          </h3>
+          <div className="space-y-2">
+            {badges.map((badge) => {
+              const Icon = badge.icon;
+              return (
+                <button
+                  key={badge.id}
+                  onClick={() => onBadgeChange(badge.id)}
+                  className={`w-full text-left px-3 py-2.5 rounded-md transition-all flex items-center space-x-2 ${
+                    selectedBadge === badge.id
+                      ? `${badge.bg || 'bg-gray-100'} ${badge.border || 'border-gray-300'} border-2`
+                      : 'hover:bg-gray-50 border-2 border-transparent'
+                  }`}
+                >
+                  {Icon && <Icon className={`w-4 h-4 ${badge.color || 'text-gray-600'}`} />}
+                  <span className={`text-sm font-medium ${
+                    selectedBadge === badge.id 
+                      ? badge.color || 'text-gray-900'
+                      : 'text-gray-700'
+                  }`}>
+                    {badge.name}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Info Section */}
+      <div className="p-6 bg-gray-50 border-t border-gray-200">
+        <p className="text-xs text-gray-600 leading-relaxed">
+          Browse our curated collection of secure container images with vulnerability scanning and SBOM support.
         </p>
       </div>
     </div>
