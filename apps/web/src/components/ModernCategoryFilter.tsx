@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Shield, Award, Star, Layers } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { categories } from '../data/mockData';
+import { FilterButton } from './ui/FilterButton';
+import { BADGE_FILTERS } from '../constants/filters';
 
 interface ModernCategoryFilterProps {
   selectedCategory: string;
@@ -18,15 +20,8 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
   onBadgeChange
 }) => {
   const allCategories = [
-    { id: 'all', name: 'all', icon: Layers },
-    ...categories.map(cat => ({ ...cat, icon: Layers }))
-  ];
-
-  const badges = [
-    { id: 'all', name: 'All', icon: null },
-    { id: 'official', name: 'Official', icon: Shield, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-200' },
-    { id: 'community', name: 'Community', icon: Award, color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-200' },
-    { id: 'verified', name: 'Verified', icon: Star, color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-200' },
+    { id: 'all', name: 'all' },
+    ...categories
   ];
 
   return (
@@ -37,27 +32,17 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
           Categories
         </h3>
         <div className="space-y-2">
-          {allCategories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <button
-                key={category.id}
-                onClick={() => onCategoryChange(category.id)}
-                className={`w-full text-left px-3 py-2.5 rounded-md transition-all flex items-center space-x-2 ${
-                  selectedCategory === category.id
-                    ? 'bg-gray-900 text-white border-2 border-gray-900'
-                    : 'hover:bg-gray-50 border-2 border-transparent text-gray-700'
-                }`}
-              >
-                {Icon && <Icon className={`w-4 h-4 ${
-                  selectedCategory === category.id ? 'text-white' : 'text-gray-500'
-                }`} />}
-                <span className="text-sm font-medium capitalize">
-                  {category.name}
-                </span>
-              </button>
-            );
-          })}
+          {allCategories.map((category) => (
+            <FilterButton
+              key={category.id}
+              id={category.id}
+              name={category.name}
+              icon={Layers}
+              isSelected={selectedCategory === category.id}
+              onClick={() => onCategoryChange(category.id)}
+              variant="default"
+            />
+          ))}
         </div>
       </div>
 
@@ -68,29 +53,20 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
             Filter by Type
           </h3>
           <div className="space-y-2">
-            {badges.map((badge) => {
-              const Icon = badge.icon;
-              return (
-                <button
-                  key={badge.id}
-                  onClick={() => onBadgeChange(badge.id)}
-                  className={`w-full text-left px-3 py-2.5 rounded-md transition-all flex items-center space-x-2 ${
-                    selectedBadge === badge.id
-                      ? `${badge.bg || 'bg-gray-100'} ${badge.border || 'border-gray-300'} border-2`
-                      : 'hover:bg-gray-50 border-2 border-transparent'
-                  }`}
-                >
-                  {Icon && <Icon className={`w-4 h-4 ${badge.color || 'text-gray-600'}`} />}
-                  <span className={`text-sm font-medium ${
-                    selectedBadge === badge.id 
-                      ? badge.color || 'text-gray-900'
-                      : 'text-gray-700'
-                  }`}>
-                    {badge.name}
-                  </span>
-                </button>
-              );
-            })}
+            {BADGE_FILTERS.map((badge) => (
+              <FilterButton
+                key={badge.id}
+                id={badge.id}
+                name={badge.name}
+                icon={badge.icon}
+                isSelected={selectedBadge === badge.id}
+                onClick={() => onBadgeChange(badge.id)}
+                variant="colored"
+                color={badge.color}
+                bg={badge.bg}
+                border={badge.border}
+              />
+            ))}
           </div>
         </div>
       )}
