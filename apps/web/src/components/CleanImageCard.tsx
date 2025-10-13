@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { DockerImage } from '../types';
 import { Badge } from './ui/Badge';
+import { handleImageError } from '../utils/image.utils';
 
 interface CleanImageCardProps {
   image: DockerImage;
