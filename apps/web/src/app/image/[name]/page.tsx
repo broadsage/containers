@@ -15,8 +15,9 @@ import SpecificationsTab from '../../../components/tabs/SpecificationsTab';
 import ComparisonTab from '../../../components/tabs/ComparisonTab';
 import AdvisoriesTab from '../../../components/tabs/AdvisoriesTab';
 import { dockerImages } from '../../../data/mockData';
-import { ArrowLeft, Copy, Check, Shield, Star } from 'lucide-react';
+import { ArrowLeft, Copy, Check } from 'lucide-react';
 import { Button } from '@repo/ui';
+import { Badge } from '../../../components/ui/Badge';
 
 export default function ImageDetailPage({ params }: { params: Promise<{ name: string }> }) {
   const router = useRouter();
