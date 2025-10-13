@@ -1,5 +1,9 @@
-export const APP_NAME = 'SecureHub';
-export const APP_DESCRIPTION = 'Explore secure, minimal Docker images from Chainguard';
+// Re-export from app.constants for better organization
+export * from './app.constants';
+export * from './filters';
+
+export const APP_NAME = 'OpenHub';
+export const APP_DESCRIPTION = 'Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.';
 
 export const ROUTES = {
   HOME: '/',
