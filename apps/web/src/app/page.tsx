@@ -46,6 +46,8 @@ export default function HomePage() {
               <ModernCategoryFilter 
                 selectedCategory={selectedCategory}
                 onCategoryChange={handleCategoryChange}
+                selectedBadge={selectedBadge}
+                onBadgeChange={handleBadgeChange}
               />
             </aside>
 
