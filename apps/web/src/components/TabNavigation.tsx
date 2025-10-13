@@ -16,7 +16,7 @@ import {
 interface Tab {
   id: string;
   label: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: LucideIcon;
   count?: number;
 }
 
