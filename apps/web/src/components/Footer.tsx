@@ -116,7 +116,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://github.com/openhub" 
+                  href="https://github.com/broadsage" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-sm text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center"
