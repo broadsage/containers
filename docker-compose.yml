@@ -1,0 +1,97 @@
+# Docker Compose for Development Environment
+version: '3.9'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7
+    container_name: openhub-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    environment:
+      MONGO_INITDB_DATABASE: openhub
+    networks:
+      - openhub-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: openhub-backend
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+      - /app/.pytest_cache
+    environment:
+      - MONGO_URL=mongodb://mongodb:27017/openhub
+      - PORT=8001
+      - ENVIRONMENT=development
+      - DEBUG=True
+      - LOG_LEVEL=DEBUG
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - openhub-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    command: uvicorn server:app --host 0.0.0.0 --port 8001 --reload
+
+  # Frontend Web App
+  frontend:
+    build:
+      context: .
+      dockerfile: ./apps/web/Dockerfile
+      target: development
+    container_name: openhub-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps:/app/apps
+      - ./packages:/app/packages
+      - /app/node_modules
+      - /app/apps/web/.next
+    environment:
+      - NEXT_PUBLIC_BACKEND_URL=http://localhost:8001
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    networks:
+      - openhub-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    command: yarn dev
+
+networks:
+  openhub-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local
+  mongodb_config:
+    driver: local

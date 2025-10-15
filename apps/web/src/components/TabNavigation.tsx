@@ -1,0 +1,93 @@
+'use client';
+
+import React from 'react';
+import { 
+  Tag, 
+  FileText, 
+  ShieldAlert, 
+  Package2, 
+  FileCheck, 
+  Settings, 
+  GitCompare, 
+  Bell,
+  LucideIcon
+} from 'lucide-react';
+
+interface Tab {
+  id: string;
+  label: string;
+  icon: LucideIcon;
+  count?: number;
+}
+
+interface TabNavigationProps {
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+}
+
+const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, onTabChange }) => {
+  const tabs: Tab[] = [
+    { id: 'tags', label: 'Tags', icon: Tag },
+    { id: 'overview', label: 'Overview', icon: FileText },
+    { id: 'vulnerabilities', label: 'Vulnerabilities', icon: ShieldAlert, count: 0 },
+    { id: 'sbom', label: 'SBOM', icon: Package2 },
+    { id: 'provenance', label: 'Provenance', icon: FileCheck },
+    { id: 'specifications', label: 'Specifications', icon: Settings },
+    { id: 'comparison', label: 'Comparison', icon: GitCompare },
+    { id: 'advisories', label: 'Advisories', icon: Bell, count: 0 },
+  ];
+
+  return (
+    <div className="border-b border-gray-200 bg-white">
+      <div className="container mx-auto px-6 lg:px-8">
+        <div className="flex overflow-x-auto hide-scrollbar">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            const Icon = tab.icon;
+            
+            return (
+              <button
+                key={tab.id}
+                onClick={() => onTabChange(tab.id)}
+                className={`
+                  relative px-4 py-3 text-sm font-medium whitespace-nowrap
+                  transition-colors border-b-2 flex items-center space-x-2
+                  ${isActive 
+                    ? 'text-gray-900 border-blue-600' 
+                    : 'text-gray-600 border-transparent hover:text-gray-900'
+                  }
+                `}
+              >
+                <Icon className="w-4 h-4" />
+                <span>{tab.label}</span>
+                {tab.count !== undefined && (
+                  <span className={`
+                    px-1.5 py-0.5 text-xs font-semibold rounded
+                    ${tab.count === 0 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'bg-red-100 text-red-700'
+                    }
+                  `}>
+                    {tab.count}
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default TabNavigation;
