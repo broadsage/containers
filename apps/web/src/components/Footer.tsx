@@ -14,12 +14,15 @@ const Footer = () => {
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center space-x-3 mb-4 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                <Boxes className="h-10 w-10 text-primary-600 relative" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <BookOpen className="h-6 w-6 text-white" />
+                  <Database className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-primary-700 rounded-full p-0.5" />
+                </div>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-bold gradient-text">OpenHub</span>
-                <span className="text-xs text-gray-600">Container Registry</span>
+                <span className="text-2xl font-bold gradient-text">Broadsage</span>
+                <span className="text-xs text-gray-600 font-medium">Registry</span>
               </div>
             </Link>
             <p className="text-sm text-gray-600 leading-relaxed mb-6 max-w-xs">
