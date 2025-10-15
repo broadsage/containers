@@ -48,6 +48,7 @@ export default function HomePage() {
                   selectedCategory={selectedCategory}
                   onCategoryChange={handleCategoryChange}
                   selectedBadge={selectedBadge}
+                  onViewModeChange={setViewMode}
                   onBadgeChange={handleBadgeChange}
                 />
               </div>
