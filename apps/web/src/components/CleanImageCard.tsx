@@ -56,14 +56,7 @@ const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
 
         {/* Metadata */}
         <div className="space-y-1.5 text-sm text-gray-600">
-          <div className="flex items-center justify-between">
-            <span className="text-xs">Last changed {image.lastChanged}</span>
-            {image.fips && (
-              <span className="text-xs font-semibold text-blue-600 px-2 py-0.5 bg-blue-50 rounded border border-blue-200">
-                FIPS
-              </span>
-            )}
-          </div>
+          <div className="text-xs">Last changed {image.lastChanged}</div>
           <div className="text-xs text-gray-500">
             Latest tag: <span className="font-mono text-gray-700">{image.latestTag}</span>
           </div>
