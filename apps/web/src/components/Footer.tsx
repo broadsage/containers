@@ -187,7 +187,7 @@ const Footer = () => {
         <div className="border-t border-gray-200 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-sm text-gray-600">
-              © {currentYear} Broadsage Registry. All rights reserved.
+              © {currentYear} Broadsage Container Image Store. All rights reserved.
             </div>
             <div className="flex items-center space-x-6">
               <span className="text-sm text-gray-600">
