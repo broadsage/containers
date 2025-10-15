@@ -3,10 +3,10 @@
  */
 
 export const APP_CONFIG = {
-  NAME: 'OpenHub Container Registry',
-  SHORT_NAME: 'OpenHub',
+  NAME: 'Broadsage Registry',
+  SHORT_NAME: 'Broadsage',
   DESCRIPTION: 'Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.',
-  REGISTRY_URL: 'hub.opensource.dev',
+  REGISTRY_URL: 'registry.broadsage.com',
 } as const;
 
 export const PAGINATION = {

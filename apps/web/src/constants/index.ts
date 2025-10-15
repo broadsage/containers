@@ -2,7 +2,7 @@
 export * from './app.constants';
 export * from './filters';
 
-export const APP_NAME = 'OpenHub';
+export const APP_NAME = 'Broadsage Registry';
 export const APP_DESCRIPTION = 'Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.';
 
 export const ROUTES = {
@@ -20,14 +20,14 @@ export const PORTS = {
 } as const;
 
 export const BRAND_COLORS = {
-  PRIMARY: '#6366f1',
-  PRIMARY_HOVER: '#4f46e5',
-  SECONDARY: '#8b5cf6',
-  SECONDARY_HOVER: '#7c3aed',
+  PRIMARY: '#fd366e',
+  PRIMARY_HOVER: '#ed1556',
+  SECONDARY: '#fd366e',
+  SECONDARY_HOVER: '#ed1556',
   SUCCESS: '#10b981',
   WARNING: '#f59e0b',
   DANGER: '#ef4444',
-  ACCENT: '#06b6d4',
+  ACCENT: '#fd5c8d',
 } as const;
 
 export const PAGINATION = {
