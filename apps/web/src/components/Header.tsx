@@ -32,13 +32,13 @@ const Header = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl blur-lg opacity-70 group-hover:opacity-100 transition-opacity"></div>
               <div className="relative flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300">
-                <BookOpen className="h-6 w-6 text-white" />
-                <Database className="h-4 w-4 text-white absolute -bottom-1 -right-1 bg-primary-700 rounded-full p-0.5" />
+                <Package className="h-7 w-7 text-white" />
+                <Layers className="h-4 w-4 text-white absolute -bottom-0.5 -right-0.5 bg-primary-700 rounded p-0.5" />
               </div>
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-bold gradient-text">Broadsage</span>
-              <span className="text-xs text-gray-600 font-medium">Registry</span>
+              <span className="text-xs text-gray-600 font-medium leading-tight">Container Image Store</span>
             </div>
           </Link>
           
