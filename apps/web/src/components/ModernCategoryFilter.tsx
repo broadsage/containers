@@ -10,6 +10,7 @@ interface ModernCategoryFilterProps {
   onCategoryChange: (category: string) => void;
   selectedBadge?: string;
   onBadgeChange?: (badge: string) => void;
+  onViewModeChange?: (viewMode: 'grid' | 'list') => void;
 }
 
 const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({ 
