@@ -2,7 +2,7 @@
 export * from './app.constants';
 export * from './filters';
 
-export const APP_NAME = 'Broadsage Registry';
+export const APP_NAME = 'Broadsage Container Image Store';
 export const APP_DESCRIPTION = 'Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.';
 
 export const ROUTES = {

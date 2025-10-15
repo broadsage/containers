@@ -3,10 +3,10 @@
  */
 
 export const APP_CONFIG = {
-  NAME: 'Broadsage Registry',
+  NAME: 'Broadsage Container Image Store',
   SHORT_NAME: 'Broadsage',
   DESCRIPTION: 'Secure, minimal container images with comprehensive vulnerability scanning and SBOM support.',
-  REGISTRY_URL: 'registry.broadsage.com',
+  REGISTRY_URL: 'store.broadsage.com',
 } as const;
 
 export const PAGINATION = {
