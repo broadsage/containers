@@ -2,9 +2,9 @@ name: Integration Tests
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, nextjs]
   pull_request:
-    branches: [main, develop]
+    branches: [main, nextjs]
 
 jobs:
   integration-tests:
@@ -40,7 +40,7 @@ jobs:
       
       - name: Install Backend Dependencies
         run: |
-          cd backend
+          cd apps/api
           pip install -r requirements.txt
       
       - name: Install Frontend Dependencies
@@ -48,12 +48,11 @@ jobs:
       
       - name: Start Backend Server
         run: |
-          cd backend
-          python server.py &
-          sleep 5
+          cd apps/api
+          uvicorn server:app --host 0.0.0.0 --port 8001 &
+          sleep 10
         env:
           MONGO_URL: mongodb://localhost:27017/test_db
-          PORT: 8001
       
       - name: Build Frontend
         run: |
@@ -64,8 +63,8 @@ jobs:
       
       - name: Run Integration Tests
         run: |
-          cd apps/web
-          yarn test:integration
+          # Run the existing backend test script
+          python backend_test.py
         env:
           NEXT_PUBLIC_BACKEND_URL: http://localhost:8001
       
@@ -76,4 +75,4 @@ jobs:
           name: integration-test-results
           path: |
             apps/web/test-results/
-            backend/test-results/
+            apps/api/test-results/

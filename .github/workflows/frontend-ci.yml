@@ -2,13 +2,13 @@ name: Frontend CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, nextjs]
     paths:
       - 'apps/web/**'
       - 'packages/**'
       - '.github/workflows/frontend-ci.yml'
   pull_request:
-    branches: [main, develop]
+    branches: [main, nextjs]
     paths:
       - 'apps/web/**'
       - 'packages/**'
@@ -107,6 +107,6 @@ jobs:
           context: .
           file: ./apps/web/Dockerfile
           push: false
-          tags: openhub-frontend:latest
+          tags: container-directory-web:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
