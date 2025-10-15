@@ -19,7 +19,7 @@ const ComparisonTab: React.FC<ComparisonTabProps> = ({ imageName }) => {
       lastUpdate: '2 months ago',
     },
     openhub: {
-      name: 'Broadsage Registry Image',
+      name: 'Broadsage Container Image',
       size: '45 MB',
       vulnerabilities: 0,
       layers: 12,
