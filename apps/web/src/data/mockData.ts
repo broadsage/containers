@@ -50,7 +50,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 1890000,
     size: '120MB',
     fips: false,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 4,
@@ -78,7 +78,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 1670000,
     size: '35MB',
     fips: true,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 6,
@@ -134,7 +134,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 1780000,
     size: '420MB',
     fips: true,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 10,
@@ -148,7 +148,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 560000,
     size: '1.2GB',
     fips: false,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 11,
@@ -162,7 +162,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 480000,
     size: '1.8GB',
     fips: false,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 12,
@@ -190,7 +190,7 @@ export const dockerImages: DockerImage[] = [
     downloads: 910000,
     size: '620MB',
     fips: false,
-    badge: 'verified'
+    badge: 'community'
   },
   {
     id: 14,
