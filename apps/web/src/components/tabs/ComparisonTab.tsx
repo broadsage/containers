@@ -174,9 +174,9 @@ const ComparisonTab: React.FC<ComparisonTabProps> = ({ imageName }) => {
         </div>
       </div>
 
-      {/* Why Choose OpenHub */}
-      <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 border border-primary-100">
-        <h3 className="text-xl font-bold text-gray-900 mb-6">Why Choose OpenHub Images?</h3>
+      {/* Why Choose Broadsage */}
+      <div className="bg-gradient-to-r from-primary-50 to-pink-50 rounded-2xl p-8 border border-primary-100">
+        <h3 className="text-xl font-bold text-gray-900 mb-6">Why Choose Broadsage Registry Images?</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-start space-x-3">
             <div className="p-2 bg-green-100 rounded-lg">
