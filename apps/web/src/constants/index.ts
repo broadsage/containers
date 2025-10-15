@@ -38,7 +38,6 @@ export const PAGINATION = {
 export const BADGE_TYPES = {
   OFFICIAL: 'official',
   COMMUNITY: 'community',
-  VERIFIED: 'verified',
 } as const;
 
 export type BadgeType = typeof BADGE_TYPES[keyof typeof BADGE_TYPES];

@@ -1,4 +1,4 @@
-import { Shield, Award, Star } from 'lucide-react';
+import { Shield, Users } from 'lucide-react';
 import { BadgeType } from '../components/ui/Badge';
 
 export interface BadgeFilterConfig {
@@ -27,17 +27,9 @@ export const BADGE_FILTERS: BadgeFilterConfig[] = [
   { 
     id: 'community', 
     name: 'Community', 
-    icon: Award, 
+    icon: Users, 
     color: 'text-green-600', 
     bg: 'bg-green-50', 
     border: 'border-green-200' 
-  },
-  { 
-    id: 'verified', 
-    name: 'Verified', 
-    icon: Star, 
-    color: 'text-purple-600', 
-    bg: 'bg-purple-50', 
-    border: 'border-purple-200' 
   }
 ];

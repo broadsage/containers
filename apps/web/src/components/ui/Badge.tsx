@@ -1,14 +1,15 @@
 import React from 'react';
-import { Shield, Award, Star, LucideIcon } from 'lucide-react';
+import { Shield, Users } from 'lucide-react';
 
-export type BadgeType = 'official' | 'community' | 'verified';
+export type BadgeType = 'official' | 'community';
 
 interface BadgeConfig {
-  icon: LucideIcon;
+  icon: React.ElementType;
   text: string;
   color: string;
   bg: string;
   border: string;
+  ringColor: string;
 }
 
 export const badgeConfig: Record<BadgeType, BadgeConfig> = {
@@ -16,22 +17,17 @@ export const badgeConfig: Record<BadgeType, BadgeConfig> = {
     icon: Shield,
     text: 'Official',
     color: 'text-blue-700',
-    bg: 'bg-blue-50',
-    border: 'border-blue-200'
+    bg: 'bg-gradient-to-r from-blue-50 to-blue-100',
+    border: 'border-blue-300',
+    ringColor: 'ring-blue-200'
   },
   community: {
-    icon: Award,
+    icon: Users,
     text: 'Community',
     color: 'text-green-700',
-    bg: 'bg-green-50',
-    border: 'border-green-200'
-  },
-  verified: {
-    icon: Star,
-    text: 'Verified',
-    color: 'text-purple-700',
-    bg: 'bg-purple-50',
-    border: 'border-purple-200'
+    bg: 'bg-gradient-to-r from-green-50 to-green-100',
+    border: 'border-green-300',
+    ringColor: 'ring-green-200'
   }
 };
 
@@ -43,7 +39,7 @@ interface BadgeProps {
 
 const sizeClasses = {
   sm: {
-    container: 'px-2 py-1',
+    container: 'px-2.5 py-1',
     icon: 'w-3 h-3',
     text: 'text-xs'
   },
@@ -66,9 +62,9 @@ export const Badge: React.FC<BadgeProps> = ({ type, size = 'md', className = '' 
 
   return (
     <div 
-      className={`inline-flex items-center space-x-1.5 ${sizeClass.container} ${config.bg} ${config.border} border rounded-md ${className}`}
+      className={`inline-flex items-center space-x-1.5 ${sizeClass.container} ${config.bg} ${config.border} border rounded-lg shadow-sm ring-1 ${config.ringColor} transition-all hover:shadow-md ${className}`}
     >
-      <Icon className={`${sizeClass.icon} ${config.color}`} />
+      <Icon className={`${sizeClass.icon} ${config.color}`} strokeWidth={2.5} />
       <span className={`${sizeClass.text} font-semibold ${config.color}`}>
         {config.text}
       </span>
