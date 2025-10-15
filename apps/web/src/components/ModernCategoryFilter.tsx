@@ -91,6 +91,7 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
           onClick={() => {
             onCategoryChange('all');
             if (onBadgeChange) onBadgeChange('all');
+            if (onViewModeChange) onViewModeChange('list');
           }}
           className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
         >
