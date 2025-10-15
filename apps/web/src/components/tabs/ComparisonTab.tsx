@@ -95,7 +95,7 @@ const ComparisonTab: React.FC<ComparisonTabProps> = ({ imageName }) => {
             <thead>
               <tr className="bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
                 <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">Feature</th>
-                <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">OpenHub</th>
+                <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Broadsage</th>
                 <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">Official</th>
               </tr>
             </thead>
