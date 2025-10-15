@@ -92,8 +92,8 @@ const OverviewTab: React.FC<OverviewTabProps> = ({ image }) => {
                 <dd className="font-medium text-gray-900">{image.isFree ? 'Free & Open Source' : 'Commercial'}</dd>
               </div>
               <div className="flex justify-between">
-                <dt className="text-gray-600">FIPS Compliant</dt>
-                <dd className="font-medium text-gray-900">{image.fips ? 'Yes' : 'No'}</dd>
+                <dt className="text-gray-600">Support</dt>
+                <dd className="font-medium text-gray-900">{image.badge === 'official' ? 'Official Support' : 'Community Support'}</dd>
               </div>
             </dl>
           </div>
