@@ -266,11 +266,6 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
                   <Clock className="w-4 h-4 mr-1" />
                   Last changed {image.lastChanged}
                 </span>
-                {image.fips && (
-                  <span className="text-xs font-semibold text-blue-600 px-2 py-1 bg-blue-50 rounded border border-blue-200">
-                    FIPS available
-                  </span>
-                )}
               </div>
             </div>
           </div>
