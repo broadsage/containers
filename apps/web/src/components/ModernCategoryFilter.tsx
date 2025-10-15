@@ -17,7 +17,8 @@ const ModernCategoryFilter: React.FC<ModernCategoryFilterProps> = ({
   selectedCategory, 
   onCategoryChange,
   selectedBadge = 'all',
-  onBadgeChange
+  onBadgeChange,
+  onViewModeChange
 }) => {
   const allCategories = [
     { id: 'all', name: 'All Images' },
