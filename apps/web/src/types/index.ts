@@ -13,7 +13,6 @@ export interface DockerImage {
   latestTag?: string;
   size: string;
   vulnerabilities?: number;
-  fips?: boolean;
   isFree?: boolean;
   free?: boolean;
 }

@@ -6,7 +6,6 @@ export const categories: Category[] = [
   { id: 'ai', name: 'AI', icon: '' },
   { id: 'application', name: 'application', icon: '' },
   { id: 'base', name: 'base', icon: '' },
-  { id: 'fips', name: 'FIPS', icon: '' },
 ];
 
 export const dockerImages: DockerImage[] = [
@@ -21,7 +20,6 @@ export const dockerImages: DockerImage[] = [
     description: 'Node.js JavaScript runtime built on Chrome\'s V8 JavaScript engine',
     downloads: 1250000,
     size: '45MB',
-    fips: false,
     badge: 'official'
   },
   {
@@ -35,7 +33,6 @@ export const dockerImages: DockerImage[] = [
     description: 'High-performance HTTP server and reverse proxy',
     downloads: 2340000,
     size: '25MB',
-    fips: false,
     badge: 'community'
   },
   {
@@ -49,7 +46,6 @@ export const dockerImages: DockerImage[] = [
     description: 'Powerful, open source object-relational database system',
     downloads: 1890000,
     size: '120MB',
-    fips: false,
     badge: 'community'
   },
   {
@@ -63,7 +59,6 @@ export const dockerImages: DockerImage[] = [
     description: 'Python is a programming language that lets you work quickly',
     downloads: 3450000,
     size: '50MB',
-    fips: false,
     badge: 'official'
   },
   {
@@ -77,7 +72,6 @@ export const dockerImages: DockerImage[] = [
     description: 'In-memory data structure store, used as database, cache',
     downloads: 1670000,
     size: '35MB',
-    fips: true,
     badge: 'community'
   },
   {
@@ -91,7 +85,6 @@ export const dockerImages: DockerImage[] = [
     description: 'Go is an open source programming language',
     downloads: 890000,
     size: '340MB',
-    fips: false,
     badge: 'community'
   },
   {
@@ -101,11 +94,10 @@ export const dockerImages: DockerImage[] = [
     lastChanged: '23 hours ago',
     latestTag: '8.4.13',
     isFree: true,
-    category: 'application',
+    category: 'starter',
     description: 'Popular general-purpose scripting language',
-    downloads: 1230000,
-    size: '78MB',
-    fips: false,
+    downloads: 1240000,
+    size: '85MB',
     badge: 'official'
   },
   {
@@ -114,12 +106,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
     lastChanged: '16 hours ago',
     latestTag: '9.1.0',
-    isFree: false,
-    category: 'base',
-    description: 'MySQL is an open-source relational database',
-    downloads: 2120000,
-    size: '145MB',
-    fips: false,
+    isFree: true,
+    category: 'featured',
+    description: 'The world\'s most popular open source database',
+    downloads: 2100000,
+    size: '180MB',
     badge: 'community'
   },
   {
@@ -128,12 +119,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
     lastChanged: '14 hours ago',
     latestTag: '8.0.4',
-    isFree: false,
-    category: 'base',
-    description: 'MongoDB is a source-available cross-platform document-oriented database',
-    downloads: 1780000,
+    isFree: true,
+    category: 'featured',
+    description: 'The most popular NoSQL database',
+    downloads: 1450000,
     size: '420MB',
-    fips: true,
     badge: 'community'
   },
   {
@@ -142,12 +132,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg',
     lastChanged: '20 hours ago',
     latestTag: '2.18.0',
-    isFree: false,
+    isFree: true,
     category: 'ai',
-    description: 'An end-to-end open source platform for machine learning',
-    downloads: 560000,
+    description: 'An end-to-end open source machine learning platform',
+    downloads: 780000,
     size: '1.2GB',
-    fips: false,
     badge: 'community'
   },
   {
@@ -156,12 +145,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
     lastChanged: '22 hours ago',
     latestTag: '2.6.1',
-    isFree: false,
+    isFree: true,
     category: 'ai',
-    description: 'An open source machine learning framework',
-    downloads: 480000,
+    description: 'Tensors and Dynamic neural networks in Python',
+    downloads: 650000,
     size: '1.8GB',
-    fips: false,
     badge: 'community'
   },
   {
@@ -172,10 +160,9 @@ export const dockerImages: DockerImage[] = [
     latestTag: '2.485',
     isFree: true,
     category: 'application',
-    description: 'Open source automation server',
-    downloads: 1340000,
-    size: '450MB',
-    fips: false,
+    description: 'The leading open source automation server',
+    downloads: 920000,
+    size: '320MB',
     badge: 'community'
   },
   {
@@ -184,12 +171,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg',
     lastChanged: '17 hours ago',
     latestTag: '8.17.1',
-    isFree: false,
+    isFree: true,
     category: 'application',
     description: 'Distributed, RESTful search and analytics engine',
-    downloads: 910000,
-    size: '620MB',
-    fips: false,
+    downloads: 1120000,
+    size: '580MB',
     badge: 'community'
   },
   {
@@ -198,12 +184,11 @@ export const dockerImages: DockerImage[] = [
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg',
     lastChanged: '13 hours ago',
     latestTag: '3.9.0',
-    isFree: false,
+    isFree: true,
     category: 'application',
     description: 'Distributed event streaming platform',
-    downloads: 720000,
-    size: '380MB',
-    fips: false,
+    downloads: 840000,
+    size: '95MB',
     badge: 'community'
   },
   {
@@ -214,10 +199,9 @@ export const dockerImages: DockerImage[] = [
     latestTag: '28.0.0',
     isFree: true,
     category: 'base',
-    description: 'Docker container runtime',
-    downloads: 5670000,
-    size: '95MB',
-    fips: false,
+    description: 'Pack, ship and run any application as a lightweight container',
+    downloads: 5200000,
+    size: '65MB',
     badge: 'official'
   },
 ];
