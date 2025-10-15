@@ -17,7 +17,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({ image }) => {
           <div className="flex items-center justify-between mb-2">
             <Download className="w-8 h-8 text-blue-600" />
           </div>
-          <p className="text-3xl font-bold text-gray-900">{(image.downloads / 1000000).toFixed(1)}M+</p>
+          <p className="text-3xl font-bold text-gray-900">{(Number(image.downloads) / 1000000).toFixed(1)}M+</p>
           <p className="text-sm text-gray-600 mt-1">Total Pulls</p>
         </div>
 
