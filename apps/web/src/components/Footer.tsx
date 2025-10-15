@@ -194,7 +194,7 @@ const Footer = () => {
                 Open Source • MIT License
               </span>
               <a 
-                href="https://status.openhub.dev" 
+                href="https://status.broadsage.com" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center"
