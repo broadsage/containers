@@ -21,5 +21,29 @@ export interface DockerImage {
 export interface Category {
   id: string;
   name: string;
-  count: number;
+  count?: number;
+  icon?: string;
+}
+
+export interface Stats {
+  projects: number;
+  versions: number;
+  images: number;
+  builds: number;
+}
+
+export interface Vulnerability {
+  severity: 'critical' | 'high' | 'medium' | 'low';
+  cve: string;
+  package: string;
+  version: string;
+  fixed: string;
+  score: number;
+}
+
+export interface SBOMPackage {
+  name: string;
+  version: string;
+  license: string;
+  type: 'library' | 'application';
 }
