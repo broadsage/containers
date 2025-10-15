@@ -48,7 +48,7 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
     };
 
     Object.entries(stats).forEach(([key, value]) => {
-      animate(key as keyof typeof stats, value);
+      animate(key as keyof typeof stats, value as number);
     });
   }, []);
 
