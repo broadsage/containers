@@ -245,12 +245,14 @@ jobs:
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: build-artifacts
           path: |
-            apps/web/.next/
-            apps/web/public/
+            apps/web/.next/static/
+            apps/web/.next/standalone/
           retention-days: 7
+        continue-on-error: true
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -278,13 +280,17 @@ jobs:
         with:
           context: .
           file: ./apps/web/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=docker,dest=/tmp/image.tar
+          load: true
+      
+      - name: Save Docker image
+        run: |
+          docker save ${{ steps.meta.outputs.tags }} > /tmp/image.tar
       
       - name: Upload Docker image artifact
         uses: actions/upload-artifact@v4
