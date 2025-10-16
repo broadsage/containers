@@ -368,7 +368,10 @@ jobs:
           path: /tmp
       
       - name: Load Docker image
-        run: docker load --input /tmp/image.tar
+        run: |
+          docker load --input /tmp/image.tar
+          echo "Available Docker images after loading:"
+          docker images
       
       - name: Log in to Container Registry
         uses: docker/login-action@v3
@@ -378,9 +381,14 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Push Docker image
+        id: push
         run: |
           # Get all tags for this image
           TAGS=$(docker images --format "table {{.Repository}}:{{.Tag}}" | grep ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} | grep -v "<none>" || true)
+          
+          # Store the first tag for SBOM generation
+          FIRST_TAG=$(echo "$TAGS" | head -n1 | awk '{print $1}' | grep -v "REPOSITORY:TAG" || true)
+          echo "first-tag=$FIRST_TAG" >> $GITHUB_OUTPUT
           
           # Push each tag
           echo "$TAGS" | while read -r tag; do
@@ -393,7 +401,7 @@ jobs:
       - name: Generate SBOM
         uses: anchore/sbom-action@v0
         with:
-          image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          image: ${{ steps.push.outputs.first-tag }}
           format: spdx-json
           output-file: sbom.spdx.json
       
