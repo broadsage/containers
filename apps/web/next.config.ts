@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@repo/ui'],
+  output: 'standalone',
   images: {
     domains: ['cdn.jsdelivr.net'],
   },
