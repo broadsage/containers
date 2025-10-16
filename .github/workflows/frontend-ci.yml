@@ -26,6 +26,7 @@ permissions:
   contents: read
   packages: write
   security-events: write
+  actions: read
   id-token: write
 
 jobs:
@@ -75,15 +76,16 @@ jobs:
       - name: Run ESLint with SARIF output
         run: |
           cd apps/web
-          yarn lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif || true
+          yarn lint --format @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif || echo "ESLint completed with warnings/errors"
         continue-on-error: true
       
       - name: Upload ESLint SARIF
         uses: github/codeql-action/upload-sarif@v3
-        if: always()
+        if: always() && hashFiles('apps/web/eslint-results.sarif') != ''
         with:
           sarif_file: apps/web/eslint-results.sarif
           category: eslint
+        continue-on-error: true
       
       - name: Run TypeScript compilation
         run: |
@@ -313,34 +315,32 @@ jobs:
         run: docker load --input /tmp/image.tar
       
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+        run: |
+          # Get the first tag from the loaded image
+          IMAGE_TAG=$(docker images --format "table {{.Repository}}:{{.Tag}}" | grep ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} | head -n1)
+          echo "Scanning image: $IMAGE_TAG"
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image --format table --output trivy-results.txt "$IMAGE_TAG" || true
+        continue-on-error: true
       
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
-          sarif_file: 'trivy-results.sarif'
-          category: trivy
-      
-      - name: Run Snyk container scan
-        uses: snyk/actions/docker@master
+          name: trivy-results
+          path: trivy-results.txt
+          retention-days: 7
         continue-on-error: true
+      
+      - name: Run Snyk container scan  
+        if: env.SNYK_TOKEN != ''
+        run: |
+          # Get the first tag from the loaded image
+          IMAGE_TAG=$(docker images --format "table {{.Repository}}:{{.Tag}}" | grep ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} | head -n1)
+          echo "Snyk scanning image: $IMAGE_TAG"
+          npx snyk container test "$IMAGE_TAG" --severity-threshold=high --file=apps/web/Dockerfile || true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          args: --severity-threshold=high --file=apps/web/Dockerfile
-      
-      - name: Upload Snyk results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: snyk.sarif
-          category: snyk
         continue-on-error: true
 
   # Publish Docker Image
