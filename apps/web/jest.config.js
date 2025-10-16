@@ -41,6 +41,17 @@ const customJestConfig = {
     '<rootDir>/src/**/*.{test,spec}.{js,jsx,ts,tsx}',
     '<rootDir>/tests/**/*.{test,spec}.{js,jsx,ts,tsx}',
   ],
+  reporters: [
+    'default',
+    ['jest-junit', {
+      outputDirectory: './coverage',
+      outputName: 'junit.xml',
+      classNameTemplate: '{classname}-{title}',
+      titleTemplate: '{classname}-{title}',
+      ancestorSeparator: ' › ',
+      usePathForSuiteName: true,
+    }],
+  ],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
