@@ -328,8 +328,22 @@ jobs:
           # Get the first tag from the loaded image
           IMAGE_TAG=$(docker images --format "table {{.Repository}}:{{.Tag}}" | grep ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} | head -n1)
           echo "Scanning image: $IMAGE_TAG"
+          
+          # Create output directory
+          mkdir -p ./trivy-output
+          
+          # Run Trivy with JSON format for detailed results with full paths
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-            aquasec/trivy:latest image --format table --output trivy-results.txt "$IMAGE_TAG" || true
+            -v "$(pwd)/trivy-output:/output" \
+            aquasec/trivy:latest image --format json --output /output/trivy-results.json "$IMAGE_TAG" || true
+          
+          # Also run with table format for human-readable output
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$(pwd)/trivy-output:/output" \
+            aquasec/trivy:latest image --format table --output /output/trivy-results.txt "$IMAGE_TAG" || true
+          
+          # Verify files were created
+          ls -la ./trivy-output/
         continue-on-error: true
       
       - name: Upload Trivy scan results
@@ -337,7 +351,9 @@ jobs:
         if: always()
         with:
           name: trivy-results
-          path: trivy-results.txt
+          path: |
+            trivy-output/trivy-results.json
+            trivy-output/trivy-results.txt
           retention-days: 7
         continue-on-error: true
       
