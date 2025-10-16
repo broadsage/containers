@@ -290,7 +290,11 @@ jobs:
       
       - name: Save Docker image
         run: |
-          docker save ${{ steps.meta.outputs.tags }} > /tmp/image.tar
+          # Get the first tag from the metadata output
+          TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
+          echo "Saving Docker image: $TAG"
+          docker save "$TAG" > /tmp/image.tar
+          ls -la /tmp/image.tar
       
       - name: Upload Docker image artifact
         uses: actions/upload-artifact@v4
