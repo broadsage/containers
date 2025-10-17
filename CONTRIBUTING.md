@@ -45,14 +45,50 @@ yarn type-check
 
 Follow conventional commits:
 
+### Commit Messages
+
+We use [Conventional Commits](https://conventionalcommits.org/) for automated release management. Please follow this format:
+
 ```
-feat: add new feature
-fix: resolve bug
-docs: update documentation
-style: format code
-refactor: restructure code
-test: add tests
-chore: update dependencies
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+#### Types
+
+- **feat**: A new feature (triggers minor release)
+- **fix**: A bug fix (triggers patch release)
+- **docs**: Documentation only changes (triggers patch release)
+- **style**: Changes that do not affect the meaning of the code
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **perf**: A code change that improves performance (triggers patch release)
+- **test**: Adding missing tests or correcting existing tests
+- **build**: Changes that affect the build system or external dependencies (triggers patch release)
+- **ci**: Changes to our CI configuration files and scripts (triggers patch release)
+- **chore**: Other changes that don't modify src or test files
+
+#### Breaking Changes
+
+Add `BREAKING CHANGE:` in the footer or `!` after the type to trigger a major release:
+
+```
+feat!: remove deprecated API endpoint
+
+BREAKING CHANGE: The /api/v1/old-endpoint has been removed. Use /api/v2/new-endpoint instead.
+```
+
+#### Examples
+
+```
+feat(web): add image vulnerability dashboard
+fix(api): resolve memory leak in image processing
+docs: update API documentation for new endpoints
+refactor(core): optimize database queries
+perf(web): improve page load times by 30%
+ci: add semantic-release workflow
 ```
 
 ### Testing

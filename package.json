@@ -12,14 +12,24 @@
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "clean": "turbo run clean",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "release": "semantic-release",
+    "release:dry-run": "semantic-release --dry-run",
+    "prepare": "husky"
   },
   "dependencies": {
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.3.5",
+    "husky": "^9.1.6",
     "prettier": "^3.2.5",
+    "semantic-release": "^24.2.0",
     "turbo": "^2.3.3"
   },
   "packageManager": "yarn@1.22.22",
