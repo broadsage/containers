@@ -92,9 +92,33 @@ cd apps/web && yarn build
 - **Web**: http://localhost:3000
 - **API**: http://localhost:8001
 
+## � Release Strategy
+
+This project uses **automated semantic versioning** with a simplified single-branch workflow:
+
+### Release Channels
+
+| Channel | Purpose | Trigger | Docker Tag |
+|---------|---------|---------|------------|
+| **Stable** | Production releases | Merge to `main` | `latest`, `v1.2.3` |
+| **Beta** | Release candidates | Manual workflow | `beta`, `v1.2.3-beta.1` |
+| **Alpha** | Development builds | Feature branches | `alpha`, `v1.2.3-alpha.1` |
+
+### Contributing
+
+```bash
+# Simple 3-step process:
+git checkout -b feature/awesome-feature
+git commit -m "feat: add awesome feature"  # Conventional commits
+# Create PR to main → Automatic release
+```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
+
 ## 📖 Documentation
 
 See individual package READMEs for detailed documentation:
+
 - [Web App](./apps/web/README.md)
 - [API](./apps/api/README.md)
 - [UI Package](./packages/ui/README.md)

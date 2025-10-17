@@ -1,195 +1,91 @@
-# Contributing Guide
+# Contributing to Container Directory
 
-Thank you for considering contributing to Container Directory!
+Thank you for your interest in contributing! This project uses a **simplified single-branch workflow** that's easy for contributors and follows industry best practices.
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-1. **Fork the repository**
-2. **Clone your fork**
-   ```bash
-   git clone https://github.com/your-username/container-directory.git
-   cd container-directory
-   ```
-3. **Install dependencies**
-   ```bash
-   yarn install
-   cd apps/api && pip install -r requirements.txt
-   ```
-4. **Create a branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-## 📋 Development Workflow
-
-### Code Style
-
-We use ESLint and TypeScript for code quality:
+### Simple 3-Step Process
 
 ```bash
-# Lint all code
-yarn lint
+# 1. Create feature branch from main
+git checkout main && git pull origin main
+git checkout -b feature/your-feature-name
 
-# Type check
-yarn type-check
+# 2. Make changes with conventional commits
+git commit -m "feat: add your awesome feature"
+
+# 3. Push and create PR to main
+git push origin feature/your-feature-name
 ```
 
-### Making Changes
+That's it! No complex branching to remember.
 
-1. Make your changes in a feature branch
-2. Test your changes thoroughly
-3. Ensure all lints pass
-4. Write clear commit messages
+## 📝 Commit Message Format
 
-### Commit Messages
+We use [Conventional Commits](https://conventionalcommits.org/) for automated versioning:
 
-Follow conventional commits:
+- `feat:` → Minor version bump (new features)
+- `fix:` → Patch version bump (bug fixes)  
+- `docs:` → Patch version bump (documentation)
+- `perf:` → Patch version bump (performance)
+- `style:` → No version bump (formatting)
+- `refactor:` → No version bump (code restructuring)
+- `test:` → No version bump (adding tests)
 
-### Commit Messages
+### Breaking Changes
 
-We use [Conventional Commits](https://conventionalcommits.org/) for automated release management. Please follow this format:
-
-```
-<type>[optional scope]: <description>
-
-[optional body]
-
-[optional footer(s)]
-```
-
-#### Types
-
-- **feat**: A new feature (triggers minor release)
-- **fix**: A bug fix (triggers patch release)
-- **docs**: Documentation only changes (triggers patch release)
-- **style**: Changes that do not affect the meaning of the code
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance (triggers patch release)
-- **test**: Adding missing tests or correcting existing tests
-- **build**: Changes that affect the build system or external dependencies (triggers patch release)
-- **ci**: Changes to our CI configuration files and scripts (triggers patch release)
-- **chore**: Other changes that don't modify src or test files
-
-#### Breaking Changes
-
-Add `BREAKING CHANGE:` in the footer or `!` after the type to trigger a major release:
-
-```
-feat!: remove deprecated API endpoint
-
-BREAKING CHANGE: The /api/v1/old-endpoint has been removed. Use /api/v2/new-endpoint instead.
-```
-
-#### Examples
-
-```
-feat(web): add image vulnerability dashboard
-fix(api): resolve memory leak in image processing
-docs: update API documentation for new endpoints
-refactor(core): optimize database queries
-perf(web): improve page load times by 30%
-ci: add semantic-release workflow
-```
-
-### Testing
+Add `!` after type or `BREAKING CHANGE:` in body:
 
 ```bash
+git commit -m "feat!: redesign API structure
+
+BREAKING CHANGE: API endpoints have changed"
+```
+
+## 🔄 Automated Release Process
+
+- **Every merge to main** → Automatic release (if needed)
+- **Version calculation** → Based on your commit messages
+- **Release notes** → Generated from commits
+- **Docker images** → Built and published automatically
+- **GitHub releases** → Created with changelog
+
+## 🧪 Development Setup
+
+```bash
+# Install dependencies
+yarn install
+
+# Start development
+yarn dev
+
 # Run tests
 yarn test
 
-# Test specific app
-cd apps/web && yarn test
+# Check code quality
+yarn lint && yarn type-check
 ```
 
-## 📝 Pull Request Process
+## � Pull Request Guidelines
 
-1. **Update documentation** if needed
-2. **Ensure all checks pass**
-3. **Write a clear PR description**
-   - What changes were made?
-   - Why were they made?
-   - How to test?
-4. **Link related issues**
-5. **Request review**
+1. **Branch from main** (always up-to-date)
+2. **Follow conventional commits** (for automated versioning)
+3. **Add tests** for new features
+4. **Update docs** if needed
+5. **Ensure CI passes** (tests, linting, type-checking)
 
-## 🎯 Areas to Contribute
+## 🆘 Getting Help
 
-- **Features**: New functionality
-- **Bug fixes**: Resolve issues
-- **Documentation**: Improve docs
-- **Performance**: Optimize code
-- **Tests**: Add test coverage
-- **UI/UX**: Enhance design
+- **Issues**: [GitHub Issues](https://github.com/broadsage/containers/issues)
+- **Questions**: [GitHub Discussions](https://github.com/broadsage/containers/discussions)
+- **Documentation**: See `/docs` folder
 
-## 📁 Project Structure
+## ✨ Why This Workflow?
 
-```
-apps/
-├── web/          # Next.js frontend
-└── api/          # FastAPI backend
+- **Simple**: One target branch (main)
+- **Fast**: No branching complexity
+- **Automated**: Releases happen automatically  
+- **Safe**: Comprehensive CI/CD checks
+- **Industry Standard**: GitHub Flow best practices
 
-packages/
-├── ui/           # Shared components
-├── typescript-config/
-├── eslint-config/
-└── tailwind-config/
-```
-
-## 🔧 Development Guidelines
-
-### TypeScript
-
-- Use strict mode
-- Define proper types
-- Avoid `any` type
-- Use type inference when possible
-
-### React
-
-- Use functional components
-- Use hooks for state management
-- Keep components small and focused
-- Extract reusable logic to hooks
-
-### Styling
-
-- Use Tailwind CSS utilities
-- Follow existing design patterns
-- Ensure responsive design
-- Test across browsers
-
-### API
-
-- Follow REST conventions
-- Validate input with Pydantic
-- Handle errors properly
-- Document endpoints
-
-## 🐛 Reporting Bugs
-
-Create an issue with:
-- Clear title
-- Steps to reproduce
-- Expected vs actual behavior
-- Screenshots if applicable
-- Environment details
-
-## 💡 Suggesting Features
-
-Create an issue with:
-- Clear description
-- Use case/motivation
-- Proposed solution
-- Alternative solutions
-
-## ❓ Questions
-
-- Check existing documentation
-- Search existing issues
-- Create a new issue with the "question" label
-
-## 📄 License
-
-By contributing, you agree that your contributions will be licensed under the project's license.
-
-Thank you for contributing! 🎉
+Ready to contribute? [Fork the repo](https://github.com/broadsage/containers/fork) and start coding! 🚀

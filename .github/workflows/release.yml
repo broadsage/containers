@@ -4,8 +4,19 @@ on:
   push:
     branches:
       - main
-      - nextjs
-      - develop
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+        - auto
+        - beta
+        - patch
+        - minor
+        - major
 
 env:
   NODE_VERSION: '20'
@@ -73,7 +84,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn release
+        run: |
+          if [[ "${{ github.event.inputs.release_type }}" == "beta" ]]; then
+            echo "Creating beta release..."
+            git checkout -b beta
+            yarn release
+          else
+            yarn release
+          fi
 
   docker-release:
     name: Docker Release
@@ -120,12 +138,6 @@ jobs:
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "channel=latest" >> $GITHUB_OUTPUT
             echo "prerelease=false" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.ref }}" == "refs/heads/nextjs" ]]; then
-            echo "channel=beta" >> $GITHUB_OUTPUT
-            echo "prerelease=true" >> $GITHUB_OUTPUT
-          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-            echo "channel=alpha" >> $GITHUB_OUTPUT
-            echo "prerelease=true" >> $GITHUB_OUTPUT
           else
             echo "channel=edge" >> $GITHUB_OUTPUT
             echo "prerelease=true" >> $GITHUB_OUTPUT
