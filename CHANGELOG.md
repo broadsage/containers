@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.3.1 (2025-10-17)</small>
+
+* fix: node version changed ([0605f7c](https://github.com/broadsage/containers/commit/0605f7c))
+
 ## 1.3.0 (2025-10-17)
 
 * feat: add gen script for easier package generation ([cc77624](https://github.com/broadsage/containers/commit/cc77624))
