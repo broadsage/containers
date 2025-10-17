@@ -1,0 +1,206 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+      - nextjs
+      - develop
+
+env:
+  NODE_VERSION: '20'
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    
+    outputs:
+      new-release-published: ${{ steps.semantic-release.outputs.new-release-published }}
+      new-release-version: ${{ steps.semantic-release.outputs.new-release-version }}
+      new-release-major-version: ${{ steps.semantic-release.outputs.new-release-major-version }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      - name: Lint
+        run: yarn turbo lint
+      
+      - name: Type check
+        run: yarn turbo type-check
+      
+      - name: Test
+        run: |
+          cd apps/web
+          yarn test --coverage --watchAll=false --maxWorkers=2
+        env:
+          CI: true
+      
+      - name: Security audit
+        run: |
+          yarn audit --level moderate --groups dependencies
+        continue-on-error: true
+      
+      - name: Build
+        run: yarn turbo build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+      
+      - name: Release
+        id: semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn release
+
+  docker-release:
+    name: Docker Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: release
+    if: needs.release.outputs.new-release-published == 'true'
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
+      
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      
+      - name: Build application
+        run: yarn turbo build --filter=web
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Determine release channel
+        id: channel
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "channel=latest" >> $GITHUB_OUTPUT
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/nextjs" ]]; then
+            echo "channel=beta" >> $GITHUB_OUTPUT
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo "channel=alpha" >> $GITHUB_OUTPUT
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          else
+            echo "channel=edge" >> $GITHUB_OUTPUT
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/web
+          tags: |
+            type=semver,pattern={{version}},value=${{ needs.release.outputs.new-release-version }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ needs.release.outputs.new-release-version }}
+            type=semver,pattern={{major}},value=${{ needs.release.outputs.new-release-version }},enable={{is_default_branch}}
+            type=raw,value=${{ steps.channel.outputs.channel }}
+            type=sha,prefix={{branch}}-
+          labels: |
+            org.opencontainers.image.title=Container Directory Web
+            org.opencontainers.image.description=Next.js frontend for container directory
+            org.opencontainers.image.vendor=broadsage
+            org.opencontainers.image.version=${{ needs.release.outputs.new-release-version }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
+      
+      - name: Build and push Docker image
+        id: docker-build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/web/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ghcr.io/${{ github.repository }}/web@${{ steps.docker-build.outputs.digest }}
+          format: spdx-json
+          output-file: sbom.spdx.json
+      
+      - name: Upload SBOM to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.release.outputs.new-release-version }}
+          files: sbom.spdx.json
+          prerelease: ${{ steps.channel.outputs.prerelease }}
+          make_latest: ${{ github.ref == 'refs/heads/main' }}
+
+  summary:
+    name: Release Summary
+    runs-on: ubuntu-latest
+    needs: [release, docker-release]
+    if: always()
+    
+    steps:
+      - name: Release Summary
+        run: |
+          echo "## 🚀 Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Release Job | ${{ needs.release.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          
+          if [[ "${{ needs.release.outputs.new-release-published }}" == "true" ]]; then
+            echo "| New Release | ✅ Published v${{ needs.release.outputs.new-release-version }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Docker Build | ${{ needs.docker-release.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 📦 Artifacts" >> $GITHUB_STEP_SUMMARY
+            echo "- **Git Tag**: v${{ needs.release.outputs.new-release-version }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Docker Image**: ghcr.io/${{ github.repository }}/web:${{ needs.release.outputs.new-release-version }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Release Notes**: [View Release](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release.outputs.new-release-version }})" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "| New Release | ⏭️ No release (no relevant changes) |" >> $GITHUB_STEP_SUMMARY
+          fi

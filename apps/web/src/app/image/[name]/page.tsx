@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import TabNavigation from '../../../components/TabNavigation';
@@ -241,9 +242,11 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
             {/* Logo */}
             <div className="flex-shrink-0">
               <div className="w-16 h-16 bg-gray-50 rounded-lg p-3 border border-gray-200">
-                <img 
+                <Image 
                   src={image.logo} 
                   alt={image.name} 
+                  width={40}
+                  height={40}
                   className="w-full h-full object-contain"
                 />
               </div>

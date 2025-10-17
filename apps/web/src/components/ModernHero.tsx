@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Search } from 'lucide-react';
 import { stats, dockerImages } from '../data/mockData';
 
@@ -125,9 +126,11 @@ const ModernHero: React.FC<ModernHeroProps> = ({ onSearch }) => {
                 className="flex-shrink-0 mx-6 flex items-center justify-center"
                 style={{ width: '120px', height: '80px' }}
               >
-                <img
+                <Image
                   src={item.logo}
                   alt={item.name}
+                  width={64}
+                  height={64}
                   className="w-16 h-16 object-contain opacity-40 hover:opacity-100 transition-opacity"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

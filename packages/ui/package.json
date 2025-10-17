@@ -5,7 +5,7 @@
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
     "type-check": "tsc --noEmit"
   },
   "peerDependencies": {

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { DockerImage } from '../types';
 import { Badge } from './ui/Badge';
 import { handleImageError } from '../utils/image.utils';
@@ -29,9 +30,11 @@ const CleanImageCard: React.FC<CleanImageCardProps> = ({ image }) => {
               
               {/* Logo container with white background */}
               <div className="relative w-10 h-10 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center justify-center">
-                <img 
+                <Image 
                   src={image.logo} 
                   alt={image.name} 
+                  width={24}
+                  height={24}
                   className="w-6 h-6 object-contain"
                   onError={handleImageError}
                 />
