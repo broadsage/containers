@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.2.2 (2025-10-17)</small>
+
+* fix: refactored readme.md file ([b9c9f18](https://github.com/broadsage/containers/commit/b9c9f18))
+
 ## <small>1.2.1 (2025-10-17)</small>
 
 * docs: comprehensive README.md refactor with modern structure and enhanced documentation ([0451e9c](https://github.com/broadsage/containers/commit/0451e9c))
