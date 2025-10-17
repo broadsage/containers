@@ -17,7 +17,7 @@ Next.js 15 application for browsing secure container images.
 
 ## 📁 Project Structure
 
-```
+```text
 src/
 ├── app/              # Next.js App Router pages
 │   ├── layout.tsx    # Root layout with metadata
@@ -84,6 +84,7 @@ cp .env.example .env.local
 ```
 
 Required variables:
+
 - `NEXT_PUBLIC_BACKEND_URL` - Backend API URL
 - `NEXT_PUBLIC_APP_URL` - Frontend app URL
 - `NEXT_PUBLIC_ENABLE_ANALYTICS` - Enable analytics (true/false)
@@ -91,6 +92,7 @@ Required variables:
 ## 📝 Development
 
 ### Start Development Server
+
 ```bash
 python -m app.main
 # Or
@@ -98,11 +100,13 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
 ```
 
 ### Seed Database
+
 ```bash
 python scripts/seed_data.py
 ```
 
 ### Run Tests
+
 ```bash
 pytest
 ```
@@ -128,16 +132,19 @@ pytest
 ## 📦 Dependencies
 
 ### Core
+
 - Next.js 15
 - React 19
 - TypeScript 5.8
 
 ### UI
+
 - Tailwind CSS
 - Radix UI
 - Lucide React (icons)
 
 ### Utilities
+
 - Axios (HTTP client)
 - clsx & tailwind-merge (className utilities)
 - React Hook Form (forms)
