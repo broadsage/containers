@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.2.3 (2025-10-17)</small>
+
+* chore: add @turbo/gen dependency and configure monorepo generators ([d7ccc10](https://github.com/broadsage/containers/commit/d7ccc10))
+* fix: add clean scripts to all packages to enable yarn clean functionality ([8efdfcd](https://github.com/broadsage/containers/commit/8efdfcd))
+
 ## <small>1.2.2 (2025-10-17)</small>
 
 * fix: refactored readme.md file ([b9c9f18](https://github.com/broadsage/containers/commit/b9c9f18))
