@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.0.0-beta.2 (2025-10-17)
+
+* fix(ci): resolve issues in release workflow ([b153b97](https://github.com/broadsage/containers/commit/b153b97))
+
 ## 1.0.0-beta.1 (2025-10-17)
 
 * fix: Configure ESLint for @repo/ui package in Turborepo ([ddfa691](https://github.com/broadsage/containers/commit/ddfa691))
