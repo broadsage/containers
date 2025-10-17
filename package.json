@@ -11,7 +11,7 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
-    "clean": "turbo run clean",
+    "clean": "turbo run clean && rm -rf node_modules/.cache .turbo",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "semantic-release",
     "release:dry-run": "semantic-release --dry-run",

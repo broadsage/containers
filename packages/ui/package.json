@@ -6,7 +6,8 @@
   "types": "./src/index.tsx",
   "scripts": {
     "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules/.cache"
   },
   "peerDependencies": {
     "react": "^19.0.0",
