@@ -20,6 +20,13 @@ import { dockerImages } from '../../../data/mockData';
 import { ArrowLeft, Copy, Check, Download, Clock } from 'lucide-react';
 import { Badge } from '../../../components/ui/Badge';
 
+// Generate static params for all images in mock data
+export async function generateStaticParams() {
+  return dockerImages.map((image) => ({
+    name: image.name,
+  }));
+}
+
 export default function ImageDetailPage({ params }: { params: Promise<{ name: string }> }) {
   const router = useRouter();
   const resolvedParams = use(params);

@@ -66,39 +66,37 @@ This project uses GitHub Actions for continuous integration and deployment. Work
 - **Tools**: npm audit
 - **Purpose**: Detect vulnerabilities in dependencies
 
-### 3. Docker CI (`docker-ci.yml`)
+### 3. GitHub Pages Deployment (`github-pages.yml`)
 
 **Triggers:**
 - Push to main branch
-- Pull requests to main
-- Changes in `apps/web/`, `packages/`, Docker files
-- Called by other workflows (workflow_call)
+- Changes in `apps/web/`, `packages/`, or workflow file
+- Manual workflow dispatch
 
 **Features:**
-- **Multi-platform builds**: linux/amd64, linux/arm64 (configurable)
-- **Build artifact reuse**: Uses artifacts from frontend-ci when available
-- **Enhanced caching**: GitHub Actions cache with platform-specific scopes
-- **Security scanning**: Trivy vulnerability scanner, SBOM generation
-- **Smart platform selection**: Single platform for PRs, multi-platform for releases
+- **Static site generation**: Next.js static export optimized for GitHub Pages
+- **Automatic deployment**: Direct deployment to GitHub Pages environment
+- **Build optimization**: Turbo build system with dependency caching
+- **Pages configuration**: Automatic basePath injection and image optimization
 
 **Jobs:**
 
-#### Docker Build
-- **Platforms**: Configurable (default: linux/amd64 for PRs, multi-platform for main)
-- **Timeout**: 30 minutes
+#### Build
+- **Purpose**: Build Next.js application for static export
+- **Timeout**: 15 minutes
 - **Steps**:
-  1. Setup Docker Buildx with optimized driver
-  2. Download build artifacts from frontend-ci (if available)
-  3. Build and push Docker images with enhanced caching
-  4. Generate and upload SBOM
-  5. Run Trivy security scan
+  1. Setup Node.js environment with Yarn caching
+  2. Configure GitHub Pages settings
+  3. Install dependencies and build application
+  4. Upload static files as Pages artifact
 
-#### Docker Test
-- **Purpose**: Smoke test the built Docker image
+#### Deploy
+- **Purpose**: Deploy built static files to GitHub Pages
+- **Environment**: github-pages
+- **Timeout**: 10 minutes
 - **Steps**:
-  1. Pull the built image
-  2. Run container and test health endpoint
-  3. Cleanup
+  1. Deploy artifact to GitHub Pages
+  2. Return deployment URL
 
 ### 4. Release (`release.yml`)
 
@@ -122,11 +120,7 @@ This project uses GitHub Actions for continuous integration and deployment. Work
   3. Create Git tag and GitHub release
   4. Output release information for downstream jobs
 
-#### Docker Release
-- **Dependency**: Calls docker-ci.yml workflow
-- **Platforms**: linux/amd64, linux/arm64
-- **Tags**: Semantic version tags (v1.2.3, v1.2, v1, latest)
-- **Security**: SBOM generation and attestation
+
 
 ### 5. Integration Tests (`integration-tests.yml`)
 
@@ -293,48 +287,51 @@ Test results and coverage reports are uploaded as artifacts:
 
 ## Architecture Benefits
 
-### Separate Workflow Design
+### GitHub Pages Deployment Architecture
 
-The project uses a **separate workflow architecture** for optimal performance:
+The project uses **GitHub Pages** for hosting the static Next.js application:
 
 #### Benefits:
-1. **Parallel Execution**: Frontend CI and Docker builds can run simultaneously
-2. **Independent Failure Domains**: Docker build failures don't affect code quality checks
-3. **Resource Optimization**: Better CI resource utilization and faster feedback
-4. **Maintainability**: Clearer separation of concerns and easier workflow management
-5. **Scalability**: Each workflow can be optimized independently
+1. **Static Site Generation**: Fast, secure, and reliable hosting
+2. **Automatic Deployment**: Direct integration with GitHub Actions
+3. **Global CDN**: GitHub's global content delivery network
+4. **Custom Domain Support**: Can be configured with custom domains
+5. **Zero Server Management**: No infrastructure to maintain
 
 #### Performance Optimizations:
-- **Smart Platform Building**: Single platform (linux/amd64) for PRs, multi-platform for releases
-- **Build Artifact Reuse**: Docker workflow reuses frontend build artifacts when available
-- **Enhanced Caching**: Platform-specific Docker layer cache, Turbo cache, and dependency caching
-- **Optimized Context**: Comprehensive .dockerignore reduces build context size
-- **Timeout Management**: Appropriate timeouts (30min for Docker, 10-15min for others)
+- **Static Export**: Next.js optimized for static file generation
+- **Build Caching**: Turbo cache and dependency caching for faster builds
+- **Image Optimization**: Unoptimized images for static export compatibility
+- **Trailing Slashes**: Proper URL structure for static hosting
 
 #### Workflow Orchestration:
 ```
+Main Branch Push:
+├── frontend-ci.yml (code quality & testing)
+└── github-pages.yml (build & deploy)
+
 Pull Request Flow:
-├── frontend-ci.yml (parallel)
-├── docker-ci.yml (uses artifacts from frontend-ci)
-└── integration-tests.yml
+├── frontend-ci.yml (validation)
+└── integration-tests.yml (if applicable)
 
 Release Flow:
-├── release.yml
-└── docker-ci.yml (called with release parameters)
+├── release.yml (semantic versioning)
+└── github-pages.yml (triggered by main push)
 ```
 
-### Docker Build Strategy
+### GitHub Pages Configuration
 
-#### Multi-Platform Considerations:
-- **Development**: linux/amd64 only for faster feedback
-- **Production**: linux/amd64,linux/arm64 for broad compatibility
-- **Performance**: ~2-3x faster single-platform builds for PRs
+#### Static Site Generation:
+- **Output**: Static HTML/CSS/JS files
+- **Routing**: File-based routing with trailing slashes
+- **Images**: Unoptimized for static compatibility
+- **API**: Client-side API calls to external services
 
-#### Caching Strategy:
-- **Layer Cache**: GitHub Actions cache with platform-specific scopes
-- **Build Context**: Optimized with comprehensive .dockerignore
-- **Dependency Cache**: Yarn/npm cache reused across jobs
-- **Artifact Reuse**: Frontend builds shared between workflows when available
+#### Deployment Strategy:
+- **Build Environment**: GitHub Actions runners
+- **Artifact Upload**: Pages-specific artifact format
+- **Deployment**: Automatic to github-pages environment
+- **URL**: `https://<username>.github.io/<repository>/`
 - Review Codecov status
 
 ## Best Practices

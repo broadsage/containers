@@ -3,20 +3,16 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@repo/ui'],
-  output: 'standalone',
+  output: 'export',
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
+  distDir: 'out',
   images: {
+    unoptimized: true,
     domains: ['cdn.jsdelivr.net'],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: process.env.NEXT_PUBLIC_BACKEND_URL 
-          ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/:path*`
-          : 'http://localhost:8001/api/:path*',
-      },
-    ];
-  },
+  // Remove rewrites for static export as they're not supported
+  // API calls should be made to external services or handled client-side
 };
 
 export default nextConfig;
