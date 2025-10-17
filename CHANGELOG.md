@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.0.1 (2025-10-17)</small>
+
+* docs: add migration summary and cleanup documentation ([64f02d0](https://github.com/broadsage/containers/commit/64f02d0))
+
 ## 1.0.0 (2025-10-17)
 
 * feat: add semantic-release for automated release management ([8fa2875](https://github.com/broadsage/containers/commit/8fa2875))
