@@ -42,25 +42,93 @@ This project uses GitHub Actions for continuous integration and deployment. Work
 
 **Jobs:**
 
-#### Lint and Test
-- **Node versions**: 18.x, 20.x
+#### Lint and Type Check
+- **Node version**: 20.x
 - **Steps**:
-  1. ESLint checks
+  1. ESLint checks with SARIF output
   2. TypeScript type checking
-  3. Unit tests with coverage (Jest)
-  4. Build application
-  5. Upload coverage to Codecov
+  3. Upload ESLint results to Security tab
 
-#### Security Scan
-- **Tools**: npm audit, Snyk
-- **Purpose**: Detect vulnerabilities in dependencies
+#### Test
+- **Strategy**: Matrix for unit and integration tests
+- **Steps**:
+  1. Unit tests with coverage (Jest)
+  2. Integration tests
+  3. Upload coverage to Codecov
+  4. Upload test results as artifacts
 
 #### Build
-- **Action**: Build Docker image
-- **Cache**: GitHub Actions cache
-- **Validates**: Dockerfile and build process
+- **Action**: Build Next.js application
+- **Output**: Upload build artifacts for Docker workflow
+- **Cache**: Yarn dependencies and Turbo cache
 
-### 3. Integration Tests (`integration-tests.yml`)
+#### Security Scan
+- **Tools**: npm audit
+- **Purpose**: Detect vulnerabilities in dependencies
+
+### 3. Docker CI (`docker-ci.yml`)
+
+**Triggers:**
+- Push to main branch
+- Pull requests to main
+- Changes in `apps/web/`, `packages/`, Docker files
+- Called by other workflows (workflow_call)
+
+**Features:**
+- **Multi-platform builds**: linux/amd64, linux/arm64 (configurable)
+- **Build artifact reuse**: Uses artifacts from frontend-ci when available
+- **Enhanced caching**: GitHub Actions cache with platform-specific scopes
+- **Security scanning**: Trivy vulnerability scanner, SBOM generation
+- **Smart platform selection**: Single platform for PRs, multi-platform for releases
+
+**Jobs:**
+
+#### Docker Build
+- **Platforms**: Configurable (default: linux/amd64 for PRs, multi-platform for main)
+- **Timeout**: 30 minutes
+- **Steps**:
+  1. Setup Docker Buildx with optimized driver
+  2. Download build artifacts from frontend-ci (if available)
+  3. Build and push Docker images with enhanced caching
+  4. Generate and upload SBOM
+  5. Run Trivy security scan
+
+#### Docker Test
+- **Purpose**: Smoke test the built Docker image
+- **Steps**:
+  1. Pull the built image
+  2. Run container and test health endpoint
+  3. Cleanup
+
+### 4. Release (`release.yml`)
+
+**Triggers:**
+- Push to main branch
+- Manual workflow dispatch with release type selection
+
+**Features:**
+- **Semantic versioning**: Automated version bumps based on conventional commits
+- **Release notes**: Auto-generated from commit messages
+- **Docker integration**: Calls docker-ci workflow for multi-platform builds
+- **Git tagging**: Automatic tag creation
+
+**Jobs:**
+
+#### Release
+- **Tool**: semantic-release
+- **Actions**:
+  1. Analyze commits for version bump
+  2. Generate release notes
+  3. Create Git tag and GitHub release
+  4. Output release information for downstream jobs
+
+#### Docker Release
+- **Dependency**: Calls docker-ci.yml workflow
+- **Platforms**: linux/amd64, linux/arm64
+- **Tags**: Semantic version tags (v1.2.3, v1.2, v1, latest)
+- **Security**: SBOM generation and attestation
+
+### 5. Integration Tests (`integration-tests.yml`)
 
 **Triggers:**
 - Push to main/develop branches
@@ -222,6 +290,51 @@ Test results and coverage reports are uploaded as artifacts:
 #### Coverage Upload Fails
 - Check Codecov token
 - Verify coverage file path
+
+## Architecture Benefits
+
+### Separate Workflow Design
+
+The project uses a **separate workflow architecture** for optimal performance:
+
+#### Benefits:
+1. **Parallel Execution**: Frontend CI and Docker builds can run simultaneously
+2. **Independent Failure Domains**: Docker build failures don't affect code quality checks
+3. **Resource Optimization**: Better CI resource utilization and faster feedback
+4. **Maintainability**: Clearer separation of concerns and easier workflow management
+5. **Scalability**: Each workflow can be optimized independently
+
+#### Performance Optimizations:
+- **Smart Platform Building**: Single platform (linux/amd64) for PRs, multi-platform for releases
+- **Build Artifact Reuse**: Docker workflow reuses frontend build artifacts when available
+- **Enhanced Caching**: Platform-specific Docker layer cache, Turbo cache, and dependency caching
+- **Optimized Context**: Comprehensive .dockerignore reduces build context size
+- **Timeout Management**: Appropriate timeouts (30min for Docker, 10-15min for others)
+
+#### Workflow Orchestration:
+```
+Pull Request Flow:
+├── frontend-ci.yml (parallel)
+├── docker-ci.yml (uses artifacts from frontend-ci)
+└── integration-tests.yml
+
+Release Flow:
+├── release.yml
+└── docker-ci.yml (called with release parameters)
+```
+
+### Docker Build Strategy
+
+#### Multi-Platform Considerations:
+- **Development**: linux/amd64 only for faster feedback
+- **Production**: linux/amd64,linux/arm64 for broad compatibility
+- **Performance**: ~2-3x faster single-platform builds for PRs
+
+#### Caching Strategy:
+- **Layer Cache**: GitHub Actions cache with platform-specific scopes
+- **Build Context**: Optimized with comprehensive .dockerignore
+- **Dependency Cache**: Yarn/npm cache reused across jobs
+- **Artifact Reuse**: Frontend builds shared between workflows when available
 - Review Codecov status
 
 ## Best Practices

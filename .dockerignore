@@ -46,19 +46,47 @@ dist
 
 # Testing
 test-results
+tests
+coverage
+.nyc_output
+junit.xml
 *.test.js
+*.test.ts
+*.test.tsx
 *.spec.js
+*.spec.ts
+*.spec.tsx
 
 # Documentation
 *.md
 docs
+!apps/*/README.md
 
 # CI/CD
 .github
 .gitlab-ci.yml
 .travis.yml
+.circleci
 
 # Docker
 Dockerfile*
 docker-compose*.yml
 .dockerignore
+
+# Build artifacts (will be copied from CI artifacts when available)
+apps/*/.next/
+packages/*/dist/
+.turbo/
+
+# Logs and temporary files
+logs
+*.log
+tmp
+temp
+
+# Cache directories
+.cache
+.parcel-cache
+.eslintcache
+.yarn/cache
+.yarn/unplugged
