@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.3.0 (2025-10-17)
+
+* feat: add gen script for easier package generation ([cc77624](https://github.com/broadsage/containers/commit/cc77624))
+* feat: add Snyk security scanning workflow for dependencies and Docker images ([1e0579f](https://github.com/broadsage/containers/commit/1e0579f))
+
 ## <small>1.2.3 (2025-10-17)</small>
 
 * chore: add @turbo/gen dependency and configure monorepo generators ([d7ccc10](https://github.com/broadsage/containers/commit/d7ccc10))
