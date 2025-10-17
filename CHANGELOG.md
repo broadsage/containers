@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.2.1 (2025-10-17)</small>
+
+* docs: comprehensive README.md refactor with modern structure and enhanced documentation ([0451e9c](https://github.com/broadsage/containers/commit/0451e9c))
+* docs: comprehensive README.md refactor with modern structure and enhanced documentation ([f77d7bb](https://github.com/broadsage/containers/commit/f77d7bb))
+
 ## 1.2.0 (2025-10-17)
 
 * fix: remove static export config and generateStaticParams to enable client-side rendering ([4214fa6](https://github.com/broadsage/containers/commit/4214fa6))
