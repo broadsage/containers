@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.0 (2025-10-17)
+
+* fix: remove static export config and generateStaticParams to enable client-side rendering ([4214fa6](https://github.com/broadsage/containers/commit/4214fa6))
+* chore: remove unused workflow files ([f2c6ac3](https://github.com/broadsage/containers/commit/f2c6ac3))
+* feat: replace Docker workflow with GitHub Pages deployment ([27b9ba3](https://github.com/broadsage/containers/commit/27b9ba3))
+
 ## 1.1.0 (2025-10-17)
 
 * feat: implement separate workflow architecture for improved CI/CD performance ([077cefa](https://github.com/broadsage/containers/commit/077cefa))
