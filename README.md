@@ -117,11 +117,22 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines.
 
 ## 📖 Documentation
 
-See individual package READMEs for detailed documentation:
+## 📚 Documentation
 
-- [Web App](./apps/web/README.md)
-- [API](./apps/api/README.md)
-- [UI Package](./packages/ui/README.md)
+For comprehensive documentation, see:
+
+- [📖 Documentation Index](./docs/INDEX.md) - Complete documentation overview
+- [🚀 Local Development](./docs/setup/LOCAL_DEVELOPMENT.md) - Development setup guide  
+- [🐳 Docker Setup](./docs/setup/DOCKER_SETUP.md) - Container-based development
+- [🔧 CI/CD Setup](./docs/setup/CI_CD_SETUP.md) - GitHub Actions workflows
+- [🤝 Contributing](./docs/guides/CONTRIBUTING.md) - Contribution guidelines
+- [📦 Release Management](./docs/guides/RELEASE_MANAGEMENT.md) - Release process
+
+### Component Documentation
+
+- [Web App](./apps/web/README.md) - Frontend application details
+- [API](./apps/api/README.md) - Backend API documentation
+- [UI Package](./packages/ui/README.md) - Shared component library
 
 ## 🏗️ Enterprise Features
 

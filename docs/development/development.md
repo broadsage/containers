@@ -5,12 +5,14 @@ Complete guide for developing the Container Directory application locally.
 ## 📋 Prerequisites
 
 ### Required Software
+
 - **Node.js**: >= 18.0.0 ([Download](https://nodejs.org/))
 - **Yarn**: 1.22.22 ([Install](https://classic.yarnpkg.com/en/docs/install))
 - **Python**: >= 3.8 ([Download](https://www.python.org/downloads/))
 - **MongoDB**: >= 4.4 ([Install Guide](https://docs.mongodb.com/manual/installation/))
 
 ### Check Installations
+
 ```bash
 node --version    # Should be >= 18.0.0
 yarn --version    # Should be 1.22.22
@@ -54,6 +56,7 @@ mongosh --eval "db.runCommand({ ping: 1 })"
 ### 3. Configure Environment Variables
 
 #### API Configuration (`apps/api/.env`)
+
 ```bash
 cd apps/api
 cat > .env << EOF
@@ -66,6 +69,7 @@ EOF
 ```
 
 #### Web Configuration (`apps/web/.env.local`)
+
 ```bash
 cd apps/web
 cat > .env.local << EOF
@@ -84,7 +88,8 @@ python scripts/seed_data.py
 ```
 
 Expected output:
-```
+
+```text
 🌱 Starting database seeding...
 ✅ Connected to MongoDB: container_directory
 🗑️  Deleted 0 existing documents
@@ -96,18 +101,21 @@ Expected output:
 ### 5. Start Development Servers
 
 #### Option A: Start All Services (Recommended)
+
 ```bash
 # From project root
 yarn dev
 ```
 
 This starts:
+
 - **Web** on http://localhost:3000
 - **API** on http://localhost:8001
 
 #### Option B: Start Services Individually
 
 **Terminal 1 - API:**
+
 ```bash
 cd apps/api
 python -m app.main
@@ -116,6 +124,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
 ```
 
 **Terminal 2 - Web:**
+
 ```bash
 cd apps/web
 yarn dev
@@ -123,7 +132,7 @@ yarn dev
 
 ## 📁 Project Structure
 
-```
+```text
 /app/
 ├── apps/
 │   ├── web/                    # Next.js frontend
@@ -170,6 +179,7 @@ yarn dev
 ### Frontend Development (Web)
 
 #### Add a New Page
+
 ```bash
 cd apps/web/src/app
 mkdir new-page
@@ -177,6 +187,7 @@ touch new-page/page.tsx
 ```
 
 Example page:
+
 ```typescript
 export default function NewPage() {
   return <div>New Page</div>;
@@ -184,12 +195,14 @@ export default function NewPage() {
 ```
 
 #### Add a New Component
+
 ```bash
 cd apps/web/src/components
 touch NewComponent.tsx
 ```
 
 #### Use API Client
+
 ```typescript
 import { apiClient } from '@/services/api.client';
 
@@ -197,12 +210,14 @@ const data = await apiClient.get('/images');
 ```
 
 #### Run Type Checking
+
 ```bash
 cd apps/web
 yarn type-check
 ```
 
 #### Run Linting
+
 ```bash
 cd apps/web
 yarn lint
@@ -211,7 +226,8 @@ yarn lint
 ### Backend Development (API)
 
 #### Project Structure
-```
+
+```text
 app/
 ├── core/           # Core functionality
 │   ├── config.py   # Settings
@@ -228,6 +244,7 @@ app/
 #### Add a New Endpoint
 
 1. **Create Schema** (`app/schemas/new_schema.py`):
+
 ```python
 from pydantic import BaseModel
 
@@ -237,6 +254,7 @@ class NewItemResponse(BaseModel):
 ```
 
 2. **Create Router** (`app/routers/new_router.py`):
+
 ```python
 from fastapi import APIRouter
 from ..schemas.new_schema import NewItemResponse
@@ -249,6 +267,7 @@ async def get_items():
 ```
 
 3. **Register Router** (`app/main.py`):
+
 ```python
 from .routers import new_router
 app.include_router(new_router.router, prefix=settings.API_V1_PREFIX)
@@ -277,21 +296,25 @@ await collection.update_one(
 ```
 
 #### Run Tests
+
 ```bash
 cd apps/api
 pytest
 ```
 
 #### Check API Documentation
+
 Visit http://localhost:8001/api/docs for interactive API docs
 
 ## 🌐 API Endpoints
 
 ### Health
+
 - `GET /api/health` - Health check
 - `GET /api/` - API root
 
 ### Images
+
 - `GET /api/v1/images/` - Get all images
   - Query params: `category`, `search`, `page`, `page_size`
 - `GET /api/v1/images/{name}` - Get image by name
@@ -326,18 +349,21 @@ curl http://localhost:8001/api/v1/images/stats/summary
 ## 🧪 Testing
 
 ### Frontend Testing
+
 ```bash
 cd apps/web
 yarn test
 ```
 
 ### Backend Testing
+
 ```bash
 cd apps/api
 pytest -v
 ```
 
 ### Manual Testing Checklist
+
 - [ ] Homepage loads
 - [ ] Image list displays
 - [ ] Category filtering works
@@ -353,6 +379,7 @@ pytest -v
 **Problem**: `pymongo.errors.ServerSelectionTimeoutError`
 
 **Solution**:
+
 ```bash
 # Check if MongoDB is running
 sudo systemctl status mongod
@@ -369,6 +396,7 @@ mongosh
 **Problem**: `Error: listen EADDRINUSE: address already in use :::3000`
 
 **Solution**:
+
 ```bash
 # Find process using port
 lsof -i :3000
@@ -382,6 +410,7 @@ kill -9 <PID>
 **Problem**: `ModuleNotFoundError: No module named 'app'`
 
 **Solution**:
+
 ```bash
 cd apps/api
 pip install -r requirements.txt
@@ -392,6 +421,7 @@ pip install -r requirements.txt
 **Problem**: Type errors in frontend
 
 **Solution**:
+
 ```bash
 cd apps/web
 yarn type-check
@@ -401,6 +431,7 @@ yarn type-check
 ## 📊 Monitoring
 
 ### Check Service Status
+
 ```bash
 # API health
 curl http://localhost:8001/api/health
@@ -412,18 +443,21 @@ curl http://localhost:3000
 ### View Logs
 
 **API Logs** (via Supervisor):
+
 ```bash
 tail -f /var/log/supervisor/backend.out.log
 tail -f /var/log/supervisor/backend.err.log
 ```
 
 **Web Logs**:
+
 ```bash
 # In terminal where yarn dev is running
 # Or check browser console (F12)
 ```
 
 ### Database Inspection
+
 ```bash
 # Connect to MongoDB
 mongosh
@@ -444,12 +478,14 @@ db.images.countDocuments()
 ## 🔄 Common Tasks
 
 ### Reset Database
+
 ```bash
 cd apps/api
 python scripts/seed_data.py
 ```
 
 ### Clean and Rebuild
+
 ```bash
 # Clean everything
 yarn clean
@@ -464,12 +500,14 @@ yarn build
 ### Update Dependencies
 
 **Frontend**:
+
 ```bash
 cd apps/web
 yarn upgrade-interactive --latest
 ```
 
 **Backend**:
+
 ```bash
 cd apps/api
 pip list --outdated
