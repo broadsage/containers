@@ -14,12 +14,6 @@ const getEnvVar = (key: string, fallback?: string): string => {
 };
 
 export const env = {
-  // API Configuration
-  api: {
-    baseUrl: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8001/api/v1',
-    timeout: 30000,
-  },
-  
   // App Configuration
   app: {
     name: 'SecureHub',

@@ -2,53 +2,6 @@
 version: '3.9'
 
 services:
-  # MongoDB for Testing
-  mongodb-test:
-    image: mongo:7
-    container_name: openhub-mongodb-test
-    ports:
-      - "27018:27017"
-    environment:
-      MONGO_INITDB_DATABASE: openhub_test
-    networks:
-      - openhub-test-network
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    tmpfs:
-      - /data/db
-
-  # Backend Tests
-  backend-test:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-      target: test
-    container_name: openhub-backend-test
-    volumes:
-      - ./backend:/app
-      - ./backend/test-results:/app/test-results
-    environment:
-      - MONGO_URL=mongodb://mongodb-test:27017/openhub_test
-      - ENVIRONMENT=test
-      - PYTHONPATH=/app
-    depends_on:
-      mongodb-test:
-        condition: service_healthy
-    networks:
-      - openhub-test-network
-    command: >
-      sh -c "
-        pytest tests/ -v 
-        --cov=app 
-        --cov-report=xml 
-        --cov-report=html 
-        --cov-report=term
-        --junitxml=test-results/junit.xml
-      "
-
   # Frontend Tests
   frontend-test:
     build:
@@ -70,25 +23,6 @@ services:
         cd apps/web &&
         yarn test --coverage --watchAll=false --ci
       "
-
-  # Integration Tests
-  integration-test:
-    build:
-      context: .
-      dockerfile: ./Dockerfile.integration-test
-    container_name: openhub-integration-test
-    volumes:
-      - ./tests:/app/tests
-      - ./test-results:/app/test-results
-    environment:
-      - BACKEND_URL=http://backend-test:8001
-      - FRONTEND_URL=http://frontend-test:3000
-    depends_on:
-      - backend-test
-      - mongodb-test
-    networks:
-      - openhub-test-network
-    command: pytest tests/integration/ -v
 
 networks:
   openhub-test-network:

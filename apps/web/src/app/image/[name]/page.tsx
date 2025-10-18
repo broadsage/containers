@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -28,173 +28,110 @@ export default function ImageDetailPage({ params }: { params: Promise<{ name: st
   const [activeTab, setActiveTab] = useState('tags');
   const [copied, setCopied] = useState(false);
 
-  // State for tab data
-  const [versions, setVersions] = useState<any[]>([]);
-  const [vulnerabilities, setVulnerabilities] = useState<any[]>([]);
-  const [sbom, setSbom] = useState<any[]>([]);
-  const [provenance, setProvenance] = useState<any>(null);
-  const [specifications, setSpecifications] = useState<any>(null);
-  const [advisories, setAdvisories] = useState<any[]>([]);
+  // Mock data for tabs
+  const versions = [
+    {
+      tag: 'latest',
+      pull_url: `hub.opensource.dev/${resolvedParams.name}:latest`,
+      compressed_size: '42.5 MB',
+      architectures: ['x86_64', 'arm64'],
+      last_changed: '2 days ago',
+      is_free: true,
+      variant: 'default'
+    },
+    {
+      tag: 'stable',
+      pull_url: `hub.opensource.dev/${resolvedParams.name}:stable`,
+      compressed_size: '41.2 MB',
+      architectures: ['x86_64', 'arm64'],
+      last_changed: '5 days ago',
+      is_free: true,
+      variant: 'default'
+    },
+    {
+      tag: 'alpine',
+      pull_url: `hub.opensource.dev/${resolvedParams.name}:alpine`,
+      compressed_size: '18.3 MB',
+      architectures: ['x86_64', 'arm64'],
+      last_changed: '1 week ago',
+      is_free: true,
+      variant: 'alpine'
+    },
+    {
+      tag: 'slim',
+      pull_url: `hub.opensource.dev/${resolvedParams.name}:slim`,
+      compressed_size: '25.7 MB',
+      architectures: ['x86_64'],
+      last_changed: '3 days ago',
+      is_free: true,
+      variant: 'slim'
+    },
+  ];
 
-  useEffect(() => {
-    // Fetch data from API with fallback to mock data
-    const fetchData = async () => {
-      const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8001/api/v1';
-      
-      try {
-        const versionsRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/versions`);
-        const vulnRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/vulnerabilities`);
-        const sbomRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/sbom`);
-        const provenanceRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/provenance`);
-        const specsRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/specifications`);
-        const advisoriesRes = await fetch(`${backendUrl}/images/${resolvedParams.name}/advisories`);
-        
-        if (versionsRes.ok) {
-          const data = await versionsRes.json();
-          setVersions(data);
-        } else {
-          // Mock versions data
-          setVersions([
-            {
-              tag: 'latest',
-              pull_url: `hub.opensource.dev/${resolvedParams.name}:latest`,
-              compressed_size: '42.5 MB',
-              architectures: ['x86_64', 'arm64'],
-              last_changed: '2 days ago',
-              is_free: true,
-              variant: 'default'
-            },
-            {
-              tag: 'stable',
-              pull_url: `hub.opensource.dev/${resolvedParams.name}:stable`,
-              compressed_size: '41.2 MB',
-              architectures: ['x86_64', 'arm64'],
-              last_changed: '5 days ago',
-              is_free: true,
-              variant: 'default'
-            },
-            {
-              tag: 'alpine',
-              pull_url: `hub.opensource.dev/${resolvedParams.name}:alpine`,
-              compressed_size: '18.3 MB',
-              architectures: ['x86_64', 'arm64'],
-              last_changed: '1 week ago',
-              is_free: true,
-              variant: 'alpine'
-            },
-            {
-              tag: 'slim',
-              pull_url: `hub.opensource.dev/${resolvedParams.name}:slim`,
-              compressed_size: '25.7 MB',
-              architectures: ['x86_64'],
-              last_changed: '3 days ago',
-              is_free: true,
-              variant: 'slim'
-            },
-          ]);
-        }
-        
-        if (vulnRes.ok) {
-          setVulnerabilities(await vulnRes.json());
-        }
-        
-        if (sbomRes.ok) {
-          const data = await sbomRes.json();
-          setSbom(data);
-        } else {
-          // Mock SBOM data
-          setSbom([
-            {
-              name: 'openssl',
-              version: '3.0.11',
-              license: 'Apache-2.0',
-              package_type: 'library',
-              source: 'alpine'
-            },
-            {
-              name: 'zlib',
-              version: '1.2.13',
-              license: 'Zlib',
-              package_type: 'library',
-              source: 'alpine'
-            },
-            {
-              name: 'libcrypto',
-              version: '3.0.11',
-              license: 'Apache-2.0',
-              package_type: 'library',
-              source: 'openssl'
-            },
-            {
-              name: 'ca-certificates',
-              version: '20230506',
-              license: 'MPL-2.0',
-              package_type: 'library',
-              source: 'alpine'
-            },
-            {
-              name: 'musl',
-              version: '1.2.4',
-              license: 'MIT',
-              package_type: 'library',
-              source: 'alpine'
-            },
-            {
-              name: 'busybox',
-              version: '1.36.1',
-              license: 'GPL-2.0',
-              package_type: 'application',
-              source: 'alpine'
-            },
-            {
-              name: 'curl',
-              version: '8.4.0',
-              license: 'curl',
-              package_type: 'application',
-              source: 'alpine'
-            },
-            {
-              name: 'libssl',
-              version: '3.0.11',
-              license: 'Apache-2.0',
-              package_type: 'library',
-              source: 'openssl'
-            },
-          ]);
-        }
-        
-        if (provenanceRes.ok) setProvenance(await provenanceRes.json());
-        if (specsRes.ok) setSpecifications(await specsRes.json());
-        if (advisoriesRes.ok) setAdvisories(await advisoriesRes.json());
-      } catch (error) {
-        console.error('Error fetching image data:', error);
-        // Set mock data on error as well
-        setVersions([
-          {
-            tag: 'latest',
-            pull_url: `hub.opensource.dev/${resolvedParams.name}:latest`,
-            compressed_size: '42.5 MB',
-            architectures: ['x86_64', 'arm64'],
-            last_changed: '2 days ago',
-            is_free: true,
-            variant: 'default'
-          },
-        ]);
-        
-        setSbom([
-          {
-            name: 'openssl',
-            version: '3.0.11',
-            license: 'Apache-2.0',
-            package_type: 'library',
-            source: 'alpine'
-          },
-        ]);
-      }
-    };
+  const vulnerabilities: any[] = [];
 
-    fetchData();
-  }, [resolvedParams.name]);
+  const sbom = [
+    {
+      name: 'openssl',
+      version: '3.0.11',
+      license: 'Apache-2.0',
+      package_type: 'library',
+      source: 'alpine'
+    },
+    {
+      name: 'zlib',
+      version: '1.2.13',
+      license: 'Zlib',
+      package_type: 'library',
+      source: 'alpine'
+    },
+    {
+      name: 'libcrypto',
+      version: '3.0.11',
+      license: 'Apache-2.0',
+      package_type: 'library',
+      source: 'openssl'
+    },
+    {
+      name: 'ca-certificates',
+      version: '20230506',
+      license: 'MPL-2.0',
+      package_type: 'library',
+      source: 'alpine'
+    },
+    {
+      name: 'musl',
+      version: '1.2.4',
+      license: 'MIT',
+      package_type: 'library',
+      source: 'alpine'
+    },
+    {
+      name: 'busybox',
+      version: '1.36.1',
+      license: 'GPL-2.0',
+      package_type: 'application',
+      source: 'alpine'
+    },
+    {
+      name: 'curl',
+      version: '8.4.0',
+      license: 'curl',
+      package_type: 'application',
+      source: 'alpine'
+    },
+    {
+      name: 'libssl',
+      version: '3.0.11',
+      license: 'Apache-2.0',
+      package_type: 'library',
+      source: 'openssl'
+    },
+  ];
+
+  const provenance = null;
+  const specifications = null;
+  const advisories: any[] = [];
 
   if (!image) {
     return (

@@ -2,65 +2,6 @@
 version: '3.9'
 
 services:
-  # MongoDB Database
-  mongodb:
-    image: mongo:7
-    container_name: openhub-mongodb-prod
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_prod_data:/data/db
-      - mongodb_prod_config:/data/configdb
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-      MONGO_INITDB_DATABASE: openhub_prod
-    networks:
-      - openhub-prod-network
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    command: mongod --auth
-
-  # Backend API
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-      target: production
-    container_name: openhub-backend-prod
-    restart: always
-    ports:
-      - "8001:8001"
-    environment:
-      - MONGO_URL=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb:27017/openhub_prod?authSource=admin
-      - PORT=8001
-      - ENVIRONMENT=production
-      - DEBUG=False
-      - LOG_LEVEL=INFO
-      - SECRET_KEY=${SECRET_KEY}
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    networks:
-      - openhub-prod-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    deploy:
-      resources:
-        limits:
-          cpus: '1'
-          memory: 1G
-        reservations:
-          cpus: '0.5'
-          memory: 512M
-
   # Frontend Web App
   frontend:
     build:
@@ -72,10 +13,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=${BACKEND_URL}
       - NODE_ENV=production
-    depends_on:
-      - backend
     networks:
       - openhub-prod-network
     healthcheck:
@@ -105,16 +43,9 @@ services:
       - ./nginx/ssl:/etc/nginx/ssl:ro
     depends_on:
       - frontend
-      - backend
     networks:
       - openhub-prod-network
 
 networks:
   openhub-prod-network:
     driver: bridge
-
-volumes:
-  mongodb_prod_data:
-    driver: local
-  mongodb_prod_config:
-    driver: local

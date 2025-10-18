@@ -10,7 +10,7 @@ Secure, minimal container images with comprehensive vulnerability scanning and S
 
 - 🔐 **Zero vulnerabilities** with daily automated scanning
 - 📋 **Complete SBOM** for supply chain transparency  
-- �️ **15+ curated images** for production use
+- 🏛️ **15+ curated images** for production use
 - 🔍 **Advanced filtering** by category and security features
 - 🏛️ **FIPS compliance** for regulated environments
 - 🌐 **Multi-architecture** support (x86_64, ARM64)
@@ -20,15 +20,14 @@ Secure, minimal container images with comprehensive vulnerability scanning and S
 ```bash
 containers/
 ├── apps/
-│   ├── web/          # Next.js frontend (port 3000)  
-│   └── api/          # FastAPI backend (port 8001)
+│   └── web/          # Next.js frontend application
 ├── packages/         # Shared configurations
 └── docs/             # Documentation
 ```
 
 ## 🚀 Quick Start
 
-**Prerequisites:** Node.js 18+, Yarn, Python 3.8+
+**Prerequisites:** Node.js 18+, Yarn
 
 ```bash
 # Install and start development
@@ -38,15 +37,11 @@ yarn install
 yarn dev
 ```
 
-**Services:**
-
-- Frontend: <http://localhost:3000>
-- Backend API: <http://localhost:8001>
+**Application:** <http://localhost:3000>
 
 ## 🛠️ Tech Stack
 
 **Frontend:** Next.js 15, React 19, TypeScript, Tailwind CSS  
-**Backend:** FastAPI, Python, MongoDB  
 **Tools:** Turborepo, Docker, GitHub Actions
 
 ## 📝 Commands
@@ -59,7 +54,7 @@ yarn test         # Run tests
 make dev          # Docker development
 ```
 
-## � Available Images
+## 📦 Available Images
 
 **Categories:** Featured • Starter • AI/ML • Application • Base • FIPS  
 **Examples:** nginx, node, python, tensorflow, alpine, ubuntu  
