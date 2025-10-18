@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.4.1 (2025-10-18)</small>
+
+* fix: resolve SARIF file path issue in security workflow ([c057094](https://github.com/broadsage/containers/commit/c057094))
+
 ## 1.4.0 (2025-10-18)
 
 * feat: refactor GitHub Actions workflows with enterprise best practices ([4c6b9aa](https://github.com/broadsage/containers/commit/4c6b9aa))
