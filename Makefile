@@ -2,7 +2,7 @@
 
 # Default target
 help:
-	@echo "OpenHub Container Registry - Development Commands"
+	@echo "Broadsage Container Image Store - Development Commands"
 	@echo ""
 	@echo "Development:"
 	@echo "  make dev              - Start development environment"
