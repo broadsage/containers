@@ -32,9 +32,11 @@ jobs:
       fail-fast: false
       matrix:
         project:
-          - name: 'Root'
+          - name: 'root'
+            display_name: 'Root'
             path: '.'
-          - name: 'Web App'
+          - name: 'web-app'
+            display_name: 'Web App'
             path: 'apps/web'
     
     steps:
@@ -58,7 +60,7 @@ jobs:
         with:
           args: |
             --org=${{ vars.SNYK_ORG_ID }}
-            --project-name=${{ github.repository }}/${{ matrix.project.name }}
+            --project-name=${{ github.repository }}/${{ matrix.project.display_name }}
             --severity-threshold=high
             --all-projects
             --sarif-file-output=snyk-${{ matrix.project.name }}.sarif
