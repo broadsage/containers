@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>1.3.2 (2025-10-18)</small>
+
+* fix: configure Snyk to generate SARIF output for GitHub Code Scanning ([99dc326](https://github.com/broadsage/containers/commit/99dc326))
+
 ## <small>1.3.1 (2025-10-17)</small>
 
 * fix: node version changed ([0605f7c](https://github.com/broadsage/containers/commit/0605f7c))
