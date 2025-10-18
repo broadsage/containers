@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.4.0 (2025-10-18)
+
+* feat: refactor GitHub Actions workflows with enterprise best practices ([4c6b9aa](https://github.com/broadsage/containers/commit/4c6b9aa))
+* chore: comprehensive cleanup of API/backend references ([1d54d73](https://github.com/broadsage/containers/commit/1d54d73))
+* chore: reorganize docker-compose files into compose directory ([cf7cd88](https://github.com/broadsage/containers/commit/cf7cd88))
+* refactor: remove redundant Snyk monitor and Docker scan jobs ([3924eed](https://github.com/broadsage/containers/commit/3924eed))
+* refactor: remove unused API backend and simplify to standalone Next.js app ([56aa89c](https://github.com/broadsage/containers/commit/56aa89c))
+
 ## <small>1.3.2 (2025-10-18)</small>
 
 * fix: configure Snyk to generate SARIF output for GitHub Code Scanning ([99dc326](https://github.com/broadsage/containers/commit/99dc326))
