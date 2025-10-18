@@ -53,11 +53,12 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --all-projects --severity-threshold=high --project-name="${{ matrix.project.name }}"
+          args: --all-projects --severity-threshold=high --sarif-file-output=snyk.sarif
           command: test
 
       - name: Upload Snyk results to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
           sarif_file: snyk.sarif
 
@@ -118,9 +119,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           image: ${{ matrix.dockerfile.name }}:latest
-          args: --severity-threshold=high --file=${{ matrix.dockerfile.path }}
+          args: --severity-threshold=high --file=${{ matrix.dockerfile.path }} --sarif-file-output=snyk.sarif
 
       - name: Upload Snyk Docker results to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v3
+        if: always()
         with:
           sarif_file: snyk.sarif
