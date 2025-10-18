@@ -24,16 +24,3 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
   useSearchParams: () => new URLSearchParams(),
 }))
-
-// Mock fetch globally
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve({}),
-  })
-)
-
-// Setup default fetch mock
-beforeEach(() => {
-  fetch.mockClear()
-})

@@ -27,16 +27,17 @@ src/
 ├── components/       # React components
 │   ├── Header.tsx
 │   ├── Footer.tsx
-│   ├── HeroSection.tsx
-│   ├── CategoryFilter.tsx
-│   ├── ImageCard.tsx
+│   ├── ModernHero.tsx
+│   ├── ModernCategoryFilter.tsx
+│   ├── CleanImageCard.tsx
+│   ├── TabNavigation.tsx
 │   ├── ErrorBoundary.tsx
 │   └── Loading.tsx
 ├── config/          # Configuration files
 │   └── env.ts       # Environment validation
 ├── constants/       # App constants
 │   └── index.ts     # Routes, colors, pagination
-├── data/           # Data layer
+├── data/           # Mock data
 │   └── mockData.ts  # Docker image data
 ├── hooks/          # Custom React hooks
 │   └── useImageFilters.ts
@@ -44,8 +45,6 @@ src/
 │   └── utils.ts
 ├── providers/      # React context providers
 │   └── index.tsx
-├── services/       # API clients
-│   └── api.client.ts
 └── types/          # TypeScript type definitions
     └── index.ts
 ```
@@ -77,38 +76,25 @@ yarn start
 
 ### Environment Variables
 
-Copy `.env.example` to `.env.local`:
+Optional variables (create `.env.local` if needed):
 
 ```bash
-cp .env.example .env.local
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_ENABLE_ANALYTICS=false
 ```
 
-Required variables:
-
-- `NEXT_PUBLIC_BACKEND_URL` - Backend API URL
-- `NEXT_PUBLIC_APP_URL` - Frontend app URL
-- `NEXT_PUBLIC_ENABLE_ANALYTICS` - Enable analytics (true/false)
-
-## 📝 Development
-
-### Start Development Server
+## 📝 Available Scripts
 
 ```bash
-python -m app.main
-# Or
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
-```
-
-### Seed Database
-
-```bash
-python scripts/seed_data.py
-```
-
-### Run Tests
-
-```bash
-pytest
+yarn dev              # Start development server
+yarn build            # Build for production
+yarn start            # Start production server
+yarn lint             # Run ESLint
+yarn type-check       # Run TypeScript compiler
+yarn test             # Run Jest tests
+yarn test:watch       # Run tests in watch mode
+yarn test:coverage    # Run tests with coverage
+yarn clean            # Clean build artifacts
 ```
 
 ## 🎨 Styling
@@ -116,7 +102,7 @@ pytest
 - **Framework**: Tailwind CSS
 - **UI Library**: Radix UI primitives
 - **Components**: shadcn/ui inspired components
-- **Theme**: Chainguard brand colors (#fd366e)
+- **Icons**: Lucide React
 
 ## 🧪 Best Practices
 
@@ -124,7 +110,7 @@ pytest
 - ESLint for code quality
 - Error boundaries for error handling
 - Custom hooks for reusable logic
-- Service layer for API calls
+- Mock data architecture for development
 - Proper loading and error states
 - SEO optimized with metadata
 - Accessibility (a11y) compliant
@@ -145,12 +131,19 @@ pytest
 
 ### Utilities
 
-- Axios (HTTP client)
 - clsx & tailwind-merge (className utilities)
 - React Hook Form (forms)
 - Zod (validation)
 
 ## 🔗 Related
 
-- [API Documentation](../api/README.md)
+- [Main README](../../README.md)
 - [UI Package](../../packages/ui/README.md)
+- [Contributing Guide](../../CONTRIBUTING.md)
+- Zod (validation)
+
+## 🔗 Related
+
+- [Main README](../../README.md)
+- [UI Package](../../packages/ui/README.md)
+- [Contributing Guide](../../CONTRIBUTING.md)

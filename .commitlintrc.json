@@ -23,7 +23,6 @@
       "always",
       [
         "web",
-        "api",
         "core",
         "ui",
         "deps",

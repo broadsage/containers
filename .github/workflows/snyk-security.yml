@@ -31,8 +31,6 @@ jobs:
             path: '.'
           - name: 'Frontend (Web)'
             path: 'apps/web'
-          - name: 'Backend (API)'
-            path: 'apps/api'
     
     steps:
       - name: Checkout code

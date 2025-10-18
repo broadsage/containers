@@ -16,7 +16,6 @@ export const ROUTES = {
 export const PORTS = {
   WEB: 3000,
   DOCS: 3002,
-  API: 8001,
 } as const;
 
 export const BRAND_COLORS = {
