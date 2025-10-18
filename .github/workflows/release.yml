@@ -2,8 +2,7 @@ name: Release
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
     inputs:
       release_type:
@@ -12,27 +11,34 @@ on:
         default: 'auto'
         type: choice
         options:
-        - auto
-        - beta
-        - patch
-        - minor
-        - major
+          - auto
+          - beta
+          - patch
+          - minor
+          - major
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 env:
   NODE_VERSION: '20'
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/web
 
 permissions:
   contents: write
   issues: write
   pull-requests: write
   packages: write
+  id-token: write
 
 jobs:
   release:
-    name: Release
+    name: Semantic Release
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    timeout-minutes: 30
+    if: '!contains(github.event.head_commit.message, ''[skip ci]'')'
     
     outputs:
       new-release-published: ${{ steps.semantic-release.outputs.new-release-published }}
@@ -53,7 +59,7 @@ jobs:
           cache: 'yarn'
       
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --prefer-offline
       
       - name: Lint
         run: yarn turbo lint
@@ -64,13 +70,12 @@ jobs:
       - name: Test
         run: |
           cd apps/web
-          yarn test --coverage --watchAll=false --maxWorkers=2
+          yarn test:coverage --ci --maxWorkers=2 --bail
         env:
           CI: true
       
       - name: Security audit
-        run: |
-          yarn audit --level moderate --groups dependencies
+        run: yarn audit --level moderate --groups dependencies
         continue-on-error: true
       
       - name: Build
@@ -79,40 +84,114 @@ jobs:
           NODE_ENV: production
           NEXT_TELEMETRY_DISABLED: 1
       
-      - name: Release
+      - name: Semantic Release
         id: semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          if [[ "${{ github.event.inputs.release_type }}" == "beta" ]]; then
-            echo "Creating beta release..."
-            git checkout -b beta
-            yarn release
-          else
-            yarn release
-          fi
+        run: yarn release
+      
+      - name: Upload build artifacts
+        if: steps.semantic-release.outputs.new-release-published == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-artifacts-${{ steps.semantic-release.outputs.new-release-version }}
+          path: |
+            apps/web/.next/
+            apps/web/out/
+            packages/*/dist/
+          retention-days: 90
+
+  docker:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [release]
+    if: needs.release.outputs.new-release-published == 'true'
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}},value=v${{ needs.release.outputs.new-release-version }}
+            type=semver,pattern={{major}}.{{minor}},value=v${{ needs.release.outputs.new-release-version }}
+            type=semver,pattern={{major}},value=v${{ needs.release.outputs.new-release-version }}
+            type=raw,value=latest,enable={{is_default_branch}}
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./apps/web/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            NODE_VERSION=${{ env.NODE_VERSION }}
+      
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ needs.release.outputs.new-release-version }}
+          format: spdx-json
+          output-file: sbom-${{ needs.release.outputs.new-release-version }}.spdx.json
+      
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-${{ needs.release.outputs.new-release-version }}
+          path: sbom-${{ needs.release.outputs.new-release-version }}.spdx.json
+          retention-days: 90
 
   summary:
     name: Release Summary
     runs-on: ubuntu-latest
-    needs: [release]
+    needs: [release, docker]
     if: always()
     
     steps:
-      - name: Release Summary
+      - name: Generate summary
         run: |
           echo "## 🚀 Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Item | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
           echo "| Release Job | ${{ needs.release.result == 'success' && '✅ Success' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Docker Build | ${{ needs.docker.result == 'success' && '✅ Success' || needs.docker.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           
           if [[ "${{ needs.release.outputs.new-release-published }}" == "true" ]]; then
-            echo "| New Release | ✅ Published v${{ needs.release.outputs.new-release-version }} |" >> $GITHUB_STEP_SUMMARY
+            echo "### ✅ New Release Published" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### 📦 Artifacts" >> $GITHUB_STEP_SUMMARY
-            echo "- **Git Tag**: v${{ needs.release.outputs.new-release-version }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **Release Notes**: [View Release](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release.outputs.new-release-version }})" >> $GITHUB_STEP_SUMMARY
+            echo "**Version:** v${{ needs.release.outputs.new-release-version }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Artifacts:**" >> $GITHUB_STEP_SUMMARY
+            echo "- [Release Notes](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release.outputs.new-release-version }})" >> $GITHUB_STEP_SUMMARY
+            echo "- [Docker Image](${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ needs.release.outputs.new-release-version }})" >> $GITHUB_STEP_SUMMARY
           else
-            echo "| New Release | ⏭️ No release (no relevant changes) |" >> $GITHUB_STEP_SUMMARY
+            echo "### ⏭️ No Release" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "No relevant changes detected for release." >> $GITHUB_STEP_SUMMARY
           fi
